@@ -1,0 +1,151 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { siteConfig } from "@/data/portfolio";
+import { useLang } from "@/context/LanguageContext";
+
+const TwitterIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const LinkedInIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+  </svg>
+);
+
+const GitHubIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+  </svg>
+);
+
+export default function Hero() {
+  const [visible, setVisible] = useState(false);
+  const { lang, t } = useLang();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), 80);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const roles = siteConfig.roles[lang];
+
+  return (
+    <section id="hero" className="min-h-screen flex flex-col md:flex-row overflow-hidden">
+
+      {/* ── LEFT PANEL — claro ─────────────────────────────────────── */}
+      <div
+        className={`
+          relative flex flex-col justify-center
+          w-full md:w-[58%] min-h-[60vh] md:min-h-screen
+          bg-neutral-100 px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0
+          transition-opacity duration-700
+          ${visible ? "opacity-100" : "opacity-0"}
+        `}
+        style={{
+          clipPath: "polygon(0 0, 100% 0, 88% 100%, 0 100%)",
+          zIndex: 10,
+        }}
+      >
+        {/* Label */}
+        <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
+          {t({ pt: "Portfólio Pessoal", en: "Personal Portfolio" })}
+        </span>
+
+        {/* Name */}
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 leading-[1.05] tracking-tight mb-4">
+          Pedro<br />
+          <span className="text-neutral-500">&ldquo;Bonis&rdquo;</span>
+        </h1>
+
+        {/* Roles */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {roles.map((role) => (
+            <span
+              key={role}
+              className="text-sm font-medium text-neutral-500 after:content-['/'] after:ml-2 after:text-neutral-300 last:after:content-none"
+            >
+              {role}
+            </span>
+          ))}
+        </div>
+
+        {/* Tagline */}
+        <p className="text-base text-neutral-500 max-w-sm leading-relaxed mb-10">
+          {t(siteConfig.tagline)}
+        </p>
+
+        {/* Social Links */}
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href={siteConfig.socials.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 bg-white text-neutral-600 hover:text-neutral-900 hover:border-neutral-900 transition-all"
+            aria-label="Twitter"
+          >
+            <TwitterIcon />
+          </a>
+          <a
+            href={siteConfig.socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 bg-white text-neutral-600 hover:text-neutral-900 hover:border-neutral-900 transition-all"
+            aria-label="LinkedIn"
+          >
+            <LinkedInIcon />
+          </a>
+          <a
+            href={siteConfig.socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 bg-white text-neutral-600 hover:text-neutral-900 hover:border-neutral-900 transition-all"
+            aria-label="GitHub"
+          >
+            <GitHubIcon />
+          </a>
+        </div>
+      </div>
+
+      {/* ── RIGHT PANEL — escuro com foto ──────────────────────────── */}
+      <div
+        className={`
+          relative flex-1 bg-neutral-900
+          min-h-[40vh] md:min-h-screen
+          -ml-0 md:-ml-[8%]
+          transition-opacity duration-700 delay-200
+          ${visible ? "opacity-100" : "opacity-0"}
+        `}
+      >
+        {siteConfig.photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={siteConfig.photo}
+            alt="Pedro Bonis"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+        ) : (
+          /* Placeholder até ter a foto */
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+            <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-600 flex items-center justify-center">
+              <svg className="w-8 h-8 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <p className="text-neutral-600 text-xs">
+              {t({ pt: "Coloque sua foto em /public/photo.jpg", en: "Add your photo to /public/photo.jpg" })}
+            </p>
+          </div>
+        )}
+
+        {/* Overlay sutil no bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-900/60 to-transparent pointer-events-none" />
+      </div>
+
+    </section>
+  );
+}
