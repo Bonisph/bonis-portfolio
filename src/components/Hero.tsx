@@ -121,19 +121,12 @@ export default function Hero() {
         `}
       >
         {siteConfig.photo ? (
-          /* Container recorta o espaço vazio do topo, alinha a pessoa na base */
-          <div className="absolute inset-0 flex items-end justify-center overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={siteConfig.photo}
-              alt="Pedro Bonis"
-              className="w-auto flex-shrink-0"
-              style={{
-                height: "165%",         /* sobe além do container para cortar espaço vazio do topo */
-                mixBlendMode: "multiply" /* remove fundo branco contra o painel escuro */
-              }}
-            />
-          </div>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={siteConfig.photo}
+            alt="Pedro Bonis"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
             <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-600 flex items-center justify-center">
