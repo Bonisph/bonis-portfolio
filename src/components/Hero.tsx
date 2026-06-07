@@ -121,15 +121,20 @@ export default function Hero() {
         `}
       >
         {siteConfig.photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={siteConfig.photo}
-            alt="Pedro Bonis"
-            className="absolute inset-0 w-full h-full object-contain object-bottom"
-            style={{ paddingBottom: "0", paddingTop: "5%" }}
-          />
+          /* Container recorta o espaço vazio do topo, alinha a pessoa na base */
+          <div className="absolute inset-0 flex items-end justify-center overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={siteConfig.photo}
+              alt="Pedro Bonis"
+              className="w-auto flex-shrink-0"
+              style={{
+                height: "165%",         /* sobe além do container para cortar espaço vazio do topo */
+                mixBlendMode: "multiply" /* remove fundo branco contra o painel escuro */
+              }}
+            />
+          </div>
         ) : (
-          /* Placeholder até ter a foto */
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
             <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-600 flex items-center justify-center">
               <svg className="w-8 h-8 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,7 +143,7 @@ export default function Hero() {
               </svg>
             </div>
             <p className="text-neutral-600 text-xs">
-              {t({ pt: "Coloque sua foto em /public/photo.jpg", en: "Add your photo to /public/photo.jpg" })}
+              {t({ pt: "Adicione a URL da foto em siteConfig.photo", en: "Add photo URL to siteConfig.photo" })}
             </p>
           </div>
         )}
