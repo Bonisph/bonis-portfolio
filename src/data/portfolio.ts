@@ -28,7 +28,7 @@ export const siteConfig = {
   // Foto da Hero — use sempre uma URL externa:
   // ImgBB: imgbb.com | GitHub CDN: cole imagem em qualquer issue do GitHub → copie a URL
   // Cloudinary: cloudinary.com
-  photo: "", // ex: "https://i.ibb.co/abc123/foto.jpg"
+  photo: "https://i.ibb.co/XkXSCWSW/Design-sem-nome.png",
 
   socials: {
     twitter:  "https://x.com/bonis_crypto",

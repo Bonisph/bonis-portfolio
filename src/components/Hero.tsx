@@ -125,7 +125,8 @@ export default function Hero() {
           <img
             src={siteConfig.photo}
             alt="Pedro Bonis"
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className="absolute inset-0 w-full h-full object-contain object-bottom"
+            style={{ paddingBottom: "0", paddingTop: "5%" }}
           />
         ) : (
           /* Placeholder até ter a foto */
