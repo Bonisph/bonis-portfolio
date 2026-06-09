@@ -95,7 +95,7 @@ export const experiences: {
       {
         title: { pt: "Growth Leader", en: "Growth Leader" },
         start: "Mai 2025",
-        end:   null,
+        end:   "Mai 2026",
         description: {
           pt: "Responsável por crescimento, parcerias e expansão de ecossistema. Prospecta e fecha parcerias com protocolos e organizações Web3 — portfolio de 10+ acordos ativos. Co-liderou 9 eventos presenciais pelo Brasil com 1.500+ participantes no total. Embarcou 120+ desenvolvedores, estruturou 4 programas de builders com 70+ participantes e apoiou o lançamento de 27+ projetos.",
           en:  "Leads growth, partnerships, and ecosystem expansion. Prospects and closes deals with Web3 protocols and organizations — 10+ active partnerships. Co-led 9 in-person regional events across Brazil reaching 1,500+ total attendees. Onboarded 120+ developers, structured 4 builder programs with 70+ participants, and supported the launch of 27+ projects.",
