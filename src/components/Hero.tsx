@@ -24,14 +24,12 @@ const GitHubIcon = () => (
 
 export default function Hero() {
   const [visible, setVisible] = useState(false);
-  const { lang, t } = useLang();
+  const { t } = useLang();
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 80);
     return () => clearTimeout(timer);
   }, []);
-
-  const roles = siteConfig.roles[lang];
 
   return (
     <section id="hero" className="min-h-screen flex flex-col md:flex-row overflow-hidden">
@@ -60,23 +58,6 @@ export default function Hero() {
           Pedro<br />
           <span className="text-neutral-500">&ldquo;Bonis&rdquo;</span>
         </h1>
-
-        {/* Roles */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {roles.map((role) => (
-            <span
-              key={role}
-              className="text-sm font-medium text-neutral-500 after:content-['/'] after:ml-2 after:text-neutral-300 last:after:content-none"
-            >
-              {role}
-            </span>
-          ))}
-        </div>
-
-        {/* Tagline */}
-        <p className="text-base text-neutral-500 max-w-sm leading-relaxed mb-10">
-          {t(siteConfig.tagline)}
-        </p>
 
         {/* Social Links */}
         <div className="flex flex-wrap items-center gap-3">

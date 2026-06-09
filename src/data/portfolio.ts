@@ -9,16 +9,6 @@ export const siteConfig = {
   name: "Pedro Bonis",
   displayName: 'Pedro "Bonis"',
 
-  roles: {
-    pt: ["Empreendedor", "Builder de IA", "Estrategista de Negócios"],
-    en:  ["Entrepreneur",  "AI Builder",   "Business Strategist"],
-  },
-
-  tagline: {
-    pt: "Construindo na interseção entre Tecnologia e Negócios.",
-    en: "Building at the intersection of Technology and Business.",
-  },
-
   bio: {
     pt: ``,
     en: ``,
