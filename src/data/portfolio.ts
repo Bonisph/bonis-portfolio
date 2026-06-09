@@ -130,16 +130,17 @@ export const content: {
 
 // ─── EVENTOS ──────────────────────────────────────────────────────────────────
 // type: "Host" | "Palestra"/"Talk" | "Painel"/"Panel" | "Organização"/"Organizer"
-// image: URL do ImgBB (deixe "" para placeholder)
-// link: URL do aftermovie ou página do evento (opcional)
+// media: array de { type: "image" | "video", url: string }
+//   - image: URL do ImgBB
+//   - video: URL do YouTube (ex: https://youtube.com/watch?v=ID)
+//   Deixe o array vazio ([]) enquanto não tiver mídia.
 export const events: {
   id: number;
   title: { pt: string; en: string };
   description: { pt: string; en: string };
   date: string;
   location: string;
-  image: string;
-  link?: string;
+  media: { type: "image" | "video"; url: string }[];
   type: { pt: string; en: string };
 }[] = [
   {
@@ -151,21 +152,19 @@ export const events: {
     },
     date: "Nov 2025",
     location: "São Paulo, SP",
-    image: "",
-    link: "",
+    media: [],
     type: { pt: "Host", en: "Host" },
   },
   {
     id: 2,
-    title: { pt: "ETH Latam — Arbitrum Day 2025", en: "ETH Latam — Arbitrum Day 2025" },
+    title: { pt: "ETH Latam (Arbitrum Day) 2025", en: "ETH Latam (Arbitrum Day) 2025" },
     description: {
       pt: "Speaker no painel de RWA no Arbitrum Day dentro do ETH Latam. Participei ao lado de representantes da Credbull, Mercado Bitcoin e Plume Network, discutindo o futuro de ativos do mundo real em blockchains.",
       en: "Speaker on the RWA panel at Arbitrum Day during ETH Latam. Joined representatives from Credbull, Mercado Bitcoin, and Plume Network to discuss the future of real-world assets on blockchains.",
     },
     date: "2025",
     location: "São Paulo, SP",
-    image: "",
-    link: "",
+    media: [],
     type: { pt: "Palestra", en: "Talk" },
   },
   {
@@ -177,8 +176,7 @@ export const events: {
     },
     date: "2025",
     location: "São Paulo, SP",
-    image: "",
-    link: "",
+    media: [],
     type: { pt: "Host", en: "Host" },
   },
   {
@@ -190,8 +188,7 @@ export const events: {
     },
     date: "2025",
     location: "Rio de Janeiro, RJ",
-    image: "",
-    link: "",
+    media: [],
     type: { pt: "Organização", en: "Organizer" },
   },
   {
@@ -203,8 +200,7 @@ export const events: {
     },
     date: "2025",
     location: "Rio de Janeiro, RJ",
-    image: "",
-    link: "",
+    media: [],
     type: { pt: "Organização", en: "Organizer" },
   },
   {
@@ -216,8 +212,7 @@ export const events: {
     },
     date: "2025",
     location: "Belo Horizonte, MG",
-    image: "",
-    link: "",
+    media: [],
     type: { pt: "Palestra", en: "Talk" },
   },
 ];
