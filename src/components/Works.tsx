@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { experiences, projects } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 
@@ -9,19 +10,18 @@ const ArrowUpRight = () => (
   </svg>
 );
 
-// Logo da empresa: usa imagem se disponível, senão inicial colorida
+// Logo da empresa: usa imagem se disponível, senão inicial
 function CompanyLogo({ logo, name }: { logo: string; name: string }) {
-  if (logo) {
+  const [failed, setFailed] = useState(false);
+
+  if (logo && !failed) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
         src={logo}
         alt={name}
-        className="w-12 h-12 rounded-xl object-contain bg-white border border-neutral-100 p-1 flex-shrink-0"
-        onError={(e) => {
-          (e.target as HTMLImageElement).style.display = "none";
-          (e.target as HTMLImageElement).nextElementSibling?.classList.remove("hidden");
-        }}
+        onError={() => setFailed(true)}
+        className="w-12 h-12 rounded-xl object-cover flex-shrink-0 bg-neutral-100"
       />
     );
   }
@@ -70,7 +70,7 @@ export default function Works() {
                             {t(exp.roles[0].title)}
                           </h3>
                           <p className="text-sm text-neutral-500 mt-0.5">
-                            {exp.company} · {t(exp.roles[0].contract)}
+                            {exp.company}
                           </p>
                           <p className="text-xs text-neutral-400 mt-0.5">
                             {periodLabel(exp.roles[0].start, exp.roles[0].end, lang)}
@@ -115,7 +115,7 @@ export default function Works() {
                             {t(role.title)}
                           </p>
                           <p className="text-sm text-neutral-400 mt-0.5">
-                            {t(role.contract)} · {periodLabel(role.start, role.end, lang)}
+                            {periodLabel(role.start, role.end, lang)}
                           </p>
                           {t(role.description) && (
                             <p className="text-sm text-neutral-500 leading-relaxed mt-2">

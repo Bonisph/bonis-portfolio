@@ -42,8 +42,7 @@ export const aboutStats = [
 ];
 
 // ─── EXPERIÊNCIAS ─────────────────────────────────────────────────────────────
-// Cada entrada = uma empresa. "roles" agrupa cargos na mesma empresa (igual LinkedIn).
-// logo: URL do logo da empresa (ImgBB, Clearbit, etc.)
+// logo: use Google favicon — https://www.google.com/s2/favicons?domain=site.com&sz=256
 // end: null = "Presente" / "Present"
 export const experiences: {
   id: number;
@@ -52,7 +51,6 @@ export const experiences: {
   link?: string;
   roles: {
     title: { pt: string; en: string };
-    contract: { pt: string; en: string };
     start: string;
     end: string | null;
     description: { pt: string; en: string };
@@ -61,32 +59,30 @@ export const experiences: {
   {
     id: 1,
     company: "Binance",
-    logo: "https://logo.clearbit.com/binance.com",
+    logo: "https://www.google.com/s2/favicons?domain=binance.com&sz=256",
     link: "https://binance.com",
     roles: [
       {
-        title:    { pt: "Affiliate Business Development", en: "Affiliate Business Development" },
-        contract: { pt: "Full-time", en: "Full-time" },
+        title: { pt: "Affiliate Business Development", en: "Affiliate Business Development" },
         start: "Jun 2026",
         end:   null,
-        description: { pt: "", en: "" }, // Adicione descrição quando quiser
+        description: { pt: "", en: "" },
       },
     ],
   },
   {
     id: 2,
     company: "Arbitrum",
-    logo: "https://logo.clearbit.com/arbitrum.io",
+    logo: "https://www.google.com/s2/favicons?domain=arbitrum.io&sz=256",
     link: "https://arbitrum.io",
     roles: [
       {
-        title:    { pt: "Arbitrum Ambassador", en: "Arbitrum Ambassador" },
-        contract: { pt: "Contrato Indireto", en: "Indirect Contract" },
-        start: "Fev 2025",
-        end:   "Mai 2026",
+        title: { pt: "Ambassador – Brasil", en: "Ambassador – Brazil" },
+        start: "Jan 2025",
+        end:   null,
         description: {
-          pt: "", // Adicione sua descrição aqui
-          en: "",
+          pt: "Produziu 70+ peças de conteúdo educativo em português sobre RWA, DeFi, governança e crescimento de ecossistema no LATAM. Vídeos curtos sobre infraestrutura L2 com 65k+ visualizações acumuladas. Co-organizou o Arbilink Brasil — primeiro evento oficial da Arbitrum no Brasil (SP, Nov 2025) — e foi speaker no ETH Latam no painel de RWA ao lado de Credbull, Mercado Bitcoin e Plume Network.",
+          en:  "Produced 70+ educational content pieces in Portuguese covering RWA, DeFi, governance, and ecosystem growth across LATAM. Short-form videos on L2 infrastructure with 65K+ accumulated views. Co-organized Arbilink Brasil — Arbitrum's first official in-person event in Brazil (SP, Nov 2025) — and spoke at ETH Latam on an RWA panel alongside Credbull, Mercado Bitcoin, and Plume Network.",
         },
       },
     ],
@@ -94,26 +90,24 @@ export const experiences: {
   {
     id: 3,
     company: "Modular Crypto",
-    logo: "", // Adicione o logo quando tiver a URL
+    logo: "https://www.google.com/s2/favicons?domain=modularcrypto.xyz&sz=256",
     roles: [
       {
-        title:    { pt: "Growth Leader", en: "Growth Leader" },
-        contract: { pt: "Full-time", en: "Full-time" },
+        title: { pt: "Growth Leader", en: "Growth Leader" },
         start: "Mai 2025",
-        end:   "Abr 2026",
+        end:   null,
         description: {
-          pt: "", // Adicione sua descrição aqui
-          en: "",
+          pt: "Responsável por crescimento, parcerias e expansão de ecossistema. Prospecta e fecha parcerias com protocolos e organizações Web3 — portfolio de 10+ acordos ativos. Co-liderou 9 eventos presenciais pelo Brasil com 1.500+ participantes no total. Embarcou 120+ desenvolvedores, estruturou 4 programas de builders com 70+ participantes e apoiou o lançamento de 27+ projetos.",
+          en:  "Leads growth, partnerships, and ecosystem expansion. Prospects and closes deals with Web3 protocols and organizations — 10+ active partnerships. Co-led 9 in-person regional events across Brazil reaching 1,500+ total attendees. Onboarded 120+ developers, structured 4 builder programs with 70+ participants, and supported the launch of 27+ projects.",
         },
       },
       {
-        title:    { pt: "Social Media & Community Manager", en: "Social Media & Community Manager" },
-        contract: { pt: "Autônomo", en: "Self-employed" },
+        title: { pt: "Social Media & Conteúdo", en: "Social Media & Content" },
         start: "Jul 2024",
-        end:   "Abr 2025",
+        end:   "Mai 2025",
         description: {
-          pt: "", // Adicione sua descrição aqui
-          en: "",
+          pt: "Desenvolveu a presença da marca no X, Instagram e LinkedIn, produzindo conteúdo educativo com 500k+ visualizações acumuladas. Criou e executou estratégias de conteúdo de forma autônoma. Co-apresentou o Estado da Solana — programa ao vivo quinzenal com 19 episódios e média de 150–200 espectadores.",
+          en:  "Built brand presence across X, Instagram, and LinkedIn, producing educational content with 500K+ accumulated views. Developed and executed content strategies autonomously. Co-hosted Estado da Solana — a bi-weekly live program with 19 episodes and 150–200 average live viewers.",
         },
       },
     ],
