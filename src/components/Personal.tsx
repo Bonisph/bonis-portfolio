@@ -4,7 +4,6 @@ import { useState } from "react";
 import { personal } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 
-// Card com controle de erro de imagem por item
 function PersonalCard({ item, index, isWide, t }: {
   item: typeof personal[number];
   index: number;
@@ -16,31 +15,36 @@ function PersonalCard({ item, index, isWide, t }: {
 
   return (
     <div
-      className={`group relative bg-white border border-neutral-200 rounded-2xl overflow-hidden hover:border-neutral-400 hover:shadow-md transition-all duration-300 ${isWide ? "md:col-span-2" : ""}`}
+      className={`group bg-white border border-neutral-200 rounded-2xl overflow-hidden hover:border-neutral-400 hover:shadow-md transition-all duration-300 ${isWide ? "md:col-span-2" : ""}`}
     >
-      {showImage && (
-        <div className={`relative overflow-hidden ${isWide ? "h-80" : "h-52"}`}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={item.image}
-            alt={t(item.title)}
-            onError={() => setImgFailed(true)}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent" />
-        </div>
-      )}
+      {/* Layout: texto à esquerda, imagem quadrada à direita */}
+      <div className="flex flex-col md:flex-row h-full">
 
-      <div className="p-7">
-        <span className="text-xs font-semibold text-neutral-300 mb-3 block">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <h3 className="text-xl font-bold text-neutral-900 mb-3 leading-tight">
-          {t(item.title)}
-        </h3>
-        <p className="text-sm text-neutral-500 leading-relaxed">
-          {t(item.description)}
-        </p>
+        {/* Texto */}
+        <div className="flex-1 p-7 flex flex-col justify-center min-w-0">
+          <span className="text-xs font-semibold text-neutral-300 mb-3 block">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 className="text-xl font-bold text-neutral-900 mb-3 leading-tight">
+            {t(item.title)}
+          </h3>
+          <p className="text-sm text-neutral-500 leading-relaxed">
+            {t(item.description)}
+          </p>
+        </div>
+
+        {/* Imagem quadrada — lado direito */}
+        {showImage && (
+          <div className="md:w-72 md:flex-shrink-0 h-64 md:h-auto relative overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={item.image}
+              alt={t(item.title)}
+              onError={() => setImgFailed(true)}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
