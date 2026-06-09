@@ -112,8 +112,7 @@ export const personal: {
       pt: `Em 2020, durante a pandemia, ainda adolescente, descobri o mundo sneaker — e enxerguei um mercado ali dentro. A paixão por me vestir bem e por colecionar coisas que têm história e valor virou o meu primeiro negócio. Comecei a comprar, revender e estudar a fundo a cultura sneaker e o mercado de streetwear. Foram experiências que me ensinaram muito sobre nicho, demanda, relacionamento com cliente e a arte de encontrar oportunidade onde outros veem só estilo.`,
       en: `In 2020, during the pandemic, I was a teenager when I discovered the sneaker world — and saw a real market inside it. A passion for dressing well and collecting things with story and value became my first business venture. I started buying, reselling, and deeply studying sneaker culture and the streetwear market. Those experiences taught me a lot about niche, demand, customer relationships, and the art of finding opportunity where others just see style.`,
     },
-    // Cole aqui a URL da imagem hospedada (ImgBB, GitHub CDN ou Cloudinary):
-    image: "", // ex: "https://i.ibb.co/abc123/sneakers.jpg"
+    image: "https://i.ibb.co/F45kkLQb/Jordan-1-High-Chicago-Lost-And-Found.jpg",
   },
   // Adicione mais itens pessoais abaixo:
   // { id: 2, title: { pt: "...", en: "..." }, description: { pt: "...", en: "..." }, image: "..." },
