@@ -129,6 +129,9 @@ export const content: {
 }[] = [];
 
 // ─── EVENTOS ──────────────────────────────────────────────────────────────────
+// type: "Host" | "Palestra"/"Talk" | "Painel"/"Panel" | "Organização"/"Organizer"
+// image: URL do ImgBB (deixe "" para placeholder)
+// link: URL do aftermovie ou página do evento (opcional)
 export const events: {
   id: number;
   title: { pt: string; en: string };
@@ -136,8 +139,88 @@ export const events: {
   date: string;
   location: string;
   image: string;
+  link?: string;
   type: { pt: string; en: string };
-}[] = [];
+}[] = [
+  {
+    id: 1,
+    title: { pt: "Arbilink Brazil 2025", en: "Arbilink Brazil 2025" },
+    description: {
+      pt: "Primeiro evento oficial da Arbitrum no Brasil. Co-liderei a organização, fui host do palco principal e speaker em um painel. Durante o evento participei ainda de um podcast gravado ao vivo.",
+      en: "Arbitrum's first official event in Brazil. Co-led the organization, hosted the main stage, and spoke on a panel. Also joined a live podcast recorded during the event.",
+    },
+    date: "Nov 2025",
+    location: "São Paulo, SP",
+    image: "",
+    link: "",
+    type: { pt: "Host", en: "Host" },
+  },
+  {
+    id: 2,
+    title: { pt: "ETH Latam — Arbitrum Day 2025", en: "ETH Latam — Arbitrum Day 2025" },
+    description: {
+      pt: "Speaker no painel de RWA no Arbitrum Day dentro do ETH Latam. Participei ao lado de representantes da Credbull, Mercado Bitcoin e Plume Network, discutindo o futuro de ativos do mundo real em blockchains.",
+      en: "Speaker on the RWA panel at Arbitrum Day during ETH Latam. Joined representatives from Credbull, Mercado Bitcoin, and Plume Network to discuss the future of real-world assets on blockchains.",
+    },
+    date: "2025",
+    location: "São Paulo, SP",
+    image: "",
+    link: "",
+    type: { pt: "Palestra", en: "Talk" },
+  },
+  {
+    id: 3,
+    title: { pt: "Modular House SP 2025", en: "Modular House SP 2025" },
+    description: {
+      pt: "Co-liderei a organização do Modular House São Paulo e fui host do evento.",
+      en: "Co-led the organization of Modular House São Paulo and hosted the event.",
+    },
+    date: "2025",
+    location: "São Paulo, SP",
+    image: "",
+    link: "",
+    type: { pt: "Host", en: "Host" },
+  },
+  {
+    id: 4,
+    title: { pt: "Modular House RJ 2025", en: "Modular House RJ 2025" },
+    description: {
+      pt: "Co-liderei a organização do Modular House Rio de Janeiro e participei em palco.",
+      en: "Co-led the organization of Modular House Rio de Janeiro and participated on stage.",
+    },
+    date: "2025",
+    location: "Rio de Janeiro, RJ",
+    image: "",
+    link: "",
+    type: { pt: "Organização", en: "Organizer" },
+  },
+  {
+    id: 5,
+    title: { pt: "Arbilunch RJ 2025", en: "Arbilunch RJ 2025" },
+    description: {
+      pt: "Co-liderei a organização do Arbilunch no Rio de Janeiro.",
+      en: "Co-led the organization of Arbilunch in Rio de Janeiro.",
+    },
+    date: "2025",
+    location: "Rio de Janeiro, RJ",
+    image: "",
+    link: "",
+    type: { pt: "Organização", en: "Organizer" },
+  },
+  {
+    id: 6,
+    title: { pt: "Modular Carnival 2025", en: "Modular Carnival 2025" },
+    description: {
+      pt: "Speaker em palco e apoiei a organização do Modular Carnival em Belo Horizonte.",
+      en: "Speaker on stage and supported the organization of Modular Carnival in Belo Horizonte.",
+    },
+    date: "2025",
+    location: "Belo Horizonte, MG",
+    image: "",
+    link: "",
+    type: { pt: "Palestra", en: "Talk" },
+  },
+];
 
 // ─── LADO PESSOAL ─────────────────────────────────────────────────────────────
 export const personal: {

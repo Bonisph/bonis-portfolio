@@ -11,6 +11,7 @@ const typeBg: Record<string, string> = {
   Workshop:     "bg-neutral-500 text-white",
   Organização:  "bg-neutral-200 text-neutral-700",
   Organizer:    "bg-neutral-200 text-neutral-700",
+  Host:         "bg-neutral-800 text-white",
 };
 
 export default function Events() {
@@ -55,10 +56,23 @@ export default function Events() {
                       <p className="text-sm text-neutral-500 leading-relaxed mb-4">
                         {t(event.description)}
                       </p>
-                      <div className="flex items-center gap-3 text-xs text-neutral-400">
+                      <div className="flex items-center gap-3 text-xs text-neutral-400 flex-wrap">
                         <span>{event.date}</span>
                         <span>·</span>
                         <span>{event.location}</span>
+                        {event.link && (
+                          <>
+                            <span>·</span>
+                            <a
+                              href={event.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-neutral-500 hover:text-neutral-900 underline underline-offset-2 transition-colors"
+                            >
+                              {t({ pt: "Ver vídeo", en: "Watch video" })}
+                            </a>
+                          </>
+                        )}
                       </div>
                     </div>
 
