@@ -1,6 +1,6 @@
 "use client";
 
-import { works } from "@/data/portfolio";
+import { experiences, projects } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 
 const ArrowUpRight = () => (
@@ -9,130 +9,164 @@ const ArrowUpRight = () => (
   </svg>
 );
 
-const BriefcaseIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2v-5.5M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M3 9h18v4.5" />
-  </svg>
-);
+// Logo da empresa: usa imagem se disponível, senão inicial colorida
+function CompanyLogo({ logo, name }: { logo: string; name: string }) {
+  if (logo) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={logo}
+        alt={name}
+        className="w-12 h-12 rounded-xl object-contain bg-white border border-neutral-100 p-1 flex-shrink-0"
+        onError={(e) => {
+          (e.target as HTMLImageElement).style.display = "none";
+          (e.target as HTMLImageElement).nextElementSibling?.classList.remove("hidden");
+        }}
+      />
+    );
+  }
+  return (
+    <div className="w-12 h-12 rounded-xl bg-neutral-200 flex items-center justify-center flex-shrink-0">
+      <span className="text-lg font-bold text-neutral-600">{name[0]}</span>
+    </div>
+  );
+}
 
-const CodeIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-  </svg>
-);
+function periodLabel(start: string, end: string | null, lang: string) {
+  const present = lang === "pt" ? "Presente" : "Present";
+  return `${start} – ${end ?? present}`;
+}
 
 export default function Works() {
   const { lang, t } = useLang();
-
-  const experiences = works.filter((w) => w.type === "experience");
-  const projects = works.filter((w) => w.type === "project");
 
   return (
     <section id="works" className="py-28 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          Works
+          {t({ pt: "Experiência", en: "Experience" })}
         </span>
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-snug">
-            {t({ pt: "O que já fiz", en: "What I've done" })}
-          </h2>
-          <p className="text-sm text-neutral-400">Proof of work</p>
-        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-snug mb-14">
+          {t({ pt: "Onde já trabalhei", en: "Where I've worked" })}
+        </h2>
 
-        {works.length === 0 && (
-          <p className="text-neutral-300 italic text-sm">
-            {t({ pt: "Nenhum work adicionado ainda.", en: "No works added yet." })}
-          </p>
-        )}
-
-        {/* Experiences */}
+        {/* ── EXPERIÊNCIAS ─────────────────────────────────────── */}
         {experiences.length > 0 && (
-          <div className="mb-14">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-6">
-              <BriefcaseIcon />
-              {t({ pt: "Experiências", en: "Experience" })}
-            </div>
-            <div className="space-y-4">
-              {experiences.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex flex-col md:flex-row md:items-center gap-4 border border-neutral-200 rounded-xl p-6 hover:border-neutral-400 transition-all duration-200"
-                >
-                  {/* Period */}
-                  <div className="md:w-36 flex-shrink-0">
-                    <span className="text-xs text-neutral-400 font-medium">{item.period}</span>
-                  </div>
-
-                  {/* Info */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-baseline gap-2 mb-1">
-                      <h3 className="font-semibold text-neutral-900">{t(item.title)}</h3>
-                      {item.company && (
-                        <span className="text-sm text-neutral-400">@ {item.company}</span>
+          <div className="space-y-2 mb-16">
+            {experiences.map((exp) => (
+              <div
+                key={exp.id}
+                className="border border-neutral-200 rounded-2xl p-6 hover:border-neutral-300 hover:shadow-sm transition-all duration-200"
+              >
+                {exp.roles.length === 1 ? (
+                  /* ── Cargo único — logo + info na mesma linha ── */
+                  <div className="flex gap-4">
+                    <CompanyLogo logo={exp.logo} name={exp.company} />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2 flex-wrap">
+                        <div>
+                          <h3 className="font-semibold text-neutral-900 leading-tight">
+                            {t(exp.roles[0].title)}
+                          </h3>
+                          <p className="text-sm text-neutral-500 mt-0.5">
+                            {exp.company} · {t(exp.roles[0].contract)}
+                          </p>
+                          <p className="text-xs text-neutral-400 mt-0.5">
+                            {periodLabel(exp.roles[0].start, exp.roles[0].end, lang)}
+                          </p>
+                        </div>
+                        {exp.link && (
+                          <a href={exp.link} target="_blank" rel="noopener noreferrer"
+                            className="text-neutral-300 hover:text-neutral-700 transition-colors flex-shrink-0">
+                            <ArrowUpRight />
+                          </a>
+                        )}
+                      </div>
+                      {t(exp.roles[0].description) && (
+                        <p className="text-sm text-neutral-500 leading-relaxed mt-3">
+                          {t(exp.roles[0].description)}
+                        </p>
                       )}
                     </div>
-                    <p className="text-sm text-neutral-500 leading-relaxed">{t(item.description)}</p>
                   </div>
+                ) : (
+                  /* ── Múltiplos cargos — empresa no topo, cargos abaixo ── */
+                  <div>
+                    {/* Cabeçalho da empresa */}
+                    <div className="flex items-center gap-4 mb-5">
+                      <CompanyLogo logo={exp.logo} name={exp.company} />
+                      <div className="flex items-center justify-between flex-1 gap-2 flex-wrap">
+                        <h3 className="font-semibold text-neutral-900">{exp.company}</h3>
+                        {exp.link && (
+                          <a href={exp.link} target="_blank" rel="noopener noreferrer"
+                            className="text-neutral-300 hover:text-neutral-700 transition-colors">
+                            <ArrowUpRight />
+                          </a>
+                        )}
+                      </div>
+                    </div>
 
-                  {/* Tags */}
-                  {item.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 md:justify-end">
-                      {item.tags.map((tag) => (
-                        <span key={tag} className="text-xs px-2.5 py-1 bg-neutral-100 text-neutral-500 rounded-full">
-                          {tag}
-                        </span>
+                    {/* Cargos agrupados com linha vertical */}
+                    <div className="ml-16 border-l-2 border-neutral-100 pl-5 space-y-5">
+                      {exp.roles.map((role, i) => (
+                        <div key={i}>
+                          <p className="font-medium text-neutral-800 leading-tight">
+                            {t(role.title)}
+                          </p>
+                          <p className="text-sm text-neutral-400 mt-0.5">
+                            {t(role.contract)} · {periodLabel(role.start, role.end, lang)}
+                          </p>
+                          {t(role.description) && (
+                            <p className="text-sm text-neutral-500 leading-relaxed mt-2">
+                              {t(role.description)}
+                            </p>
+                          )}
+                        </div>
                       ))}
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         )}
 
-        {/* Projects */}
+        {/* ── PROJETOS (se houver) ─────────────────────────────── */}
         {projects.length > 0 && (
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-6">
-              <CodeIcon />
+            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-6">
               {t({ pt: "Projetos", en: "Projects" })}
-            </div>
+            </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {projects.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.link || "#"}
-                  target={item.link ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
-                  className="group block bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-400 hover:shadow-md transition-all duration-200"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-xs text-neutral-400">{item.period}</span>
-                    {item.link && (
+              {projects.map((proj) => (
+                <a key={proj.id} href={proj.link || "#"} target="_blank" rel="noopener noreferrer"
+                  className="group block border border-neutral-200 rounded-2xl p-6 hover:border-neutral-400 hover:shadow-md transition-all duration-200">
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="text-xs text-neutral-400">{proj.period}</span>
+                    {proj.link && (
                       <span className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
                         <ArrowUpRight />
                       </span>
                     )}
                   </div>
-                  <h3 className="font-semibold text-neutral-900 mb-2 group-hover:text-neutral-700 transition-colors">
-                    {t(item.title)}
-                  </h3>
-                  <p className="text-sm text-neutral-500 leading-relaxed mb-5">
-                    {t(item.description)}
-                  </p>
+                  <h3 className="font-semibold text-neutral-900 mb-2">{t(proj.title)}</h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed mb-4">{t(proj.description)}</p>
                   <div className="flex flex-wrap gap-2">
-                    {item.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2.5 py-1 bg-neutral-100 text-neutral-500 rounded-full">
-                        {tag}
-                      </span>
+                    {proj.tags.map((tag) => (
+                      <span key={tag} className="text-xs px-2.5 py-1 bg-neutral-100 text-neutral-500 rounded-full">{tag}</span>
                     ))}
                   </div>
                 </a>
               ))}
             </div>
           </div>
+        )}
+
+        {experiences.length === 0 && projects.length === 0 && (
+          <p className="text-neutral-300 italic text-sm">
+            {t({ pt: "Nenhuma experiência adicionada ainda.", en: "No experience added yet." })}
+          </p>
         )}
       </div>
     </section>

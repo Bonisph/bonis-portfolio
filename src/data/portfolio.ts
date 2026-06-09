@@ -9,7 +9,6 @@ export const siteConfig = {
   name: "Pedro Bonis",
   displayName: 'Pedro "Bonis"',
 
-  // Cargos/funções exibidos na Hero abaixo do nome
   roles: {
     pt: ["Empreendedor", "Builder de IA", "Estrategista de Negócios"],
     en:  ["Entrepreneur",  "AI Builder",   "Business Strategist"],
@@ -21,19 +20,16 @@ export const siteConfig = {
   },
 
   bio: {
-    pt: ``, // Adicione sua bio aqui
-    en: ``, // Add your bio here
+    pt: ``,
+    en: ``,
   },
 
-  // Foto da Hero — use sempre uma URL externa:
-  // ImgBB: imgbb.com | GitHub CDN: cole imagem em qualquer issue do GitHub → copie a URL
-  // Cloudinary: cloudinary.com
   photo: "https://i.ibb.co/xqYsQs8M/Foto-do-portfolio.png",
 
   socials: {
     twitter:  "https://x.com/bonis_crypto",
     linkedin: "https://www.linkedin.com/in/pedro-henrique-bonilha-ferreira-68271625a/",
-    github:   "https://github.com/seuperfil", // atualize quando quiser
+    github:   "https://github.com/seuperfil",
   },
 };
 
@@ -45,23 +41,96 @@ export const aboutStats = [
   { value: "", label: { pt: "", en: "" } },
 ];
 
-// ─── WORKS ────────────────────────────────────────────────────────────────────
-export const works: {
+// ─── EXPERIÊNCIAS ─────────────────────────────────────────────────────────────
+// Cada entrada = uma empresa. "roles" agrupa cargos na mesma empresa (igual LinkedIn).
+// logo: URL do logo da empresa (ImgBB, Clearbit, etc.)
+// end: null = "Presente" / "Present"
+export const experiences: {
   id: number;
-  type: "experience" | "project";
-  title: { pt: string; en: string };
   company: string;
+  logo: string;
+  link?: string;
+  roles: {
+    title: { pt: string; en: string };
+    contract: { pt: string; en: string };
+    start: string;
+    end: string | null;
+    description: { pt: string; en: string };
+  }[];
+}[] = [
+  {
+    id: 1,
+    company: "Binance",
+    logo: "https://logo.clearbit.com/binance.com",
+    link: "https://binance.com",
+    roles: [
+      {
+        title:    { pt: "Affiliate Business Development", en: "Affiliate Business Development" },
+        contract: { pt: "Full-time", en: "Full-time" },
+        start: "Jun 2026",
+        end:   null,
+        description: { pt: "", en: "" }, // Adicione descrição quando quiser
+      },
+    ],
+  },
+  {
+    id: 2,
+    company: "Arbitrum",
+    logo: "https://logo.clearbit.com/arbitrum.io",
+    link: "https://arbitrum.io",
+    roles: [
+      {
+        title:    { pt: "Arbitrum Ambassador", en: "Arbitrum Ambassador" },
+        contract: { pt: "Contrato Indireto", en: "Indirect Contract" },
+        start: "Fev 2025",
+        end:   "Mai 2026",
+        description: {
+          pt: "", // Adicione sua descrição aqui
+          en: "",
+        },
+      },
+    ],
+  },
+  {
+    id: 3,
+    company: "Modular Crypto",
+    logo: "", // Adicione o logo quando tiver a URL
+    roles: [
+      {
+        title:    { pt: "Growth Leader", en: "Growth Leader" },
+        contract: { pt: "Full-time", en: "Full-time" },
+        start: "Mai 2025",
+        end:   "Abr 2026",
+        description: {
+          pt: "", // Adicione sua descrição aqui
+          en: "",
+        },
+      },
+      {
+        title:    { pt: "Social Media & Community Manager", en: "Social Media & Community Manager" },
+        contract: { pt: "Autônomo", en: "Self-employed" },
+        start: "Jul 2024",
+        end:   "Abr 2025",
+        description: {
+          pt: "", // Adicione sua descrição aqui
+          en: "",
+        },
+      },
+    ],
+  },
+];
+
+// ─── PROJETOS ─────────────────────────────────────────────────────────────────
+export const projects: {
+  id: number;
+  title: { pt: string; en: string };
   period: string;
   description: { pt: string; en: string };
   tags: string[];
   link: string;
 }[] = [
-  // Experiência:
-  // { id: 1, type: "experience", title: { pt: "Cargo", en: "Role" }, company: "Empresa",
-  //   period: "2024 – Presente", description: { pt: "...", en: "..." }, tags: [], link: "" },
-  // Projeto:
-  // { id: 2, type: "project", title: { pt: "Nome", en: "Name" }, company: "",
-  //   period: "2025", description: { pt: "...", en: "..." }, tags: ["Next.js"], link: "https://..." },
+  // { id: 1, title: { pt: "Nome", en: "Name" }, period: "2025",
+  //   description: { pt: "...", en: "..." }, tags: ["Next.js"], link: "https://..." },
 ];
 
 // ─── CONTEÚDO ─────────────────────────────────────────────────────────────────
@@ -73,10 +142,7 @@ export const content: {
   excerpt: { pt: string; en: string };
   link: string;
   thumbnail?: string;
-}[] = [
-  // { id: 1, title: { pt: "Título", en: "Title" }, platform: "LinkedIn",
-  //   date: "Maio 2026", excerpt: { pt: "...", en: "..." }, link: "https://..." },
-];
+}[] = [];
 
 // ─── EVENTOS ──────────────────────────────────────────────────────────────────
 export const events: {
@@ -85,17 +151,11 @@ export const events: {
   description: { pt: string; en: string };
   date: string;
   location: string;
-  image: string; // URL externa ou /events/foto.jpg
+  image: string;
   type: { pt: string; en: string };
-}[] = [
-  // { id: 1, title: { pt: "Nome", en: "Name" }, description: { pt: "...", en: "..." },
-  //   date: "Mar 2026", location: "São Paulo, SP", image: "https://...",
-  //   type: { pt: "Palestra", en: "Talk" } },
-];
+}[] = [];
 
 // ─── LADO PESSOAL ─────────────────────────────────────────────────────────────
-// Coisas não-profissionais que moldam quem você é.
-// image: URL externa ou caminho local /personal/foto.jpg (opcional)
 export const personal: {
   id: number;
   title: { pt: string; en: string };
@@ -114,6 +174,4 @@ export const personal: {
     },
     image: "https://i.ibb.co/F45kkLQb/Jordan-1-High-Chicago-Lost-And-Found.jpg",
   },
-  // Adicione mais itens pessoais abaixo:
-  // { id: 2, title: { pt: "...", en: "..." }, description: { pt: "...", en: "..." }, image: "..." },
 ];
