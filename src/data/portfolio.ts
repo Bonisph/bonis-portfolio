@@ -147,12 +147,17 @@ export const events: {
     id: 1,
     title: { pt: "Arbilink Brazil 2025", en: "Arbilink Brazil 2025" },
     description: {
-      pt: "Primeiro evento oficial da Arbitrum no Brasil. Co-liderei a organização, fui host do palco principal e speaker em um painel. Durante o evento participei ainda de um podcast gravado ao vivo.",
-      en: "Arbitrum's first official event in Brazil. Co-led the organization, hosted the main stage, and spoke on a panel. Also joined a live podcast recorded during the event.",
+      pt: "Primeiro evento oficial da Arbitrum no Brasil. Co-liderei a organização, fui host do palco e speaker no painel sobre o programa de embaixadores da Arbitrum. Durante o evento participei ainda de um podcast gravado ao vivo.",
+      en: "Arbitrum's first official event in Brazil. Co-led the organization, hosted the stage, and spoke on a panel about the Arbitrum ambassador program. Also joined a live podcast recorded during the event.",
     },
     date: "Nov 2025",
     location: "São Paulo, SP",
-    media: [],
+    media: [
+      { type: "image", url: "https://i.ibb.co/C3QyxbwF/ELZ-0922.jpg" },
+      { type: "image", url: "https://i.ibb.co/7dW98q9m/ELZ-0890.jpg" },
+      { type: "image", url: "https://i.ibb.co/Qvcjq10z/ELZ-0647.jpg" },
+      { type: "video", url: "https://www.youtube.com/watch?v=vI6-GmvSAIQ" },
+    ],
     type: { pt: "Host", en: "Host" },
   },
   {
@@ -171,8 +176,8 @@ export const events: {
     id: 3,
     title: { pt: "Modular House SP 2025", en: "Modular House SP 2025" },
     description: {
-      pt: "Co-liderei a organização do Modular House São Paulo e fui host do evento.",
-      en: "Co-led the organization of Modular House São Paulo and hosted the event.",
+      pt: "Co-liderei a organização do Modular House São Paulo, fui host do evento e participei em palco falando sobre o programa de embaixadores da Arbitrum.",
+      en: "Co-led the organization of Modular House São Paulo, hosted the event, and took the stage to speak about the Arbitrum ambassador program.",
     },
     date: "2025",
     location: "São Paulo, SP",
@@ -207,13 +212,13 @@ export const events: {
     id: 6,
     title: { pt: "Modular Carnival 2025", en: "Modular Carnival 2025" },
     description: {
-      pt: "Speaker em palco e apoiei a organização do Modular Carnival em Belo Horizonte.",
-      en: "Speaker on stage and supported the organization of Modular Carnival in Belo Horizonte.",
+      pt: "Moderador do painel 'Solana além das memecoins' no Modular Carnival. Conduzi a discussão sobre tudo que a Solana entrega além das memecoins, o que a rede realmente oferece e o que enxergávamos para o seu futuro. Também apoiei a organização do evento.",
+      en: "Moderated the 'Solana Beyond Memecoins' panel at Modular Carnival. Led the discussion about everything Solana delivers beyond memecoins, what the network truly offers, and our vision for its future. Also supported the event organization.",
     },
     date: "2025",
     location: "Belo Horizonte, MG",
     media: [],
-    type: { pt: "Palestra", en: "Talk" },
+    type: { pt: "Moderador", en: "Moderator" },
   },
 ];
 

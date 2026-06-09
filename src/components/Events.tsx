@@ -13,6 +13,8 @@ const typeBg: Record<string, string> = {
   Organização: "bg-neutral-200 text-neutral-700",
   Organizer:   "bg-neutral-200 text-neutral-700",
   Host:        "bg-neutral-800 text-white",
+  Moderador:   "bg-neutral-600 text-white",
+  Moderator:   "bg-neutral-600 text-white",
 };
 
 function getYouTubeId(url: string): string | null {
