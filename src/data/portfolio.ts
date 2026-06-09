@@ -19,7 +19,7 @@ export const siteConfig = {
   socials: {
     twitter:  "https://x.com/bonis_crypto",
     linkedin: "https://www.linkedin.com/in/pedro-henrique-bonilha-ferreira-68271625a/",
-    github:   "https://github.com/seuperfil",
+    github:   "https://github.com/Bonisph",
   },
 };
 
