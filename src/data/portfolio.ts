@@ -79,7 +79,7 @@ export const experiences: {
       {
         title: { pt: "Ambassador – Brasil", en: "Ambassador – Brazil" },
         start: "Jan 2025",
-        end:   null,
+        end:   "Mai 2026",
         description: {
           pt: "Produziu 70+ peças de conteúdo educativo em português sobre RWA, DeFi, governança e crescimento de ecossistema no LATAM. Vídeos curtos sobre infraestrutura L2 com 65k+ visualizações acumuladas. Co-organizou o Arbilink Brasil — primeiro evento oficial da Arbitrum no Brasil (SP, Nov 2025) — e foi speaker no ETH Latam no painel de RWA ao lado de Credbull, Mercado Bitcoin e Plume Network.",
           en:  "Produced 70+ educational content pieces in Portuguese covering RWA, DeFi, governance, and ecosystem growth across LATAM. Short-form videos on L2 infrastructure with 65K+ accumulated views. Co-organized Arbilink Brasil — Arbitrum's first official in-person event in Brazil (SP, Nov 2025) — and spoke at ETH Latam on an RWA panel alongside Credbull, Mercado Bitcoin, and Plume Network.",
@@ -90,7 +90,7 @@ export const experiences: {
   {
     id: 3,
     company: "Modular Crypto",
-    logo: "https://www.google.com/s2/favicons?domain=modularcrypto.xyz&sz=256",
+    logo: "https://media.beehiiv.com/cdn-cgi/image/format=auto,onerror=redirect/uploads/asset/file/f66aa22c-da3d-45d9-a9ab-981749782825/1.jpg",
     roles: [
       {
         title: { pt: "Growth Leader", en: "Growth Leader" },
