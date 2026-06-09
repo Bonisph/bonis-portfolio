@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="py-12 px-6 bg-neutral-900 border-t border-neutral-800 text-neutral-400">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm">
-          © {year} {siteConfig.name} —{" "}
+          © {year} {siteConfig.name}.{" "}
           {t({ pt: "Todos os direitos reservados.", en: "All rights reserved." })}
         </p>
 
