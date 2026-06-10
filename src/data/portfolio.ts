@@ -53,7 +53,7 @@ export const experiences: {
     link: "https://binance.com",
     roles: [
       {
-        title: { pt: "Affiliate Business Development", en: "Affiliate Business Development" },
+        title: { pt: "Global Affiliate BD", en: "Global Affiliate BD" },
         start: "Jun 2026",
         end:   null,
         description: { pt: "", en: "" },
