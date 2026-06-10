@@ -176,8 +176,8 @@ export const events: {
     id: 3,
     title: { pt: "Modular House SP 2025", en: "Modular House SP 2025" },
     description: {
-      pt: "Co-liderei a organização do Modular House São Paulo, fui host do evento e participei em palco falando sobre o programa de embaixadores da Arbitrum.",
-      en: "Co-led the organization of Modular House São Paulo, hosted the event, and took the stage to speak about the Arbitrum ambassador program.",
+      pt: "Co-liderei a organização do Modular House São Paulo, fui host do evento e participei em palco falando sobre o programa de embaixadores da Arbitrum. O evento contou com o apoio de Scroll, Arbitrum DAO, Devconnect, Team1 Avax, ETH Latam e Mercado Bitcoin.",
+      en: "Co-led the organization of Modular House São Paulo, hosted the event, and took the stage to speak about the Arbitrum ambassador program. The event was supported by Scroll, Arbitrum DAO, Devconnect, Team1 Avax, ETH Latam, and Mercado Bitcoin.",
     },
     date: "2025",
     location: "São Paulo, SP",
@@ -188,8 +188,8 @@ export const events: {
     id: 4,
     title: { pt: "Modular House RJ 2025", en: "Modular House RJ 2025" },
     description: {
-      pt: "Co-liderei a organização do Modular House Rio de Janeiro e participei em palco.",
-      en: "Co-led the organization of Modular House Rio de Janeiro and participated on stage.",
+      pt: "Co-liderei a organização do Modular House Rio de Janeiro e participei em palco. O evento contou com o apoio de Scroll, Arbitrum DAO, Mantle, Rayls, Plume e Chainlink.",
+      en: "Co-led the organization of Modular House Rio de Janeiro and participated on stage. The event was supported by Scroll, Arbitrum DAO, Mantle, Rayls, Plume, and Chainlink.",
     },
     date: "2025",
     location: "Rio de Janeiro, RJ",
@@ -200,8 +200,8 @@ export const events: {
     id: 5,
     title: { pt: "Arbilunch RJ 2025", en: "Arbilunch RJ 2025" },
     description: {
-      pt: "Co-liderei a organização do Arbilunch no Rio de Janeiro.",
-      en: "Co-led the organization of Arbilunch in Rio de Janeiro.",
+      pt: "Co-liderei a organização do Arbilunch no Rio de Janeiro, um almoço exclusivo de networking reunindo founders, KOLs e embaixadores da Arbitrum.",
+      en: "Co-led the organization of Arbilunch in Rio de Janeiro, an exclusive networking lunch bringing together founders, KOLs, and Arbitrum ambassadors.",
     },
     date: "2025",
     location: "Rio de Janeiro, RJ",
