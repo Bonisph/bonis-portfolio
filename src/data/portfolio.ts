@@ -154,13 +154,12 @@ export const events: {
     location: "São Paulo, SP",
     media: [
       { type: "image", url: "https://i.ibb.co/C3QyxbwF/ELZ-0922.jpg" },
-      { type: "image", url: "https://i.ibb.co/7dW98q9m/ELZ-0890.jpg" },
       { type: "image", url: "https://i.ibb.co/Qvcjq10z/ELZ-0647.jpg" },
       { type: "video", url: "https://www.youtube.com/watch?v=vI6-GmvSAIQ" },
     ],
     types: [
       { pt: "Host", en: "Host" },
-      { pt: "Palestra", en: "Talk" },
+      { pt: "Palestrante", en: "Speaker" },
     ],
   },
   {
@@ -174,7 +173,7 @@ export const events: {
     location: "São Paulo, SP",
     media: [],
     types: [
-      { pt: "Palestra", en: "Talk" },
+      { pt: "Palestrante", en: "Speaker" },
     ],
   },
   {
@@ -189,7 +188,7 @@ export const events: {
     media: [],
     types: [
       { pt: "Host", en: "Host" },
-      { pt: "Palestra", en: "Talk" },
+      { pt: "Palestrante", en: "Speaker" },
     ],
   },
   {
@@ -203,7 +202,7 @@ export const events: {
     location: "Rio de Janeiro, RJ",
     media: [],
     types: [
-      { pt: "Organização", en: "Organizer" },
+      { pt: "Organizador", en: "Organizer" },
     ],
   },
   {
@@ -217,7 +216,7 @@ export const events: {
     location: "Rio de Janeiro, RJ",
     media: [],
     types: [
-      { pt: "Organização", en: "Organizer" },
+      { pt: "Organizador", en: "Organizer" },
     ],
   },
   {
@@ -232,7 +231,7 @@ export const events: {
     media: [],
     types: [
       { pt: "Moderador", en: "Moderator" },
-      { pt: "Organização", en: "Organizer" },
+      { pt: "Organizador", en: "Organizer" },
     ],
   },
 ];

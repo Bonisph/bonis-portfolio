@@ -5,12 +5,12 @@ import { events } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 
 const typeBg: Record<string, string> = {
-  Palestra:    "bg-neutral-900 text-white",
-  Talk:        "bg-neutral-900 text-white",
+  Palestrante: "bg-neutral-900 text-white",
+  Speaker:     "bg-neutral-900 text-white",
   Painel:      "bg-neutral-700 text-white",
   Panel:       "bg-neutral-700 text-white",
   Workshop:    "bg-neutral-500 text-white",
-  Organização: "bg-neutral-100 text-neutral-600 border border-neutral-300",
+  Organizador: "bg-neutral-100 text-neutral-600 border border-neutral-300",
   Organizer:   "bg-neutral-100 text-neutral-600 border border-neutral-300",
   Host:        "bg-neutral-800 text-white",
   Moderador:   "bg-neutral-600 text-white",
