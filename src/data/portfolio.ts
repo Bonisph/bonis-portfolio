@@ -173,7 +173,6 @@ export const events: {
     location: "São Paulo, SP",
     media: [
       { type: "image", url: "https://i.ibb.co/cKC2swDL/IMG-4235.jpg" },
-      { type: "image", url: "https://i.ibb.co/HT4dbJPh/Arbitrum-Day-RWA-in-Brazil.jpg" },
     ],
     types: [
       { pt: "Palestrante", en: "Speaker" },
@@ -211,7 +210,6 @@ export const events: {
     location: "Rio de Janeiro, RJ",
     media: [
       { type: "image", url: "https://i.ibb.co/cKnJmcKL/Baskerp-115.jpg" },
-      { type: "image", url: "https://i.ibb.co/pjvD7hmL/Baskerp-17.jpg" },
       { type: "video", url: "https://youtu.be/6jrnFo-8XDI" },
     ],
     types: [
