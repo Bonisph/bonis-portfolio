@@ -171,7 +171,10 @@ export const events: {
     },
     date: "2025",
     location: "São Paulo, SP",
-    media: [],
+    media: [
+      { type: "image", url: "https://i.ibb.co/cKC2swDL/IMG-4235.jpg" },
+      { type: "image", url: "https://i.ibb.co/HT4dbJPh/Arbitrum-Day-RWA-in-Brazil.jpg" },
+    ],
     types: [
       { pt: "Palestrante", en: "Speaker" },
     ],
@@ -185,7 +188,13 @@ export const events: {
     },
     date: "2025",
     location: "São Paulo, SP",
-    media: [],
+    media: [
+      { type: "image", url: "https://i.ibb.co/pj5Q8sw4/ELZ-2002.jpg" },
+      { type: "image", url: "https://i.ibb.co/xtGPPngF/ELZ-2168.jpg" },
+      { type: "image", url: "https://i.ibb.co/fdDvYm6d/ELZ-2086.jpg" },
+      { type: "image", url: "https://i.ibb.co/x8MLYxsV/ELZ-2038.jpg" },
+      { type: "video", url: "https://youtu.be/s6mJZ_RHUes" },
+    ],
     types: [
       { pt: "Host", en: "Host" },
       { pt: "Palestrante", en: "Speaker" },
@@ -200,7 +209,11 @@ export const events: {
     },
     date: "2025",
     location: "Rio de Janeiro, RJ",
-    media: [],
+    media: [
+      { type: "image", url: "https://i.ibb.co/cKnJmcKL/Baskerp-115.jpg" },
+      { type: "image", url: "https://i.ibb.co/pjvD7hmL/Baskerp-17.jpg" },
+      { type: "video", url: "https://youtu.be/6jrnFo-8XDI" },
+    ],
     types: [
       { pt: "Organizador", en: "Organizer" },
     ],
@@ -228,7 +241,11 @@ export const events: {
     },
     date: "2025",
     location: "Belo Horizonte, MG",
-    media: [],
+    media: [
+      { type: "image", url: "https://i.ibb.co/8gSscY2L/20250227-170204.jpg" },
+      { type: "image", url: "https://i.ibb.co/VGHSC56/G8-ZSSq-JXIAAZL2h.jpg" },
+      { type: "video", url: "https://youtu.be/0SHSsuaroCA" },
+    ],
     types: [
       { pt: "Moderador", en: "Moderator" },
       { pt: "Organizador", en: "Organizer" },

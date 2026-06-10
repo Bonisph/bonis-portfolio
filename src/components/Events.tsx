@@ -18,7 +18,7 @@ const typeBg: Record<string, string> = {
 };
 
 function getYouTubeId(url: string): string | null {
-  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?\s]+)/);
   return match ? match[1] : null;
 }
 
