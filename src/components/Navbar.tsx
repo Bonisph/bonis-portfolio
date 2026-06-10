@@ -11,7 +11,7 @@ export default function Navbar() {
 
   const navLinks = [
     { label: lang === "pt" ? "Sobre" : "About",        href: "#sobre" },
-    { label: "Works",                                   href: "#works" },
+    { label: lang === "pt" ? "Experiência" : "Works",    href: "#works" },
     { label: lang === "pt" ? "Conteúdo" : "Content",   href: "#conteudo" },
     { label: lang === "pt" ? "Eventos" : "Events",      href: "#eventos" },
     { label: lang === "pt" ? "Pessoal" : "Personal",    href: "#pessoal" },
