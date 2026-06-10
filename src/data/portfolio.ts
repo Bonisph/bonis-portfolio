@@ -141,7 +141,7 @@ export const events: {
   date: string;
   location: string;
   media: { type: "image" | "video"; url: string }[];
-  type: { pt: string; en: string };
+  types: { pt: string; en: string }[];
 }[] = [
   {
     id: 1,
@@ -158,7 +158,10 @@ export const events: {
       { type: "image", url: "https://i.ibb.co/Qvcjq10z/ELZ-0647.jpg" },
       { type: "video", url: "https://www.youtube.com/watch?v=vI6-GmvSAIQ" },
     ],
-    type: { pt: "Host", en: "Host" },
+    types: [
+      { pt: "Host", en: "Host" },
+      { pt: "Palestra", en: "Talk" },
+    ],
   },
   {
     id: 2,
@@ -170,7 +173,9 @@ export const events: {
     date: "2025",
     location: "São Paulo, SP",
     media: [],
-    type: { pt: "Palestra", en: "Talk" },
+    types: [
+      { pt: "Palestra", en: "Talk" },
+    ],
   },
   {
     id: 3,
@@ -182,7 +187,10 @@ export const events: {
     date: "2025",
     location: "São Paulo, SP",
     media: [],
-    type: { pt: "Host", en: "Host" },
+    types: [
+      { pt: "Host", en: "Host" },
+      { pt: "Palestra", en: "Talk" },
+    ],
   },
   {
     id: 4,
@@ -194,7 +202,9 @@ export const events: {
     date: "2025",
     location: "Rio de Janeiro, RJ",
     media: [],
-    type: { pt: "Organização", en: "Organizer" },
+    types: [
+      { pt: "Organização", en: "Organizer" },
+    ],
   },
   {
     id: 5,
@@ -206,7 +216,9 @@ export const events: {
     date: "2025",
     location: "Rio de Janeiro, RJ",
     media: [],
-    type: { pt: "Organização", en: "Organizer" },
+    types: [
+      { pt: "Organização", en: "Organizer" },
+    ],
   },
   {
     id: 6,
@@ -218,7 +230,10 @@ export const events: {
     date: "2025",
     location: "Belo Horizonte, MG",
     media: [],
-    type: { pt: "Moderador", en: "Moderator" },
+    types: [
+      { pt: "Moderador", en: "Moderator" },
+      { pt: "Organização", en: "Organizer" },
+    ],
   },
 ];
 
