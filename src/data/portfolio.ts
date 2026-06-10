@@ -225,7 +225,9 @@ export const events: {
     },
     date: "2025",
     location: "Rio de Janeiro, RJ",
-    media: [],
+    media: [
+      { type: "image", url: "https://i.ibb.co/gM9Sw5n3/Gy-Zo-Ly-UWEAAs0-EW.jpg" },
+    ],
     types: [
       { pt: "Organizador", en: "Organizer" },
     ],
