@@ -10,8 +10,8 @@ const typeBg: Record<string, string> = {
   Painel:      "bg-neutral-700 text-white",
   Panel:       "bg-neutral-700 text-white",
   Workshop:    "bg-neutral-500 text-white",
-  Organizador: "bg-neutral-100 text-neutral-600 border border-neutral-300",
-  Organizer:   "bg-neutral-100 text-neutral-600 border border-neutral-300",
+  Organizador: "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-300 dark:border-neutral-600",
+  Organizer:   "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-300 dark:border-neutral-600",
   Host:        "bg-neutral-800 text-white",
   Moderador:   "bg-neutral-600 text-white",
   Moderator:   "bg-neutral-600 text-white",
@@ -136,13 +136,13 @@ export default function Events() {
   const { t } = useLang();
 
   return (
-    <section id="eventos" className="py-28 px-6 bg-neutral-50">
+    <section id="eventos" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
           {t({ pt: "Eventos", en: "Events" })}
         </span>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-snug mb-14">
+        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
           {t({ pt: "Eventos", en: "Events" })}
         </h2>
 
@@ -155,10 +155,10 @@ export default function Events() {
             {events.map((event) => (
               <div
                 key={event.id}
-                className="bg-white border border-neutral-200 rounded-2xl overflow-hidden hover:border-neutral-300 hover:shadow-lg transition-all duration-300 flex flex-col"
+                className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden hover:border-neutral-300 dark:hover:border-neutral-600 hover:shadow-lg transition-all duration-300 flex flex-col"
               >
                 {/* ── Imagem / Carrossel ── */}
-                <div className="relative aspect-video overflow-hidden bg-neutral-100">
+                <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
                   <MediaCarousel media={event.media} eventId={event.id} />
                 </div>
 
@@ -180,19 +180,19 @@ export default function Events() {
                   </div>
 
                   {/* Título */}
-                  <h3 className="font-semibold text-neutral-900 text-lg leading-snug mb-2">
+                  <h3 className="font-semibold text-neutral-900 dark:text-white text-lg leading-snug mb-2">
                     {t(event.title)}
                   </h3>
 
                   {/* Data e local */}
-                  <div className="flex items-center gap-2 text-xs text-neutral-400 mb-4">
+                  <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500 mb-4">
                     <span>{event.date}</span>
                     <span>·</span>
                     <span>{event.location}</span>
                   </div>
 
                   {/* Descrição */}
-                  <p className="text-sm text-neutral-500 leading-relaxed">
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
                     {t(event.description)}
                   </p>
                 </div>

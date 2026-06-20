@@ -9,7 +9,7 @@ export default function About() {
   const filledStats = aboutStats.filter((s) => s.value);
 
   return (
-    <section id="sobre" className="py-28 px-6 bg-neutral-50">
+    <section id="sobre" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
           {t({ pt: "Sobre", en: "About" })}
@@ -18,11 +18,11 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Text */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-snug mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-6">
               {t({ pt: "Quem é Pedro Bonis?", en: "Who is Pedro Bonis?" })}
             </h2>
             {bio ? (
-              <div className="space-y-4 text-neutral-500 leading-relaxed">
+              <div className="space-y-4 text-neutral-500 dark:text-neutral-400 leading-relaxed">
                 {bio.split("\n").filter(Boolean).map((paragraph, i) => (
                   <p key={i}>{paragraph.trim()}</p>
                 ))}
@@ -38,8 +38,8 @@ export default function About() {
           {filledStats.length > 0 && (
             <div className="grid grid-cols-2 gap-4">
               {filledStats.map((stat) => (
-                <div key={stat.value} className="bg-white border border-neutral-200 rounded-xl p-6">
-                  <p className="text-2xl font-bold text-neutral-900 mb-1">{stat.value}</p>
+                <div key={stat.value} className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-6">
+                  <p className="text-2xl font-bold text-neutral-900 dark:text-white mb-1">{stat.value}</p>
                   <p className="text-sm text-neutral-400">{t(stat.label)}</p>
                 </div>
               ))}

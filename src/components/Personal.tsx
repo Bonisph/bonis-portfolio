@@ -15,20 +15,20 @@ function PersonalCard({ item, index, isWide, t }: {
 
   return (
     <div
-      className={`group bg-white border border-neutral-200 rounded-2xl overflow-hidden hover:border-neutral-400 hover:shadow-md transition-all duration-300 ${isWide ? "md:col-span-2" : ""}`}
+      className={`group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-md transition-all duration-300 ${isWide ? "md:col-span-2" : ""}`}
     >
       {/* Layout: texto à esquerda, imagem quadrada à direita */}
       <div className="flex flex-col md:flex-row h-full">
 
         {/* Texto */}
         <div className="flex-1 p-7 flex flex-col justify-center min-w-0">
-          <span className="text-xs font-semibold text-neutral-300 mb-3 block">
+          <span className="text-xs font-semibold text-neutral-300 dark:text-neutral-600 mb-3 block">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <h3 className="text-xl font-bold text-neutral-900 mb-3 leading-tight">
+          <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3 leading-tight">
             {t(item.title)}
           </h3>
-          <p className="text-sm text-neutral-500 leading-relaxed">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
             {t(item.description)}
           </p>
         </div>
@@ -54,14 +54,14 @@ export default function Personal() {
   const { t } = useLang();
 
   return (
-    <section id="pessoal" className="py-28 px-6 bg-neutral-50">
+    <section id="pessoal" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
           {t({ pt: "Lado pessoal", en: "Personal side" })}
         </span>
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-snug max-w-lg">
+          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug max-w-lg">
             {t({
               pt: "O que me forma além do trabalho",
               en: "What shapes me beyond work",

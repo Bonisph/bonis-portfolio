@@ -38,6 +38,7 @@ export const experiences: {
   id: number;
   company: string;
   logo: string;
+  logoBg?: "dark" | "light";
   link?: string;
   roles: {
     title: { pt: string; en: string };
@@ -50,6 +51,7 @@ export const experiences: {
     id: 1,
     company: "Binance",
     logo: "https://www.google.com/s2/favicons?domain=binance.com&sz=256",
+    logoBg: "dark",
     link: "https://binance.com",
     roles: [
       {
@@ -64,6 +66,7 @@ export const experiences: {
     id: 2,
     company: "Arbitrum",
     logo: "https://www.google.com/s2/favicons?domain=arbitrum.io&sz=256",
+    logoBg: "dark",
     link: "https://arbitrum.io",
     roles: [
       {

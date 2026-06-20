@@ -22,13 +22,13 @@ export default function Content() {
   const { t } = useLang();
 
   return (
-    <section id="conteudo" className="py-28 px-6 bg-neutral-50">
+    <section id="conteudo" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
           {t({ pt: "Conteúdo", en: "Content" })}
         </span>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-snug mb-14">
+        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
           {t({ pt: "Conteúdos produzidos", en: "Published content" })}
         </h2>
 
@@ -44,7 +44,7 @@ export default function Content() {
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col md:flex-row md:items-center gap-4 bg-white border border-neutral-200 rounded-xl p-5 hover:border-neutral-400 hover:shadow-md transition-all duration-200"
+                className="group flex flex-col md:flex-row md:items-center gap-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-md transition-all duration-200"
               >
                 {/* Thumbnail opcional */}
                 {item.thumbnail && (
@@ -67,10 +67,10 @@ export default function Content() {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-neutral-900 mb-1 group-hover:text-neutral-700 transition-colors">
+                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-1 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors">
                     {t(item.title)}
                   </h3>
-                  <p className="text-sm text-neutral-500 leading-relaxed line-clamp-2">
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed line-clamp-2">
                     {t(item.excerpt)}
                   </p>
                 </div>
