@@ -86,24 +86,32 @@ export default function Hero() {
   if (theme === "dark") {
     return (
       <section id="hero" className="relative min-h-screen overflow-hidden bg-neutral-950">
-        {/* Foto cobre a seção inteira */}
+        {/* Foto posicionada no lado direito — mesmo tamanho e zoom do original */}
         {siteConfig.photo && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={siteConfig.photo}
             alt="Pedro Bonis"
-            className="absolute inset-0 w-full h-full object-cover object-right-top"
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: "58%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "left top",
+            }}
           />
         )}
 
-        {/* Gradiente cobre o lado esquerdo — sem linha visível */}
+        {/* Gradiente da esquerda cobre a borda da foto — sem linha */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to right, #0a0a0a 25%, rgba(10,10,10,0.85) 50%, rgba(10,10,10,0.2) 70%, transparent 90%)" }}
+          style={{ background: "linear-gradient(to right, #0a0a0a 32%, rgba(10,10,10,0.75) 55%, rgba(10,10,10,0.15) 75%, transparent 90%)" }}
         />
 
         {/* Conteúdo */}
-        <div className={`relative z-10 flex flex-col justify-center w-full md:w-[55%] min-h-screen px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0 transition-opacity duration-700 ${visible ? "opacity-100" : "opacity-0"}`}>
+        <div className={`relative z-10 flex flex-col justify-center min-h-screen w-full md:w-[52%] px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0 transition-opacity duration-700 ${visible ? "opacity-100" : "opacity-0"}`}>
           {content}
         </div>
       </section>
