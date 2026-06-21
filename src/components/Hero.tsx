@@ -34,7 +34,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="min-h-screen flex flex-col md:flex-row overflow-hidden">
+    <section
+      id="hero"
+      className="min-h-screen flex flex-col md:flex-row overflow-hidden"
+      style={theme === "dark" ? { background: "linear-gradient(160deg, #262626 0%, #171717 60%, #0a0a0a 100%)" } : undefined}
+    >
 
       {/* ── LEFT PANEL — claro ─────────────────────────────────────── */}
       <div
@@ -48,9 +52,6 @@ export default function Hero() {
         style={{
           clipPath: "polygon(0 0, 100% 0, 88% 100%, 0 100%)",
           zIndex: 10,
-          ...(theme === "dark" && {
-            background: "linear-gradient(160deg, #262626 0%, #171717 60%, #0a0a0a 100%)",
-          }),
         }}
       >
         {/* Label */}
@@ -122,18 +123,16 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── RIGHT PANEL — gradiente com foto ──────────────────────────── */}
+      {/* ── RIGHT PANEL — foto sobre gradiente da section ──────────────────────────── */}
       <div
         className={`
           relative flex-1
+          ${theme === "dark" ? "" : "bg-neutral-900"}
           min-h-[40vh] md:min-h-screen
           -ml-0 md:-ml-[8%]
           transition-opacity duration-700 delay-200
           ${visible ? "opacity-100" : "opacity-0"}
         `}
-        style={{
-          background: "linear-gradient(160deg, #262626 0%, #171717 60%, #0a0a0a 100%)",
-        }}
       >
         {siteConfig.photo ? (
           // eslint-disable-next-line @next/next/no-img-element
