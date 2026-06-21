@@ -20,7 +20,7 @@ const MoonIcon = () => (
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { lang, toggle } = useLang();
+  const { lang, setLang } = useLang();
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
@@ -82,15 +82,20 @@ export default function Navbar() {
           </button>
 
           {/* Language Toggle */}
-          <button
-            onClick={toggle}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-700 text-xs font-semibold text-neutral-500 dark:text-neutral-400 hover:border-neutral-900 dark:hover:border-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all"
-            aria-label="Trocar idioma"
-          >
-            <span className={lang === "pt" ? "text-neutral-900 dark:text-white" : "text-neutral-400 dark:text-neutral-600"}>PT</span>
-            <span className="text-neutral-300 dark:text-neutral-600">|</span>
-            <span className={lang === "en" ? "text-neutral-900 dark:text-white" : "text-neutral-400 dark:text-neutral-600"}>EN</span>
-          </button>
+          <div className="flex items-center gap-1 px-3 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-700 text-xs font-semibold">
+            {(["pt", "en", "es"] as const).map((l, i) => (
+              <>
+                {i > 0 && <span key={`sep-${l}`} className="text-neutral-300 dark:text-neutral-600">|</span>}
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className={`transition-colors ${lang === l ? "text-neutral-900 dark:text-white" : "text-neutral-400 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300"}`}
+                >
+                  {l.toUpperCase()}
+                </button>
+              </>
+            ))}
+          </div>
         </nav>
 
         {/* Mobile: toggles + hamburger */}
@@ -102,14 +107,16 @@ export default function Navbar() {
           >
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
-          <button
-            onClick={toggle}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-neutral-200 dark:border-neutral-700 text-xs font-semibold text-neutral-500 dark:text-neutral-400"
-          >
-            <span className={lang === "pt" ? "text-neutral-900 dark:text-white" : "text-neutral-400"}>PT</span>
-            <span className="text-neutral-300 dark:text-neutral-600">|</span>
-            <span className={lang === "en" ? "text-neutral-900 dark:text-white" : "text-neutral-400"}>EN</span>
-          </button>
+          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-neutral-200 dark:border-neutral-700 text-xs font-semibold">
+            {(["pt", "en", "es"] as const).map((l, i) => (
+              <>
+                {i > 0 && <span key={`sep-${l}`} className="text-neutral-300 dark:text-neutral-600">|</span>}
+                <button key={l} onClick={() => setLang(l)} className={lang === l ? "text-neutral-900 dark:text-white" : "text-neutral-400 dark:text-neutral-600"}>
+                  {l.toUpperCase()}
+                </button>
+              </>
+            ))}
+          </div>
           <button
             className="flex flex-col gap-1.5 p-1"
             onClick={() => setMenuOpen(!menuOpen)}

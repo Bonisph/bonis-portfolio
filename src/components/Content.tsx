@@ -16,6 +16,9 @@ const platformColor: Record<string, string> = {
   Instagram: "bg-pink-50 text-pink-600",
   Medium:    "bg-green-50 text-green-700",
   Substack:  "bg-orange-50 text-orange-600",
+  Podcast:   "bg-red-50 text-red-600",
+  Mídia:     "bg-neutral-100 text-neutral-700",
+  Press:     "bg-neutral-100 text-neutral-700",
 };
 
 export default function Content() {
@@ -25,11 +28,11 @@ export default function Content() {
     <section id="conteudo" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          {t({ pt: "Conteúdo", en: "Content" })}
+          {t({ pt: "Conteúdo & Mídia", en: "Content & Media", es: "Contenido & Medios" })}
         </span>
 
         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-          {t({ pt: "Conteúdos produzidos", en: "Published content" })}
+          {t({ pt: "Conteúdos produzidos", en: "Published content", es: "Contenido producido" })}
         </h2>
 
         {content.length === 0 ? (
