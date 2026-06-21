@@ -119,22 +119,27 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── RIGHT PANEL — escuro com foto ──────────────────────────── */}
+      {/* ── RIGHT PANEL — gradiente com foto ──────────────────────────── */}
       <div
         className={`
-          relative flex-1 bg-neutral-900
+          relative flex-1
           min-h-[40vh] md:min-h-screen
           -ml-0 md:-ml-[8%]
           transition-opacity duration-700 delay-200
           ${visible ? "opacity-100" : "opacity-0"}
         `}
+        style={{
+          background: theme === "dark"
+            ? "linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #020617 100%)"
+            : "linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #020617 100%)",
+        }}
       >
         {siteConfig.photo ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={siteConfig.photo}
             alt="Pedro Bonis"
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className="absolute inset-0 w-full h-full object-contain object-bottom"
           />
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
@@ -150,8 +155,8 @@ export default function Hero() {
           </div>
         )}
 
-        {/* Overlay sutil no bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-900/60 to-transparent pointer-events-none" />
+        {/* Overlay sutil nas bordas para dar profundidade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/40 via-transparent to-transparent pointer-events-none" />
       </div>
 
     </section>
