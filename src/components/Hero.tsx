@@ -96,10 +96,10 @@ export default function Hero() {
               position: "absolute",
               top: 0,
               right: 0,
-              width: "58%",
+              width: "50%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "left top",
+              objectPosition: "center top",
             }}
           />
         )}
@@ -129,7 +129,10 @@ export default function Hero() {
       </div>
 
       {/* RIGHT PANEL */}
-      <div className={`relative flex-1 bg-neutral-900 min-h-[40vh] md:min-h-screen -ml-0 md:-ml-[8%] transition-opacity duration-700 delay-200 ${visible ? "opacity-100" : "opacity-0"}`}>
+      <div
+        className={`relative flex-1 min-h-[40vh] md:min-h-screen -ml-0 md:-ml-[8%] transition-opacity duration-700 delay-200 ${visible ? "opacity-100" : "opacity-0"}`}
+        style={{ background: "linear-gradient(160deg, #262626 0%, #171717 60%, #0a0a0a 100%)" }}
+      >
         {siteConfig.photo ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={siteConfig.photo} alt="Pedro Bonis" className="absolute inset-0 w-full h-full object-cover object-top" />
