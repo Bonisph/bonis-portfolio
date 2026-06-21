@@ -49,7 +49,10 @@ export default function Hero() {
           transition-opacity duration-700
           ${visible ? "opacity-100" : "opacity-0"}
         `}
-        style={{
+        style={theme === "dark" ? {
+          zIndex: 10,
+          background: "linear-gradient(to right, #171717 40%, transparent 85%)",
+        } : {
           clipPath: "polygon(0 0, 100% 0, 88% 100%, 0 100%)",
           zIndex: 10,
         }}
