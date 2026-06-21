@@ -33,123 +33,103 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  return (
-    <section
-      id="hero"
-      className="min-h-screen flex flex-col md:flex-row overflow-hidden"
-      style={theme === "dark" ? { background: "linear-gradient(160deg, #262626 0%, #171717 60%, #0a0a0a 100%)" } : undefined}
-    >
+  const content = (
+    <>
+      <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
+        {t({ pt: "Portfólio Pessoal", en: "Personal Portfolio" })}
+      </span>
 
-      {/* ── LEFT PANEL — claro ─────────────────────────────────────── */}
-      <div
-        className={`
-          relative flex flex-col justify-center
-          w-full md:w-[58%] min-h-[60vh] md:min-h-screen
-          ${theme === "dark" ? "" : "bg-neutral-100"} px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0
-          transition-opacity duration-700
-          ${visible ? "opacity-100" : "opacity-0"}
-        `}
-        style={theme === "dark" ? {
-          zIndex: 10,
-          background: "linear-gradient(to right, #171717 40%, transparent 85%)",
-        } : {
-          clipPath: "polygon(0 0, 100% 0, 88% 100%, 0 100%)",
-          zIndex: 10,
-        }}
-      >
-        {/* Label */}
-        <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          {t({ pt: "Portfólio Pessoal", en: "Personal Portfolio" })}
-        </span>
+      <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white leading-[1.05] tracking-tight mb-4">
+        Pedro<br />
+        <span className="text-neutral-500 dark:text-neutral-400">&ldquo;Bonis&rdquo;</span>
+      </h1>
 
-        {/* Name */}
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white leading-[1.05] tracking-tight mb-4">
-          Pedro<br />
-          <span className="text-neutral-500 dark:text-neutral-400">&ldquo;Bonis&rdquo;</span>
-        </h1>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-8">
-          <a
-            href="https://calendly.com/pedro-f-binance/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-medium rounded-full hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            {t({ pt: "Marque uma reunião", en: "Schedule a meeting" })}
-          </a>
-          <a
-            href="https://t.me/bonis_crypto"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 text-sm font-medium rounded-full hover:border-neutral-900 dark:hover:border-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
-          >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-            </svg>
-            {t({ pt: "Me mande uma mensagem", en: "Send me a message" })}
-          </a>
-        </div>
-
-        {/* Social Links */}
-        <div className="flex flex-wrap items-center gap-3">
-          <a
-            href={siteConfig.socials.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
-            aria-label="Twitter"
-          >
-            <TwitterIcon />
-          </a>
-          <a
-            href={siteConfig.socials.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
-            aria-label="LinkedIn"
-          >
-            <LinkedInIcon />
-          </a>
-          <a
-            href={siteConfig.socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
-            aria-label="GitHub"
-          >
-            <GitHubIcon />
-          </a>
-        </div>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-8">
+        <a
+          href="https://calendly.com/pedro-f-binance/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-5 py-2.5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-medium rounded-full hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          {t({ pt: "Marque uma reunião", en: "Schedule a meeting" })}
+        </a>
+        <a
+          href="https://t.me/bonis_crypto"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 text-sm font-medium rounded-full hover:border-neutral-900 dark:hover:border-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+        >
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+          {t({ pt: "Me mande uma mensagem", en: "Send me a message" })}
+        </a>
       </div>
 
-      {/* ── RIGHT PANEL — foto sobre gradiente da section ──────────────────────────── */}
-      <div
-        className={`
-          relative flex-1
-          ${theme === "dark" ? "" : "bg-neutral-900"}
-          min-h-[40vh] md:min-h-screen
-          -ml-0 md:-ml-[8%]
-          transition-opacity duration-700 delay-200
-          ${visible ? "opacity-100" : "opacity-0"}
-        `}
-      >
-        {siteConfig.photo ? (
+      <div className="flex flex-wrap items-center gap-3">
+        <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer"
+          className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
+          aria-label="Twitter"><TwitterIcon /></a>
+        <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer"
+          className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
+          aria-label="LinkedIn"><LinkedInIcon /></a>
+        <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer"
+          className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
+          aria-label="GitHub"><GitHubIcon /></a>
+      </div>
+    </>
+  );
+
+  if (theme === "dark") {
+    return (
+      <section id="hero" className="relative min-h-screen overflow-hidden bg-neutral-950">
+        {/* Foto cobre a seção inteira */}
+        {siteConfig.photo && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={siteConfig.photo}
             alt="Pedro Bonis"
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className="absolute inset-0 w-full h-full object-cover object-right-top"
           />
+        )}
+
+        {/* Gradiente cobre o lado esquerdo — sem linha visível */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(to right, #0a0a0a 25%, rgba(10,10,10,0.85) 50%, rgba(10,10,10,0.2) 70%, transparent 90%)" }}
+        />
+
+        {/* Conteúdo */}
+        <div className={`relative z-10 flex flex-col justify-center w-full md:w-[55%] min-h-screen px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0 transition-opacity duration-700 ${visible ? "opacity-100" : "opacity-0"}`}>
+          {content}
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id="hero" className="min-h-screen flex flex-col md:flex-row overflow-hidden">
+      {/* LEFT PANEL */}
+      <div
+        className={`relative flex flex-col justify-center w-full md:w-[58%] min-h-[60vh] md:min-h-screen bg-neutral-100 px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0 transition-opacity duration-700 ${visible ? "opacity-100" : "opacity-0"}`}
+        style={{ clipPath: "polygon(0 0, 100% 0, 88% 100%, 0 100%)", zIndex: 10 }}
+      >
+        {content}
+      </div>
+
+      {/* RIGHT PANEL */}
+      <div className={`relative flex-1 bg-neutral-900 min-h-[40vh] md:min-h-screen -ml-0 md:-ml-[8%] transition-opacity duration-700 delay-200 ${visible ? "opacity-100" : "opacity-0"}`}>
+        {siteConfig.photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={siteConfig.photo} alt="Pedro Bonis" className="absolute inset-0 w-full h-full object-cover object-top" />
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
             <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-600 flex items-center justify-center">
               <svg className="w-8 h-8 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
             <p className="text-neutral-600 text-xs">
@@ -157,11 +137,8 @@ export default function Hero() {
             </p>
           </div>
         )}
-
-        {/* Overlay sutil na base */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
       </div>
-
     </section>
   );
 }
