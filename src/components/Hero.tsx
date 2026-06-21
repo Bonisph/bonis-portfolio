@@ -129,9 +129,7 @@ export default function Hero() {
           ${visible ? "opacity-100" : "opacity-0"}
         `}
         style={{
-          background: theme === "dark"
-            ? "linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #020617 100%)"
-            : "linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #020617 100%)",
+          background: "linear-gradient(160deg, #262626 0%, #171717 60%, #0a0a0a 100%)",
         }}
       >
         {siteConfig.photo ? (
@@ -139,7 +137,7 @@ export default function Hero() {
           <img
             src={siteConfig.photo}
             alt="Pedro Bonis"
-            className="absolute inset-0 w-full h-full object-contain object-bottom"
+            className="absolute inset-0 w-full h-full object-cover object-top"
           />
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
@@ -155,8 +153,8 @@ export default function Hero() {
           </div>
         )}
 
-        {/* Overlay sutil nas bordas para dar profundidade */}
-        <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/40 via-transparent to-transparent pointer-events-none" />
+        {/* Overlay sutil na base */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
       </div>
 
     </section>
