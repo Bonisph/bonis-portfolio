@@ -32,7 +32,7 @@ export default function Content() {
         </span>
 
         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-          {t({ pt: "Conteúdos produzidos", en: "Published content", es: "Contenido producido" })}
+          {t({ pt: "Conteúdos", en: "Content", es: "Contenido" })}
         </h2>
 
         {content.length === 0 ? (
