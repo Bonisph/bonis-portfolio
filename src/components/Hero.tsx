@@ -41,13 +41,16 @@ export default function Hero() {
         className={`
           relative flex flex-col justify-center
           w-full md:w-[58%] min-h-[60vh] md:min-h-screen
-          ${theme === "dark" ? "bg-neutral-900" : "bg-neutral-100"} px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0
+          ${theme === "dark" ? "" : "bg-neutral-100"} px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0
           transition-opacity duration-700
           ${visible ? "opacity-100" : "opacity-0"}
         `}
         style={{
           clipPath: "polygon(0 0, 100% 0, 88% 100%, 0 100%)",
           zIndex: 10,
+          ...(theme === "dark" && {
+            background: "linear-gradient(160deg, #262626 0%, #171717 60%, #0a0a0a 100%)",
+          }),
         }}
       >
         {/* Label */}
