@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const TwitterIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
@@ -25,6 +26,7 @@ const GitHubIcon = () => (
 export default function Hero() {
   const [visible, setVisible] = useState(false);
   const { t } = useLang();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 80);
@@ -39,7 +41,7 @@ export default function Hero() {
         className={`
           relative flex flex-col justify-center
           w-full md:w-[58%] min-h-[60vh] md:min-h-screen
-          bg-neutral-100 dark:bg-neutral-900 px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0
+          ${theme === "dark" ? "bg-neutral-900" : "bg-neutral-100"} px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0
           transition-opacity duration-700
           ${visible ? "opacity-100" : "opacity-0"}
         `}
