@@ -85,7 +85,7 @@ export default function Hero() {
 
   if (theme === "dark") {
     return (
-      <section id="hero" className="relative min-h-screen overflow-hidden bg-neutral-950">
+      <section id="hero" className="relative min-h-screen overflow-hidden" style={{ background: "linear-gradient(160deg, #262626 0%, #171717 60%, #0a0a0a 100%)" }}>
         {/* Foto posicionada no lado direito — mesmo tamanho e zoom do original */}
         {siteConfig.photo && (
           // eslint-disable-next-line @next/next/no-img-element
