@@ -7,6 +7,7 @@ import { useLang } from "@/context/LanguageContext";
 const typeBg: Record<string, string> = {
   Palestrante: "bg-neutral-900 text-white",
   Speaker:     "bg-neutral-900 text-white",
+  Ponente:     "bg-neutral-900 text-white",
   Painel:      "bg-neutral-700 text-white",
   Panel:       "bg-neutral-700 text-white",
   Workshop:    "bg-neutral-500 text-white",
