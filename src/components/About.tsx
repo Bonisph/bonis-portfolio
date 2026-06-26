@@ -12,14 +12,14 @@ export default function About() {
     <section id="sobre" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          {t({ pt: "Sobre", en: "About" })}
+          {t({ pt: "Sobre", en: "About", es: "Sobre mí" })}
         </span>
 
         <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Text */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-6">
-              {t({ pt: "Quem é Pedro Bonis?", en: "Who is Pedro Bonis?" })}
+              {t({ pt: "Quem é Pedro Bonis?", en: "Who is Pedro Bonis?", es: "¿Quién es Pedro Bonis?" })}
             </h2>
             {bio ? (
               <div className="space-y-4 text-neutral-500 dark:text-neutral-400 leading-relaxed">
@@ -29,7 +29,7 @@ export default function About() {
               </div>
             ) : (
               <p className="text-neutral-300 italic text-sm">
-                {t({ pt: "Bio ainda não adicionada.", en: "Bio not added yet." })}
+                {t({ pt: "Bio ainda não adicionada.", en: "Bio not added yet.", es: "Bio aún no añadida." })}
               </p>
             )}
           </div>

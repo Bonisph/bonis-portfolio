@@ -8,7 +8,7 @@ function PersonalCard({ item, index, isWide, t }: {
   item: typeof personal[number];
   index: number;
   isWide: boolean;
-  t: (f: { pt: string; en: string }) => string;
+  t: (f: { pt: string; en: string; es?: string }) => string;
 }) {
   const [imgFailed, setImgFailed] = useState(false);
   const showImage = item.image && !imgFailed;
@@ -57,7 +57,7 @@ export default function Personal() {
     <section id="pessoal" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          {t({ pt: "Lado pessoal", en: "Personal side" })}
+          {t({ pt: "Lado pessoal", en: "Personal side", es: "Lado personal" })}
         </span>
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
@@ -65,19 +65,21 @@ export default function Personal() {
             {t({
               pt: "O que me forma além do trabalho",
               en: "What shapes me beyond work",
+              es: "Lo que me define más allá del trabajo",
             })}
           </h2>
           <p className="text-sm text-neutral-400 max-w-xs text-right hidden md:block">
             {t({
               pt: "Paixões, valores e coisas que me movem",
               en: "Passions, values and things that drive me",
+              es: "Pasiones, valores y cosas que me impulsan",
             })}
           </p>
         </div>
 
         {personal.length === 0 ? (
           <p className="text-neutral-300 italic text-sm">
-            {t({ pt: "Nenhum item adicionado ainda.", en: "No items added yet." })}
+            {t({ pt: "Nenhum item adicionado ainda.", en: "No items added yet.", es: "Ningún ítem añadido aún." })}
           </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

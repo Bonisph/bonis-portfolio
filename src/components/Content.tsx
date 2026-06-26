@@ -37,7 +37,7 @@ export default function Content() {
 
         {content.length === 0 ? (
           <p className="text-neutral-300 italic text-sm">
-            {t({ pt: "Nenhum conteúdo adicionado ainda.", en: "No content added yet." })}
+            {t({ pt: "Nenhum conteúdo adicionado ainda.", en: "No content added yet.", es: "Ningún contenido añadido aún." })}
           </p>
         ) : (
           <div className="space-y-4">

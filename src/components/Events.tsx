@@ -139,16 +139,16 @@ export default function Events() {
     <section id="eventos" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          {t({ pt: "Eventos", en: "Events" })}
+          {t({ pt: "Eventos", en: "Events", es: "Eventos" })}
         </span>
 
         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-          {t({ pt: "Eventos", en: "Events" })}
+          {t({ pt: "Eventos", en: "Events", es: "Eventos" })}
         </h2>
 
         {events.length === 0 ? (
           <p className="text-neutral-300 italic text-sm">
-            {t({ pt: "Nenhum evento adicionado ainda.", en: "No events added yet." })}
+            {t({ pt: "Nenhum evento adicionado ainda.", en: "No events added yet.", es: "Ningún evento añadido aún." })}
           </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

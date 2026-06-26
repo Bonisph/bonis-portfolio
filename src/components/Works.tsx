@@ -34,7 +34,7 @@ function CompanyLogo({ logo, name, logoBg }: { logo: string; name: string; logoB
 }
 
 function periodLabel(start: string, end: string | null, lang: string) {
-  const present = lang === "pt" ? "Presente" : "Present";
+  const present = lang === "pt" ? "Presente" : lang === "es" ? "Presente" : "Present";
   return `${start} – ${end ?? present}`;
 }
 
@@ -45,11 +45,11 @@ export default function Works() {
     <section id="works" className="py-28 px-6 bg-white dark:bg-neutral-900">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          {t({ pt: "Experiência", en: "Experience" })}
+          {t({ pt: "Experiência", en: "Experience", es: "Experiencia" })}
         </span>
 
         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-          {t({ pt: "Onde já trabalhei", en: "Where I've worked" })}
+          {t({ pt: "Onde já trabalhei", en: "Where I've worked", es: "Dónde he trabajado" })}
         </h2>
 
         {/* ── EXPERIÊNCIAS ─────────────────────────────────────── */}
@@ -133,7 +133,7 @@ export default function Works() {
         {projects.length > 0 && (
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-6">
-              {t({ pt: "Projetos", en: "Projects" })}
+              {t({ pt: "Projetos", en: "Projects", es: "Proyectos" })}
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {projects.map((proj) => (
@@ -162,7 +162,7 @@ export default function Works() {
 
         {experiences.length === 0 && projects.length === 0 && (
           <p className="text-neutral-300 italic text-sm">
-            {t({ pt: "Nenhuma experiência adicionada ainda.", en: "No experience added yet." })}
+            {t({ pt: "Nenhuma experiência adicionada ainda.", en: "No experience added yet.", es: "Ninguna experiencia añadida aún." })}
           </p>
         )}
       </div>

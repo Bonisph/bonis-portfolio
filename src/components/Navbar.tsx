@@ -24,11 +24,11 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
-    { label: lang === "pt" ? "Sobre"      : "About",    href: "#sobre" },
-    { label: lang === "pt" ? "Experiência": "Works",    href: "#works" },
-    { label: lang === "pt" ? "Eventos"    : "Events",   href: "#eventos" },
-    { label: lang === "pt" ? "Conteúdo"   : "Content",  href: "#conteudo" },
-    { label: lang === "pt" ? "Pessoal"    : "Personal", href: "#pessoal" },
+    { label: lang === "pt" ? "Sobre"      : lang === "es" ? "Sobre mí"    : "About",    href: "#sobre" },
+    { label: lang === "pt" ? "Experiência": lang === "es" ? "Experiencia" : "Works",    href: "#works" },
+    { label: lang === "pt" ? "Eventos"    : lang === "es" ? "Eventos"     : "Events",   href: "#eventos" },
+    { label: lang === "pt" ? "Conteúdo"   : lang === "es" ? "Contenido"   : "Content",  href: "#conteudo" },
+    { label: lang === "pt" ? "Pessoal"    : lang === "es" ? "Personal"    : "Personal", href: "#pessoal" },
   ];
 
   useEffect(() => {
