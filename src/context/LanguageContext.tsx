@@ -22,7 +22,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("pt");
   const toggle = () => setLang((l) => l === "pt" ? "en" : l === "en" ? "es" : "pt");
   const t = (field: { pt: string; en: string; es?: string }) => {
-    if (lang === "es") return field.es ?? field.en;
+    if (lang === "es") return field.es ?? field.pt;
     return field[lang];
   };
 
