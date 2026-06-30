@@ -167,6 +167,7 @@ export const events: {
     ],
     types: [
       { pt: "Host", en: "Host", es: "Host" },
+      { pt: "Organizador", en: "Organizer", es: "Organizador" },
       { pt: "Palestrante", en: "Speaker", es: "Ponente" },
     ],
   },
@@ -206,6 +207,7 @@ export const events: {
     ],
     types: [
       { pt: "Host", en: "Host", es: "Host" },
+      { pt: "Organizador", en: "Organizer", es: "Organizador" },
       { pt: "Palestrante", en: "Speaker", es: "Ponente" },
     ],
   },
