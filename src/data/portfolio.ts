@@ -84,9 +84,10 @@ export const experiences: {
           es:  "Produjo 70+ piezas de contenido educativo en portugués sobre RWA, DeFi, gobernanza y crecimiento del ecosistema en LATAM. Videos cortos sobre infraestructura L2 con 65K+ visualizaciones acumuladas. Co-organizó Arbilink Brasil, primer evento oficial de Arbitrum en Brasil (SP, nov. 2025), y fue speaker en ETH Latam en el panel de RWA junto a Credbull, Mercado Bitcoin y Plume Network.",
         },
         stats: [
-          { value: "70+",  label: { pt: "conteúdos criados",    en: "content pieces",       es: "contenidos creados"    } },
-          { value: "65k+", label: { pt: "visualizações",        en: "views",                es: "visualizaciones"       } },
-          { value: "1",    label: { pt: "evento co-organizado", en: "co-organized event",   es: "evento co-organizado"  } },
+          { value: "70+",  label: { pt: "conteúdos criados",       en: "content pieces",       es: "contenidos creados"    } },
+          { value: "65k+", label: { pt: "visualizações",           en: "views",                es: "visualizaciones"       } },
+          { value: "2",    label: { pt: "palestras / painéis",     en: "talks & panels",       es: "charlas y paneles"     } },
+          { value: "1",    label: { pt: "evento co-organizado",    en: "co-organized event",   es: "evento co-organizado"  } },
         ],
       },
     ],
