@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
+import RoleCycler from "@/components/RoleCycler";
 
 const TwitterIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
@@ -34,10 +34,10 @@ const TelegramIcon = () => (
   </svg>
 );
 
-const STAGGER = [50, 170, 290, 410] as const;
+const STAGGER = [50, 160, 270, 360, 460] as const;
 
 function heroStyle(i: number): React.CSSProperties {
-  return { animation: `heroUp 0.6s cubic-bezier(0.4,0,0.2,1) ${STAGGER[i]}ms both` };
+  return { animation: `heroUp 0.65s cubic-bezier(0.4,0,0.2,1) ${STAGGER[i]}ms both` };
 }
 
 export default function Hero() {
@@ -49,54 +49,78 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="relative min-h-screen overflow-hidden bg-neutral-950"
     >
-      {siteConfig.photo ? (
-        <div className="absolute inset-0">
-          {/* Photo — full bleed on mobile, starts 38% from left on desktop */}
-          <div className="absolute inset-0 md:left-[38%]">
-            <Image
-              src={siteConfig.photo}
-              alt="Pedro Bonis"
-              fill
-              priority
-              className="object-cover object-top"
-            />
-          </div>
+      {/* Dot grid background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
 
-          {/* Gradient — always dark */}
-          <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "linear-gradient(to right, #0a0a0a 0%, #0a0a0a 26%, rgba(10,10,10,0.9) 42%, rgba(10,10,10,0.4) 60%, transparent 76%)" }}
-          />
-          {/* Mobile: stronger top overlay so text stays readable */}
-          <div className="md:hidden absolute inset-0 pointer-events-none"
-            style={{ background: "linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.8) 100%)" }}
-          />
-        </div>
-      ) : (
-        <div className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] flex items-center justify-center">
-          <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-300 dark:border-neutral-700 flex items-center justify-center">
-            <svg className="w-8 h-8 text-neutral-400 dark:text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-          </div>
-        </div>
-      )}
-
-      {/* Blue glow orb */}
+      {/* Animated orb 1 — blue, top-left */}
       <div
         className="absolute pointer-events-none"
         style={{
-          top: "10%", left: "-15%",
-          width: "70%", height: "80%",
-          background: "radial-gradient(ellipse at 35% 50%, rgba(59,130,246,0.13) 0%, rgba(59,130,246,0.04) 45%, transparent 70%)",
-          filter: "blur(48px)",
+          width: "700px",
+          height: "700px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(59,130,246,0.22) 0%, rgba(59,130,246,0.06) 50%, transparent 70%)",
+          filter: "blur(64px)",
+          top: "-180px",
+          left: "-200px",
+          animation: "blob1 14s ease-in-out infinite",
+        }}
+      />
+
+      {/* Animated orb 2 — indigo, bottom-right */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(99,102,241,0.05) 50%, transparent 70%)",
+          filter: "blur(72px)",
+          bottom: "-120px",
+          right: "-120px",
+          animation: "blob2 18s ease-in-out infinite",
+        }}
+      />
+
+      {/* Animated orb 3 — cyan, center */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          width: "420px",
+          height: "420px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(6,182,212,0.12) 0%, rgba(6,182,212,0.03) 50%, transparent 70%)",
+          filter: "blur(56px)",
+          top: "35%",
+          left: "55%",
+          animation: "blob3 22s ease-in-out infinite",
+        }}
+      />
+
+      {/* Vignette edges */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(10,10,10,0.7) 100%)",
         }}
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center min-h-screen w-full md:w-[56%] px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0">
+      <div className="relative z-10 flex flex-col justify-center min-h-screen max-w-5xl mx-auto px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0">
 
         <span
-          className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8 block"
+          className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 mb-10 block"
           style={heroStyle(0)}
         >
           {t({ pt: "Portfólio Pessoal", en: "Personal Portfolio", es: "Portafolio Personal" })}
@@ -104,22 +128,29 @@ export default function Hero() {
 
         <h1
           id="hero-heading"
-          className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-6"
+          className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.0] tracking-tight mb-4"
           style={heroStyle(1)}
         >
           Pedro<br />
-          <span className="text-neutral-400">&ldquo;Bonis&rdquo;</span>
+          <span className="text-neutral-500">&ldquo;Bonis&rdquo;</span>
         </h1>
 
-        <div
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-8"
+        <p
+          className="text-xl md:text-2xl text-neutral-400 mb-10 font-light"
           style={heroStyle(2)}
+        >
+          <RoleCycler />
+        </p>
+
+        <div
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-10"
+          style={heroStyle(3)}
         >
           <a
             href={siteConfig.socials.calendly}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30"
+            className="flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30"
           >
             <CalendarIcon />
             {t({ pt: "Marque uma reunião", en: "Schedule a meeting", es: "Agenda una reunión" })}
@@ -128,7 +159,7 @@ export default function Hero() {
             href={siteConfig.socials.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 border border-neutral-600 text-neutral-300 text-sm font-medium rounded-full hover:border-blue-400 hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center gap-2 px-6 py-3 border border-neutral-700 text-neutral-300 text-sm font-semibold rounded-full hover:border-blue-400 hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/15"
           >
             <TelegramIcon />
             {t({ pt: "Me mande uma mensagem", en: "Send me a message", es: "Envíame un mensaje" })}
@@ -137,13 +168,13 @@ export default function Hero() {
 
         <div
           className="flex flex-wrap items-center gap-3"
-          style={heroStyle(3)}
+          style={heroStyle(4)}
         >
           <a
             href={siteConfig.socials.twitter}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-700 text-neutral-400 hover:text-white hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
             aria-label="Twitter"
           >
             <TwitterIcon />
@@ -152,7 +183,7 @@ export default function Hero() {
             href={siteConfig.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-700 text-neutral-400 hover:text-white hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
             aria-label="LinkedIn"
           >
             <LinkedInIcon />
@@ -161,11 +192,16 @@ export default function Hero() {
             href={siteConfig.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-700 text-neutral-400 hover:text-white hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
             aria-label="GitHub"
           >
             <GitHubIcon />
           </a>
+
+          {/* Scroll hint */}
+          <span className="ml-4 text-xs text-neutral-600 tracking-widest uppercase hidden md:block">
+            {t({ pt: "role para explorar", en: "scroll to explore", es: "desplázate para explorar" })}
+          </span>
         </div>
       </div>
     </section>
