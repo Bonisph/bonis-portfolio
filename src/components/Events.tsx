@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { events } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
+import Reveal from "@/components/Reveal";
 
 const typeBg: Record<string, string> = {
   Palestrante: "bg-neutral-900 text-white",
@@ -58,7 +59,6 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
 
   return (
     <div className="absolute inset-0">
-      {/* Mídia atual — key força re-render ao trocar */}
       {ytId ? (
         <iframe
           key={`${eventId}-yt-${ytId}`}
@@ -80,12 +80,10 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
         </div>
       )}
 
-      {/* Gradiente suave no fundo para dots ficarem legíveis */}
       {total > 1 && (
         <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
       )}
 
-      {/* Setas + dots */}
       {total > 1 && (
         <>
           <button
@@ -108,7 +106,6 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
             </svg>
           </button>
 
-          {/* Dots */}
           <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-10">
             {media.map((_, i) => (
               <button
@@ -125,7 +122,6 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
             ))}
           </div>
 
-          {/* Ícone de vídeo quando o item atual for vídeo */}
           {current.type === "video" && (
             <div className="absolute top-3 right-3 z-10 bg-black/50 rounded-md px-2 py-1 flex items-center gap-1" aria-hidden="true">
               <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -146,13 +142,15 @@ export default function Events() {
   return (
     <section id="eventos" aria-labelledby="events-heading" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
-        <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          {t({ pt: "Eventos", en: "Events", es: "Eventos" })}
-        </span>
+        <Reveal>
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
+            {t({ pt: "Eventos", en: "Events", es: "Eventos" })}
+          </span>
 
-        <h2 id="events-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-          {t({ pt: "Eventos em que participei", en: "Events I've attended", es: "Eventos en los que participé" })}
-        </h2>
+          <h2 id="events-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
+            {t({ pt: "Eventos em que participei", en: "Events I've attended", es: "Eventos en los que participé" })}
+          </h2>
+        </Reveal>
 
         {events.length === 0 ? (
           <p className="text-neutral-300 italic text-sm">
@@ -160,55 +158,50 @@ export default function Events() {
           </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {events.map((event) => (
-              <div
-                key={event.id}
-                className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden hover:border-neutral-300 dark:hover:border-neutral-600 hover:shadow-lg transition-all duration-300 flex flex-col"
-              >
-                {/* ── Imagem / Carrossel ── */}
-                <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-                  <MediaCarousel
-                    media={event.media}
-                    eventId={event.id}
-                    eventTitle={t(event.title)}
-                  />
-                </div>
-
-                {/* ── Informações ── */}
-                <div className="p-6 flex flex-col flex-1">
-                  {/* Badges */}
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {event.types.map((type, i) => {
-                      const label = t(type);
-                      return (
-                        <span
-                          key={i}
-                          className={`text-xs font-semibold px-2.5 py-1 rounded-full ${typeBg[label] ?? "bg-neutral-200 text-neutral-700"}`}
-                        >
-                          {label}
-                        </span>
-                      );
-                    })}
+            {events.map((event, i) => (
+              <Reveal key={event.id} delay={i * 70}>
+                <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden hover:border-neutral-300 dark:hover:border-neutral-600 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                  {/* ── Imagem / Carrossel ── */}
+                  <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+                    <MediaCarousel
+                      media={event.media}
+                      eventId={event.id}
+                      eventTitle={t(event.title)}
+                    />
                   </div>
 
-                  {/* Título */}
-                  <h3 className="font-semibold text-neutral-900 dark:text-white text-lg leading-snug mb-2">
-                    {t(event.title)}
-                  </h3>
+                  {/* ── Informações ── */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {event.types.map((type, ti) => {
+                        const label = t(type);
+                        return (
+                          <span
+                            key={ti}
+                            className={`text-xs font-semibold px-2.5 py-1 rounded-full ${typeBg[label] ?? "bg-neutral-200 text-neutral-700"}`}
+                          >
+                            {label}
+                          </span>
+                        );
+                      })}
+                    </div>
 
-                  {/* Data e local */}
-                  <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500 mb-4">
-                    <span>{event.date}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{event.location}</span>
+                    <h3 className="font-semibold text-neutral-900 dark:text-white text-lg leading-snug mb-2">
+                      {t(event.title)}
+                    </h3>
+
+                    <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500 mb-4">
+                      <span>{event.date}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>{event.location}</span>
+                    </div>
+
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                      {t(event.description)}
+                    </p>
                   </div>
-
-                  {/* Descrição */}
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                    {t(event.description)}
-                  </p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         )}

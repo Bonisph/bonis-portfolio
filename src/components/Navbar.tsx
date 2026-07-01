@@ -97,10 +97,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white dark:bg-neutral-950 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-neutral-950/90 backdrop-blur-md transition-all duration-300 ${
         scrolled
-          ? "border-b border-neutral-200 dark:border-neutral-800 shadow-sm"
-          : "border-b border-neutral-100 dark:border-neutral-900"
+          ? "border-b border-neutral-200/70 dark:border-neutral-800/70 shadow-sm"
+          : "border-b border-neutral-100/70 dark:border-neutral-900/70"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">

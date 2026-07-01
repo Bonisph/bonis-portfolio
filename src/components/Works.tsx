@@ -5,6 +5,7 @@ import Image from "next/image";
 import { experiences, projects } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import type { Lang } from "@/context/LanguageContext";
+import Reveal from "@/components/Reveal";
 
 const ArrowUpRight = () => (
   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
@@ -47,97 +48,118 @@ export default function Works() {
   return (
     <section id="works" aria-labelledby="works-heading" className="py-28 px-6 bg-white dark:bg-neutral-900">
       <div className="max-w-6xl mx-auto">
-        <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-          {t({ pt: "Experiência", en: "Experience", es: "Experiencia" })}
-        </span>
+        <Reveal>
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
+            {t({ pt: "Experiência", en: "Experience", es: "Experiencia" })}
+          </span>
 
-        <h2 id="works-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-          {t({ pt: "Onde já trabalhei", en: "Where I've worked", es: "Dónde he trabajado" })}
-        </h2>
+          <h2 id="works-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
+            {t({ pt: "Onde já trabalhei", en: "Where I've worked", es: "Dónde he trabajado" })}
+          </h2>
+        </Reveal>
 
         {/* ── EXPERIÊNCIAS ─────────────────────────────────────── */}
         {experiences.length > 0 && (
-          <div className="space-y-2 mb-16">
-            {experiences.map((exp) => (
-              <div
-                key={exp.id}
-                className="border border-neutral-200 dark:border-neutral-700 rounded-2xl p-6 hover:border-neutral-300 dark:hover:border-neutral-600 hover:shadow-sm transition-all duration-200"
-              >
-                {exp.roles.length === 1 ? (
-                  <div className="flex gap-4">
-                    <CompanyLogo logo={exp.logo} name={exp.company} logoBg={exp.logoBg} />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-2 flex-wrap">
-                        <div>
-                          <h3 className="font-semibold text-neutral-900 dark:text-white leading-tight">
-                            {t(exp.roles[0].title)}
-                          </h3>
-                          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-                            {exp.company}
-                          </p>
-                          <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">
-                            {periodLabel(exp.roles[0].start, exp.roles[0].end, lang)}
-                          </p>
-                        </div>
-                        {exp.link && (
-                          <a
-                            href={exp.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Ver ${exp.company}`}
-                            className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors flex-shrink-0"
-                          >
-                            <ArrowUpRight />
-                          </a>
-                        )}
-                      </div>
-                      {t(exp.roles[0].description) && (
-                        <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-3">
-                          {t(exp.roles[0].description)}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <div className="flex items-center gap-4 mb-5">
+          <div className="space-y-3 mb-16">
+            {experiences.map((exp, expIdx) => (
+              <Reveal key={exp.id} delay={expIdx * 80}>
+                <div className="border border-neutral-200 dark:border-neutral-700 rounded-2xl p-6 hover:border-neutral-300 dark:hover:border-neutral-600 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                  {exp.roles.length === 1 ? (
+                    <div className="flex gap-4">
                       <CompanyLogo logo={exp.logo} name={exp.company} logoBg={exp.logoBg} />
-                      <div className="flex items-center justify-between flex-1 gap-2 flex-wrap">
-                        <h3 className="font-semibold text-neutral-900 dark:text-white">{exp.company}</h3>
-                        {exp.link && (
-                          <a
-                            href={exp.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Ver ${exp.company}`}
-                            className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
-                          >
-                            <ArrowUpRight />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="ml-16 border-l-2 border-neutral-100 dark:border-neutral-700 pl-5 space-y-5">
-                      {exp.roles.map((role, i) => (
-                        <div key={i}>
-                          <p className="font-medium text-neutral-800 dark:text-neutral-100 leading-tight">
-                            {t(role.title)}
-                          </p>
-                          <p className="text-sm text-neutral-400 dark:text-neutral-500 mt-0.5">
-                            {periodLabel(role.start, role.end, lang)}
-                          </p>
-                          {t(role.description) && (
-                            <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-2">
-                              {t(role.description)}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-2 flex-wrap">
+                          <div>
+                            <h3 className="font-semibold text-neutral-900 dark:text-white leading-tight">
+                              {t(exp.roles[0].title)}
+                            </h3>
+                            <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+                              {exp.company}
                             </p>
+                            <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">
+                              {periodLabel(exp.roles[0].start, exp.roles[0].end, lang)}
+                            </p>
+                          </div>
+                          {exp.link && (
+                            <a
+                              href={exp.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Ver ${exp.company}`}
+                              className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors flex-shrink-0"
+                            >
+                              <ArrowUpRight />
+                            </a>
                           )}
                         </div>
-                      ))}
+                        {t(exp.roles[0].description) && (
+                          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-3">
+                            {t(exp.roles[0].description)}
+                          </p>
+                        )}
+                        {exp.roles[0].stats && exp.roles[0].stats.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/60">
+                            {exp.roles[0].stats.map((stat, si) => (
+                              <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2">
+                                <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums">{stat.value}</p>
+                                <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 leading-none whitespace-nowrap">{t(stat.label)}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  ) : (
+                    <div>
+                      <div className="flex items-center gap-4 mb-5">
+                        <CompanyLogo logo={exp.logo} name={exp.company} logoBg={exp.logoBg} />
+                        <div className="flex items-center justify-between flex-1 gap-2 flex-wrap">
+                          <h3 className="font-semibold text-neutral-900 dark:text-white">{exp.company}</h3>
+                          {exp.link && (
+                            <a
+                              href={exp.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Ver ${exp.company}`}
+                              className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
+                            >
+                              <ArrowUpRight />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="ml-16 border-l-2 border-neutral-100 dark:border-neutral-700 pl-5 space-y-6">
+                        {exp.roles.map((role, i) => (
+                          <div key={i}>
+                            <p className="font-medium text-neutral-800 dark:text-neutral-100 leading-tight">
+                              {t(role.title)}
+                            </p>
+                            <p className="text-sm text-neutral-400 dark:text-neutral-500 mt-0.5">
+                              {periodLabel(role.start, role.end, lang)}
+                            </p>
+                            {t(role.description) && (
+                              <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-2">
+                                {t(role.description)}
+                              </p>
+                            )}
+                            {role.stats && role.stats.length > 0 && (
+                              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/60">
+                                {role.stats.map((stat, si) => (
+                                  <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2">
+                                    <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums">{stat.value}</p>
+                                    <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 leading-none whitespace-nowrap">{t(stat.label)}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Reveal>
             ))}
           </div>
         )}
@@ -149,25 +171,27 @@ export default function Works() {
               {t({ pt: "Projetos", en: "Projects", es: "Proyectos" })}
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {projects.map((proj) => (
-                <a key={proj.id} href={proj.link || "#"} target="_blank" rel="noopener noreferrer"
-                  className="group block border border-neutral-200 rounded-2xl p-6 hover:border-neutral-400 hover:shadow-md transition-all duration-200">
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="text-xs text-neutral-400">{proj.period}</span>
-                    {proj.link && (
-                      <span aria-hidden="true" className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
-                        <ArrowUpRight />
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-semibold text-neutral-900 mb-2">{t(proj.title)}</h3>
-                  <p className="text-sm text-neutral-500 leading-relaxed mb-4">{t(proj.description)}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {proj.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2.5 py-1 bg-neutral-100 text-neutral-500 rounded-full">{tag}</span>
-                    ))}
-                  </div>
-                </a>
+              {projects.map((proj, i) => (
+                <Reveal key={proj.id} delay={i * 80}>
+                  <a href={proj.link || "#"} target="_blank" rel="noopener noreferrer"
+                    className="group block border border-neutral-200 rounded-2xl p-6 hover:border-neutral-400 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full">
+                    <div className="flex justify-between items-start mb-4">
+                      <span className="text-xs text-neutral-400">{proj.period}</span>
+                      {proj.link && (
+                        <span aria-hidden="true" className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
+                          <ArrowUpRight />
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-semibold text-neutral-900 mb-2">{t(proj.title)}</h3>
+                    <p className="text-sm text-neutral-500 leading-relaxed mb-4">{t(proj.description)}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {proj.tags.map((tag) => (
+                        <span key={tag} className="text-xs px-2.5 py-1 bg-neutral-100 text-neutral-500 rounded-full">{tag}</span>
+                      ))}
+                    </div>
+                  </a>
+                </Reveal>
               ))}
             </div>
           </div>

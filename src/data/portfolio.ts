@@ -37,6 +37,7 @@ export const aboutStats = [
 // ─── EXPERIÊNCIAS ─────────────────────────────────────────────────────────────
 // logo: use Google favicon — https://www.google.com/s2/favicons?domain=site.com&sz=256
 // end: null = "Presente" / "Present" / "Presente"
+// stats: métricas chave que aparecem como chips abaixo da descrição
 export const experiences: {
   id: number;
   company: string;
@@ -48,6 +49,7 @@ export const experiences: {
     start: string;
     end: string | null;
     description: { pt: string; en: string; es?: string };
+    stats?: { value: string; label: { pt: string; en: string; es?: string } }[];
   }[];
 }[] = [
   {
@@ -81,6 +83,11 @@ export const experiences: {
           en:  "Produced 70+ educational content pieces in Portuguese covering RWA, DeFi, governance, and ecosystem growth across LATAM. Short-form videos on L2 infrastructure with 65K+ accumulated views. Co-organized Arbilink Brasil, Arbitrum's first official in-person event in Brazil (SP, Nov 2025), and spoke at ETH Latam on an RWA panel alongside Credbull, Mercado Bitcoin, and Plume Network.",
           es:  "Produjo 70+ piezas de contenido educativo en portugués sobre RWA, DeFi, gobernanza y crecimiento del ecosistema en LATAM. Videos cortos sobre infraestructura L2 con 65K+ visualizaciones acumuladas. Co-organizó Arbilink Brasil, primer evento oficial de Arbitrum en Brasil (SP, nov. 2025), y fue speaker en ETH Latam en el panel de RWA junto a Credbull, Mercado Bitcoin y Plume Network.",
         },
+        stats: [
+          { value: "70+",  label: { pt: "conteúdos criados",    en: "content pieces",       es: "contenidos creados"    } },
+          { value: "65k+", label: { pt: "visualizações",        en: "views",                es: "visualizaciones"       } },
+          { value: "1",    label: { pt: "evento co-organizado", en: "co-organized event",   es: "evento co-organizado"  } },
+        ],
       },
     ],
   },
@@ -98,6 +105,13 @@ export const experiences: {
           en:  "Leads growth, partnerships, and ecosystem expansion. Prospects and closes deals with Web3 protocols and organizations, with 10+ active partnerships. Co-led 9 in-person regional events across Brazil reaching 1,500+ total attendees. Onboarded 120+ developers, structured 4 builder programs with 70+ participants, and supported the launch of 27+ projects.",
           es:  "Lidera el crecimiento, las alianzas y la expansión del ecosistema. Prospecta y cierra acuerdos con protocolos y organizaciones Web3, con un portafolio de 10+ alianzas activas. Co-lideró 9 eventos presenciales por Brasil con 1.500+ participantes en total. Incorporó 120+ desarrolladores, estructuró 4 programas de builders con 70+ participantes y apoyó el lanzamiento de 27+ proyectos.",
         },
+        stats: [
+          { value: "10+",    label: { pt: "parcerias ativas",    en: "active partnerships",  es: "alianzas activas"     } },
+          { value: "9",      label: { pt: "eventos co-liderados",en: "co-led events",        es: "eventos co-liderados" } },
+          { value: "1.500+", label: { pt: "participantes",       en: "attendees",            es: "participantes"        } },
+          { value: "120+",   label: { pt: "devs embarcados",     en: "devs onboarded",       es: "devs incorporados"    } },
+          { value: "27+",    label: { pt: "projetos apoiados",   en: "projects supported",   es: "proyectos apoyados"   } },
+        ],
       },
       {
         title: { pt: "Social Media & Conteúdo", en: "Social Media & Content", es: "Redes Sociales & Contenido" },
@@ -108,6 +122,11 @@ export const experiences: {
           en:  "Built brand presence across X, Instagram, and LinkedIn, producing educational content with 500K+ accumulated views. Developed and executed content strategies autonomously. Co-hosted Estado da Solana, a bi-weekly live program with 19 episodes and 150–200 average live viewers.",
           es:  "Desarrolló la presencia de marca en X, Instagram y LinkedIn, produciendo contenido educativo con 500K+ visualizaciones acumuladas. Creó y ejecutó estrategias de contenido de forma autónoma. Co-presentó Estado da Solana, programa en vivo quincenal con 19 episodios y un promedio de 150–200 espectadores.",
         },
+        stats: [
+          { value: "500k+",    label: { pt: "views acumuladas",    en: "accumulated views",   es: "visualizaciones"        } },
+          { value: "19",       label: { pt: "episódios ao vivo",   en: "live episodes",       es: "episodios en vivo"      } },
+          { value: "150–200",  label: { pt: "espectadores / ep.",  en: "viewers / episode",   es: "espectadores / ep."     } },
+        ],
       },
     ],
   },
