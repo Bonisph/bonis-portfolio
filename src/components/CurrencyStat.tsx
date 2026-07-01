@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLang } from "@/context/LanguageContext";
+import CountUp from "@/components/CountUp";
 
 let cachedRate: number | null = null;
 let pending: Promise<number> | null = null;
@@ -18,16 +19,15 @@ function fetchRate(): Promise<number> {
 
 export default function CurrencyStat({ brl, ptValue }: { brl: number; ptValue: string }) {
   const { lang } = useLang();
-  const [usd, setUsd] = useState<string | null>(null);
+  const [displayValue, setDisplayValue] = useState(ptValue);
 
   useEffect(() => {
-    if (lang === "pt") { setUsd(null); return; }
+    if (lang === "pt") { setDisplayValue(ptValue); return; }
     fetchRate().then((rate) => {
       const k = Math.round((brl * rate) / 1000);
-      setUsd(`$${k}k+`);
+      setDisplayValue(`$${k}k+`);
     });
-  }, [lang, brl]);
+  }, [lang, brl, ptValue]);
 
-  if (lang === "pt" || usd === null) return <>{ptValue}</>;
-  return <>{usd}</>;
+  return <CountUp value={displayValue} />;
 }
