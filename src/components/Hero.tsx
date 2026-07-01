@@ -50,7 +50,7 @@ export default function Hero() {
       className="relative min-h-screen overflow-hidden bg-neutral-50 dark:bg-neutral-950"
     >
       {siteConfig.photo ? (
-        <>
+        <div className="hidden md:block absolute inset-0">
           {/* Photo — full bleed, starts from right ~40% on desktop */}
           <div className="absolute inset-0 md:left-[38%]">
             <Image
@@ -70,10 +70,7 @@ export default function Hero() {
           <div className="hidden dark:block absolute inset-0 pointer-events-none"
             style={{ background: "linear-gradient(to right, #0a0a0a 0%, #0a0a0a 26%, rgba(10,10,10,0.88) 44%, rgba(10,10,10,0.3) 60%, transparent 76%)" }}
           />
-
-          {/* Mobile overlay */}
-          <div className="md:hidden absolute inset-0 bg-neutral-50/80 dark:bg-neutral-950/85 pointer-events-none" />
-        </>
+        </div>
       ) : (
         <div className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] flex items-center justify-center">
           <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-300 dark:border-neutral-700 flex items-center justify-center">
