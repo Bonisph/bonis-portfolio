@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import RoleCycler from "@/components/RoleCycler";
@@ -53,156 +54,211 @@ export default function Hero() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px)",
           backgroundSize: "44px 44px",
         }}
       />
 
-      {/* Animated orb 1 — blue, top-left */}
+      {/* Orb 1 — blue, behind text */}
       <div
         className="absolute pointer-events-none"
         style={{
-          width: "700px",
-          height: "700px",
+          width: "600px", height: "600px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(59,130,246,0.22) 0%, rgba(59,130,246,0.06) 50%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(59,130,246,0.05) 55%, transparent 70%)",
           filter: "blur(64px)",
-          top: "-180px",
-          left: "-200px",
+          top: "-160px", left: "-180px",
           animation: "blob1 14s ease-in-out infinite",
         }}
       />
 
-      {/* Animated orb 2 — indigo, bottom-right */}
+      {/* Orb 2 — indigo, behind photo */}
       <div
         className="absolute pointer-events-none"
         style={{
-          width: "600px",
-          height: "600px",
+          width: "520px", height: "520px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(99,102,241,0.05) 50%, transparent 70%)",
-          filter: "blur(72px)",
-          bottom: "-120px",
-          right: "-120px",
+          background: "radial-gradient(circle, rgba(99,102,241,0.22) 0%, rgba(99,102,241,0.06) 55%, transparent 70%)",
+          filter: "blur(64px)",
+          top: "10%", right: "-80px",
           animation: "blob2 18s ease-in-out infinite",
         }}
       />
 
-      {/* Animated orb 3 — cyan, center */}
+      {/* Orb 3 — cyan accent */}
       <div
         className="absolute pointer-events-none"
         style={{
-          width: "420px",
-          height: "420px",
+          width: "360px", height: "360px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(6,182,212,0.12) 0%, rgba(6,182,212,0.03) 50%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%)",
           filter: "blur(56px)",
-          top: "35%",
-          left: "55%",
+          bottom: "10%", left: "40%",
           animation: "blob3 22s ease-in-out infinite",
         }}
       />
 
-      {/* Vignette edges */}
+      {/* Vignette */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(10,10,10,0.7) 100%)",
-        }}
+        style={{ background: "radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, rgba(10,10,10,0.65) 100%)" }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center min-h-screen max-w-5xl mx-auto px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0">
+      {/* Two-column layout */}
+      <div className="relative z-10 flex items-center min-h-screen max-w-6xl mx-auto px-8 md:px-12 lg:px-20 pt-24 pb-16 md:pt-0 md:pb-0 gap-8 lg:gap-16">
 
-        <span
-          className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 mb-10 block"
-          style={heroStyle(0)}
-        >
-          {t({ pt: "Portfólio Pessoal", en: "Personal Portfolio", es: "Portafolio Personal" })}
-        </span>
+        {/* Left — text */}
+        <div className="flex-1 flex flex-col justify-center min-w-0">
 
-        <h1
-          id="hero-heading"
-          className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.0] tracking-tight mb-4"
-          style={heroStyle(1)}
-        >
-          Pedro<br />
-          <span className="text-neutral-500">&ldquo;Bonis&rdquo;</span>
-        </h1>
-
-        <p
-          className="text-xl md:text-2xl text-neutral-400 mb-10 font-light"
-          style={heroStyle(2)}
-        >
-          <RoleCycler />
-        </p>
-
-        <div
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-10"
-          style={heroStyle(3)}
-        >
-          <a
-            href={siteConfig.socials.calendly}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30"
+          <span
+            className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 mb-10 block"
+            style={heroStyle(0)}
           >
-            <CalendarIcon />
-            {t({ pt: "Marque uma reunião", en: "Schedule a meeting", es: "Agenda una reunión" })}
-          </a>
-          <a
-            href={siteConfig.socials.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 border border-neutral-700 text-neutral-300 text-sm font-semibold rounded-full hover:border-blue-400 hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/15"
-          >
-            <TelegramIcon />
-            {t({ pt: "Me mande uma mensagem", en: "Send me a message", es: "Envíame un mensaje" })}
-          </a>
-        </div>
-
-        <div
-          className="flex flex-wrap items-center gap-3"
-          style={heroStyle(4)}
-        >
-          <a
-            href={siteConfig.socials.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
-            aria-label="Twitter"
-          >
-            <TwitterIcon />
-          </a>
-          <a
-            href={siteConfig.socials.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
-            aria-label="LinkedIn"
-          >
-            <LinkedInIcon />
-          </a>
-          <a
-            href={siteConfig.socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
-            aria-label="GitHub"
-          >
-            <GitHubIcon />
-          </a>
-
-          {/* Scroll hint */}
-          <span className="ml-4 text-xs text-neutral-600 tracking-widest uppercase hidden md:block">
-            {t({ pt: "role para explorar", en: "scroll to explore", es: "desplázate para explorar" })}
+            {t({ pt: "Portfólio Pessoal", en: "Personal Portfolio", es: "Portafolio Personal" })}
           </span>
+
+          <h1
+            id="hero-heading"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.0] tracking-tight mb-4"
+            style={heroStyle(1)}
+          >
+            Pedro<br />
+            <span className="text-neutral-500">&ldquo;Bonis&rdquo;</span>
+          </h1>
+
+          <p
+            className="text-xl md:text-2xl text-neutral-400 mb-10 font-light"
+            style={heroStyle(2)}
+          >
+            <RoleCycler />
+          </p>
+
+          <div
+            className="flex flex-col sm:flex-row items-start gap-3 mb-10"
+            style={heroStyle(3)}
+          >
+            <a
+              href={siteConfig.socials.calendly}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30"
+            >
+              <CalendarIcon />
+              {t({ pt: "Marque uma reunião", en: "Schedule a meeting", es: "Agenda una reunión" })}
+            </a>
+            <a
+              href={siteConfig.socials.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 border border-neutral-700 text-neutral-300 text-sm font-semibold rounded-full hover:border-blue-400 hover:text-white transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <TelegramIcon />
+              {t({ pt: "Me mande uma mensagem", en: "Send me a message", es: "Envíame un mensaje" })}
+            </a>
+          </div>
+
+          <div
+            className="flex flex-wrap items-center gap-3"
+            style={heroStyle(4)}
+          >
+            <a
+              href={siteConfig.socials.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
+              aria-label="Twitter"
+            >
+              <TwitterIcon />
+            </a>
+            <a
+              href={siteConfig.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
+              aria-label="LinkedIn"
+            >
+              <LinkedInIcon />
+            </a>
+            <a
+              href={siteConfig.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
+              aria-label="GitHub"
+            >
+              <GitHubIcon />
+            </a>
+            <span className="ml-3 text-xs text-neutral-700 tracking-widest uppercase hidden md:block">
+              {t({ pt: "role para explorar", en: "scroll to explore", es: "desplázate" })}
+            </span>
+          </div>
         </div>
+
+        {/* Right — portrait card (desktop only) */}
+        {siteConfig.photo && (
+          <div
+            className="hidden md:flex flex-col items-center justify-center flex-shrink-0"
+            style={{ animation: `heroUp 0.7s cubic-bezier(0.4,0,0.2,1) 200ms both` }}
+          >
+            {/* Outer glow ring */}
+            <div
+              className="relative"
+              style={{
+                filter: "drop-shadow(0 0 32px rgba(99,102,241,0.25))",
+              }}
+            >
+              {/* Decorative outer border */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: "-6px",
+                  borderRadius: "22px",
+                  border: "1px solid rgba(99,102,241,0.2)",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Photo card */}
+              <div
+                style={{
+                  width: "260px",
+                  height: "340px",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  border: "1.5px solid rgba(99,102,241,0.45)",
+                  position: "relative",
+                  background: "#0f0f18",
+                }}
+              >
+                <Image
+                  src={siteConfig.photo}
+                  alt="Pedro Bonis"
+                  fill
+                  priority
+                  className="object-cover object-top"
+                />
+
+                {/* Bottom gradient overlay for name tag */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0, left: 0, right: 0,
+                    height: "80px",
+                    background: "linear-gradient(to top, rgba(15,15,24,0.95) 0%, rgba(15,15,24,0.6) 60%, transparent 100%)",
+                  }}
+                />
+
+                {/* Name tag inside card */}
+                <div style={{ position: "absolute", bottom: "14px", left: "16px", right: "16px" }}>
+                  <p style={{ color: "#fff", fontSize: "13px", fontWeight: 600, margin: 0, lineHeight: 1.2 }}>Pedro Bonis</p>
+                  <p style={{ color: "rgba(165,180,252,0.8)", fontSize: "11px", margin: "2px 0 0", lineHeight: 1 }}>
+                    {t({ pt: "Web3 & Growth", en: "Web3 & Growth", es: "Web3 & Growth" })}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
