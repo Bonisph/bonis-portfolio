@@ -296,7 +296,7 @@ export const personal: {
   title: { pt: string; en: string; es?: string };
   description: { pt: string; en: string; es?: string };
   image?: string;
-  stats?: { value: string; label: { pt: string; en: string; es?: string } }[];
+  stats?: { value: string; label: { pt: string; en: string; es?: string }; currencyBRL?: number }[];
 }[] = [
   {
     id: 1,
@@ -312,9 +312,8 @@ export const personal: {
     },
     image: "https://i.ibb.co/F45kkLQb/Jordan-1-High-Chicago-Lost-And-Found.jpg",
     stats: [
-      { value: "590+",    label: { pt: "tênis vendidos",     en: "sneakers sold",       es: "zapatillas vendidas"  } },
-      { value: "R$618k+", label: { pt: "faturamento total",  en: "total revenue",       es: "facturación total"    } },
-      { value: "R$116k+", label: { pt: "lucro total",        en: "total profit",        es: "beneficio total"      } },
+      { value: "590+",    label: { pt: "tênis vendidos",    en: "sneakers sold",   es: "zapatillas vendidas" } },
+      { value: "R$600k+", label: { pt: "faturamento total", en: "total revenue",   es: "facturación total"   }, currencyBRL: 600000 },
     ],
   },
 ];

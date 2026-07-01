@@ -6,6 +6,7 @@ import { personal } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
+import CurrencyStat from "@/components/CurrencyStat";
 
 function PersonalCard({ item, index, t }: {
   item: typeof personal[number];
@@ -34,7 +35,9 @@ function PersonalCard({ item, index, t }: {
               {item.stats.map((stat, si) => (
                 <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2">
                   <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums">
-                    <CountUp value={stat.value} />
+                    {stat.currencyBRL
+                      ? <CurrencyStat brl={stat.currencyBRL} ptValue={stat.value} />
+                      : <CountUp value={stat.value} />}
                   </p>
                   <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 leading-none whitespace-nowrap">
                     {t(stat.label)}
