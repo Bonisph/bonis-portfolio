@@ -47,11 +47,11 @@ export default function Hero() {
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative min-h-screen overflow-hidden bg-neutral-50 dark:bg-neutral-950"
+      className="relative min-h-screen overflow-hidden bg-neutral-950"
     >
       {siteConfig.photo ? (
-        <div className="hidden md:block absolute inset-0">
-          {/* Photo — full bleed, starts from right ~40% on desktop */}
+        <div className="absolute inset-0">
+          {/* Photo — full bleed on mobile, starts 38% from left on desktop */}
           <div className="absolute inset-0 md:left-[38%]">
             <Image
               src={siteConfig.photo}
@@ -62,13 +62,13 @@ export default function Hero() {
             />
           </div>
 
-          {/* Gradient light mode */}
-          <div className="dark:hidden absolute inset-0 pointer-events-none"
-            style={{ background: "linear-gradient(to right, #f5f5f5 0%, #f5f5f5 26%, rgba(245,245,245,0.88) 44%, rgba(245,245,245,0.3) 60%, transparent 76%)" }}
+          {/* Gradient — always dark */}
+          <div className="absolute inset-0 pointer-events-none"
+            style={{ background: "linear-gradient(to right, #0a0a0a 0%, #0a0a0a 26%, rgba(10,10,10,0.9) 42%, rgba(10,10,10,0.4) 60%, transparent 76%)" }}
           />
-          {/* Gradient dark mode */}
-          <div className="hidden dark:block absolute inset-0 pointer-events-none"
-            style={{ background: "linear-gradient(to right, #0a0a0a 0%, #0a0a0a 26%, rgba(10,10,10,0.88) 44%, rgba(10,10,10,0.3) 60%, transparent 76%)" }}
+          {/* Mobile: stronger top overlay so text stays readable */}
+          <div className="md:hidden absolute inset-0 pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.8) 100%)" }}
           />
         </div>
       ) : (
@@ -104,7 +104,7 @@ export default function Hero() {
 
         <h1
           id="hero-heading"
-          className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white leading-[1.05] tracking-tight mb-6"
+          className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-6"
           style={heroStyle(1)}
         >
           Pedro<br />
@@ -128,7 +128,7 @@ export default function Hero() {
             href={siteConfig.socials.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 text-sm font-medium rounded-full hover:border-blue-400 dark:hover:border-blue-400 hover:text-neutral-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center gap-2 px-5 py-2.5 border border-neutral-600 text-neutral-300 text-sm font-medium rounded-full hover:border-blue-400 hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
           >
             <TelegramIcon />
             {t({ pt: "Me mande uma mensagem", en: "Send me a message", es: "Envíame un mensaje" })}
@@ -143,7 +143,7 @@ export default function Hero() {
             href={siteConfig.socials.twitter}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-700 text-neutral-400 hover:text-white hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
             aria-label="Twitter"
           >
             <TwitterIcon />
@@ -152,7 +152,7 @@ export default function Hero() {
             href={siteConfig.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-700 text-neutral-400 hover:text-white hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
             aria-label="LinkedIn"
           >
             <LinkedInIcon />
@@ -161,7 +161,7 @@ export default function Hero() {
             href={siteConfig.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-700 text-neutral-400 hover:text-white hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
             aria-label="GitHub"
           >
             <GitHubIcon />
