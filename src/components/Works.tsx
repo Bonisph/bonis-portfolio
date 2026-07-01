@@ -6,6 +6,7 @@ import { experiences, projects } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import type { Lang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
+import CountUp from "@/components/CountUp";
 
 const ArrowUpRight = () => (
   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
@@ -100,8 +101,8 @@ export default function Works() {
                         {exp.roles[0].stats && exp.roles[0].stats.length > 0 && (
                           <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/60">
                             {exp.roles[0].stats.map((stat, si) => (
-                              <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2">
-                                <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums">{stat.value}</p>
+                              <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20 hover:bg-white dark:hover:bg-neutral-700">
+                                <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums"><CountUp value={stat.value} /></p>
                                 <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 leading-none whitespace-nowrap">{t(stat.label)}</p>
                               </div>
                             ))}
@@ -146,8 +147,8 @@ export default function Works() {
                             {role.stats && role.stats.length > 0 && (
                               <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/60">
                                 {role.stats.map((stat, si) => (
-                                  <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2">
-                                    <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums">{stat.value}</p>
+                                  <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20 hover:bg-white dark:hover:bg-neutral-700">
+                                    <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums"><CountUp value={stat.value} /></p>
                                     <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 leading-none whitespace-nowrap">{t(stat.label)}</p>
                                   </div>
                                 ))}

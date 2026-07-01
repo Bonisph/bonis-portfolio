@@ -5,6 +5,7 @@ import Image from "next/image";
 import { personal } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
+import CountUp from "@/components/CountUp";
 
 function PersonalCard({ item, index, t }: {
   item: typeof personal[number];
@@ -27,6 +28,21 @@ function PersonalCard({ item, index, t }: {
           <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
             {t(item.description)}
           </p>
+
+          {item.stats && item.stats.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/60">
+              {item.stats.map((stat, si) => (
+                <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2">
+                  <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums">
+                    <CountUp value={stat.value} />
+                  </p>
+                  <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 leading-none whitespace-nowrap">
+                    {t(stat.label)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {showImage && (

@@ -81,6 +81,17 @@ export default function Hero() {
         </div>
       )}
 
+      {/* Blue glow orb */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "10%", left: "-15%",
+          width: "70%", height: "80%",
+          background: "radial-gradient(ellipse at 35% 50%, rgba(59,130,246,0.13) 0%, rgba(59,130,246,0.04) 45%, transparent 70%)",
+          filter: "blur(48px)",
+        }}
+      />
+
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-center min-h-screen w-full md:w-[56%] px-8 md:px-16 lg:px-24 pt-24 pb-16 md:pt-0 md:pb-0">
 
@@ -108,7 +119,7 @@ export default function Hero() {
             href={siteConfig.socials.calendly}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-full transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30"
           >
             <CalendarIcon />
             {t({ pt: "Marque uma reunião", en: "Schedule a meeting", es: "Agenda una reunión" })}
@@ -117,7 +128,7 @@ export default function Hero() {
             href={siteConfig.socials.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 text-sm font-medium rounded-full hover:border-neutral-500 dark:hover:border-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 text-sm font-medium rounded-full hover:border-blue-400 dark:hover:border-blue-400 hover:text-neutral-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
           >
             <TelegramIcon />
             {t({ pt: "Me mande uma mensagem", en: "Send me a message", es: "Envíame un mensaje" })}
@@ -132,7 +143,7 @@ export default function Hero() {
             href={siteConfig.socials.twitter}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
             aria-label="Twitter"
           >
             <TwitterIcon />
@@ -141,7 +152,7 @@ export default function Hero() {
             href={siteConfig.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
             aria-label="LinkedIn"
           >
             <LinkedInIcon />
@@ -150,7 +161,7 @@ export default function Hero() {
             href={siteConfig.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-900 dark:hover:border-neutral-400 transition-all"
+            className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
             aria-label="GitHub"
           >
             <GitHubIcon />
