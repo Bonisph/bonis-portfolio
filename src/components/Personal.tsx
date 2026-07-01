@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { personal } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 
@@ -35,11 +36,12 @@ function PersonalCard({ item, index, isWide, t }: {
 
         {/* Imagem quadrada — lado direito */}
         {showImage && (
-          <div className="md:w-72 md:flex-shrink-0 h-64 md:h-auto relative overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={item.image}
+          <div className="md:w-72 md:flex-shrink-0 h-64 md:h-auto overflow-hidden">
+            <Image
+              src={item.image!}
               alt={t(item.title)}
+              width={288}
+              height={256}
               onError={() => setImgFailed(true)}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
@@ -54,14 +56,14 @@ export default function Personal() {
   const { t } = useLang();
 
   return (
-    <section id="pessoal" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
+    <section id="pessoal" aria-labelledby="personal-heading" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
           {t({ pt: "Lado pessoal", en: "Personal side", es: "Lado personal" })}
         </span>
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug max-w-lg">
+          <h2 id="personal-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug max-w-lg">
             {t({
               pt: "O que me forma além do trabalho",
               en: "What shapes me beyond work",

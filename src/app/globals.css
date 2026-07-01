@@ -2,12 +2,13 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --font-space: "Space Grotesk", system-ui, sans-serif;
-}
-
 @theme inline {
   --font-sans: var(--font-space);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 body {

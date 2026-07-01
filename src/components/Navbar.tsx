@@ -1,18 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 
 const SunIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
     <circle cx="12" cy="12" r="5" /><path strokeLinecap="round" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
   </svg>
 );
 
 const MoonIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
     <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
   </svg>
 );
@@ -22,19 +22,29 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { lang, setLang } = useLang();
   const { theme, toggleTheme } = useTheme();
+  const rafRef = useRef<number | null>(null);
 
   const navLinks = [
-    { label: lang === "pt" ? "Sobre"      : lang === "es" ? "Sobre mí"    : "About",    href: "#sobre" },
-    { label: lang === "pt" ? "Experiência": lang === "es" ? "Experiencia" : "Works",    href: "#works" },
-    { label: lang === "pt" ? "Eventos"    : lang === "es" ? "Eventos"     : "Events",   href: "#eventos" },
+    { label: lang === "pt" ? "Sobre"       : lang === "es" ? "Sobre mí"    : "About",    href: "#sobre" },
+    { label: lang === "pt" ? "Experiência" : lang === "es" ? "Experiencia" : "Works",    href: "#works" },
+    { label: lang === "pt" ? "Eventos"     : lang === "es" ? "Eventos"     : "Events",   href: "#eventos" },
     { label: lang === "pt" ? "Conteúdo"   : lang === "es" ? "Contenido"   : "Content",  href: "#conteudo" },
-    { label: lang === "pt" ? "Pessoal"    : lang === "es" ? "Personal"    : "Personal", href: "#pessoal" },
+    { label: lang === "pt" ? "Pessoal"     : lang === "es" ? "Personal"    : "Personal", href: "#pessoal" },
   ];
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const onScroll = () => {
+      if (rafRef.current !== null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        rafRef.current = null;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   const handleNav = (href: string) => {
@@ -42,6 +52,48 @@ export default function Navbar() {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
+
+  const langToggle = (
+    <div
+      role="group"
+      aria-label="Selecionar idioma"
+      className="flex items-center gap-1 px-3 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-700 text-xs font-semibold"
+    >
+      {(["pt", "en", "es"] as const).map((l, i) => (
+        <React.Fragment key={l}>
+          {i > 0 && <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-600">|</span>}
+          <button
+            onClick={() => setLang(l)}
+            aria-pressed={lang === l}
+            className={`transition-colors ${lang === l ? "text-neutral-900 dark:text-white" : "text-neutral-400 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300"}`}
+          >
+            {l.toUpperCase()}
+          </button>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+
+  const langToggleMobile = (
+    <div
+      role="group"
+      aria-label="Selecionar idioma"
+      className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-neutral-200 dark:border-neutral-700 text-xs font-semibold"
+    >
+      {(["pt", "en", "es"] as const).map((l, i) => (
+        <React.Fragment key={l}>
+          {i > 0 && <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-600">|</span>}
+          <button
+            onClick={() => setLang(l)}
+            aria-pressed={lang === l}
+            className={lang === l ? "text-neutral-900 dark:text-white" : "text-neutral-400 dark:text-neutral-600"}
+          >
+            {l.toUpperCase()}
+          </button>
+        </React.Fragment>
+      ))}
+    </div>
+  );
 
   return (
     <header
@@ -81,21 +133,7 @@ export default function Navbar() {
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
 
-          {/* Language Toggle */}
-          <div className="flex items-center gap-1 px-3 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-700 text-xs font-semibold">
-            {(["pt", "en", "es"] as const).map((l, i) => (
-              <>
-                {i > 0 && <span key={`sep-${l}`} className="text-neutral-300 dark:text-neutral-600">|</span>}
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`transition-colors ${lang === l ? "text-neutral-900 dark:text-white" : "text-neutral-400 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300"}`}
-                >
-                  {l.toUpperCase()}
-                </button>
-              </>
-            ))}
-          </div>
+          {langToggle}
         </nav>
 
         {/* Mobile: toggles + hamburger */}
@@ -107,20 +145,12 @@ export default function Navbar() {
           >
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
-          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-neutral-200 dark:border-neutral-700 text-xs font-semibold">
-            {(["pt", "en", "es"] as const).map((l, i) => (
-              <>
-                {i > 0 && <span key={`sep-${l}`} className="text-neutral-300 dark:text-neutral-600">|</span>}
-                <button key={l} onClick={() => setLang(l)} className={lang === l ? "text-neutral-900 dark:text-white" : "text-neutral-400 dark:text-neutral-600"}>
-                  {l.toUpperCase()}
-                </button>
-              </>
-            ))}
-          </div>
+          {langToggleMobile}
           <button
             className="flex flex-col gap-1.5 p-1"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
+            aria-expanded={menuOpen}
           >
             <span className={`block w-5 h-0.5 bg-neutral-900 dark:bg-white transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
             <span className={`block w-5 h-0.5 bg-neutral-900 dark:bg-white transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />

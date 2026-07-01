@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { content } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 
 const ArrowUpRight = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
     <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M7 7h10v10" />
   </svg>
 );
@@ -25,13 +26,13 @@ export default function Content() {
   const { t } = useLang();
 
   return (
-    <section id="conteudo" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
+    <section id="conteudo" aria-labelledby="content-heading" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
           {t({ pt: "Conteúdo & Mídia", en: "Content & Media", es: "Contenido & Medios" })}
         </span>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
+        <h2 id="content-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
           {t({ pt: "Conteúdos", en: "Content", es: "Contenido" })}
         </h2>
 
@@ -51,12 +52,12 @@ export default function Content() {
               >
                 {/* Thumbnail opcional */}
                 {item.thumbnail && (
-                  <div className="md:w-20 md:h-14 w-full h-36 flex-shrink-0 rounded-lg overflow-hidden bg-neutral-100">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                  <div className="relative md:w-20 md:h-14 w-full h-36 flex-shrink-0 rounded-lg overflow-hidden bg-neutral-100">
+                    <Image
+                      fill
                       src={item.thumbnail}
                       alt={t(item.title)}
-                      className="w-full h-full object-cover"
+                      className="object-cover"
                     />
                   </div>
                 )}
@@ -81,7 +82,7 @@ export default function Content() {
                 {/* Date + Arrow */}
                 <div className="flex items-center gap-3 flex-shrink-0">
                   <span className="text-xs text-neutral-400">{item.date}</span>
-                  <span className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
+                  <span aria-hidden="true" className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
                     <ArrowUpRight />
                   </span>
                 </div>

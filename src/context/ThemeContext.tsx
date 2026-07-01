@@ -10,12 +10,11 @@ const ThemeContext = createContext<{ theme: Theme; toggleTheme: () => void }>({
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("portfolio-theme") as Theme | null;
-    if (saved === "dark") setTheme("dark");
-  }, []);
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "light";
+    const saved = localStorage.getItem("portfolio-theme");
+    return saved === "dark" || saved === "light" ? saved : "light";
+  });
 
   useEffect(() => {
     if (theme === "dark") {

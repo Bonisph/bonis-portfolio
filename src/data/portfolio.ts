@@ -21,6 +21,8 @@ export const siteConfig = {
     twitter:  "https://x.com/bonis_crypto",
     linkedin: "https://www.linkedin.com/in/pedro-henrique-bonilha-ferreira-68271625a/",
     github:   "https://github.com/Bonisph",
+    telegram: "https://t.me/bonis_crypto",
+    calendly: "https://calendly.com/pedro-f-binance/30min",
   },
 };
 

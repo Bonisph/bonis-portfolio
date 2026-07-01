@@ -17,20 +17,20 @@ export default function Footer() {
 
         <div className="flex items-center gap-6 text-sm">
           <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-            Twitter
+            Twitter<span className="sr-only"> {t({ pt: "(abre em nova aba)", en: "(opens in new tab)", es: "(abre en nueva pestaña)" })}</span>
           </a>
           <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-            LinkedIn
+            LinkedIn<span className="sr-only"> {t({ pt: "(abre em nova aba)", en: "(opens in new tab)", es: "(abre en nueva pestaña)" })}</span>
           </a>
           <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-            GitHub
+            GitHub<span className="sr-only"> {t({ pt: "(abre em nova aba)", en: "(opens in new tab)", es: "(abre en nueva pestaña)" })}</span>
           </a>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Voltar ao topo"
             className="flex items-center gap-1.5 hover:text-white transition-colors"
           >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7 7 7M12 3v18" />
             </svg>
             {t({ pt: "Topo", en: "Top", es: "Inicio" })}

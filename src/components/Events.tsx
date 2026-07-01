@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { events } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 
@@ -18,20 +19,23 @@ const typeBg: Record<string, string> = {
   Moderator:   "bg-neutral-600 text-white",
 };
 
+const YT_ID_RE = /^[a-zA-Z0-9_-]{11}$/;
+
 function getYouTubeId(url: string): string | null {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?\s]+)/);
-  return match ? match[1] : null;
+  if (!match) return null;
+  return YT_ID_RE.test(match[1]) ? match[1] : null;
 }
 
 type MediaItem = { type: "image" | "video"; url: string };
 
-function MediaCarousel({ media, eventId }: { media: MediaItem[]; eventId: number }) {
+function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eventId: number; eventTitle: string }) {
   const [idx, setIdx] = useState(0);
 
   if (!media || media.length === 0) {
     return (
       <div className="absolute inset-0 flex items-center justify-center bg-neutral-100">
-        <svg className="w-12 h-12 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-12 h-12 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
@@ -59,19 +63,21 @@ function MediaCarousel({ media, eventId }: { media: MediaItem[]; eventId: number
         <iframe
           key={`${eventId}-yt-${ytId}`}
           src={`https://www.youtube.com/embed/${ytId}?rel=0`}
-          title="aftermovie"
+          title={`Aftermovie: ${eventTitle}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
         />
       ) : (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={`${eventId}-img-${idx}`}
-          src={current.url}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            key={`${eventId}-img-${idx}`}
+            fill
+            src={current.url}
+            alt=""
+            className="object-cover"
+          />
+        </div>
       )}
 
       {/* Gradiente suave no fundo para dots ficarem legíveis */}
@@ -87,7 +93,7 @@ function MediaCarousel({ media, eventId }: { media: MediaItem[]; eventId: number
             aria-label="Anterior"
             className="absolute left-2.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/75 transition-colors"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -97,18 +103,19 @@ function MediaCarousel({ media, eventId }: { media: MediaItem[]; eventId: number
             aria-label="Próximo"
             className="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/75 transition-colors"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
           {/* Dots */}
           <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-10">
-            {media.map((item, i) => (
+            {media.map((_, i) => (
               <button
                 key={i}
                 onClick={(e) => { e.stopPropagation(); setIdx(i); }}
-                aria-label={`Item ${i + 1}`}
+                aria-label={`Mídia ${i + 1} de ${total}`}
+                aria-current={i === idx ? "true" : undefined}
                 className={`transition-all duration-200 rounded-full ${
                   i === idx
                     ? "bg-white w-4 h-1.5"
@@ -120,7 +127,7 @@ function MediaCarousel({ media, eventId }: { media: MediaItem[]; eventId: number
 
           {/* Ícone de vídeo quando o item atual for vídeo */}
           {current.type === "video" && (
-            <div className="absolute top-3 right-3 z-10 bg-black/50 rounded-md px-2 py-1 flex items-center gap-1">
+            <div className="absolute top-3 right-3 z-10 bg-black/50 rounded-md px-2 py-1 flex items-center gap-1" aria-hidden="true">
               <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
@@ -137,14 +144,14 @@ export default function Events() {
   const { t } = useLang();
 
   return (
-    <section id="eventos" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
+    <section id="eventos" aria-labelledby="events-heading" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
           {t({ pt: "Eventos", en: "Events", es: "Eventos" })}
         </span>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-          {t({ pt: "Eventos", en: "Events", es: "Eventos" })}
+        <h2 id="events-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
+          {t({ pt: "Eventos em que participei", en: "Events I've attended", es: "Eventos en los que participé" })}
         </h2>
 
         {events.length === 0 ? (
@@ -160,7 +167,11 @@ export default function Events() {
               >
                 {/* ── Imagem / Carrossel ── */}
                 <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-                  <MediaCarousel media={event.media} eventId={event.id} />
+                  <MediaCarousel
+                    media={event.media}
+                    eventId={event.id}
+                    eventTitle={t(event.title)}
+                  />
                 </div>
 
                 {/* ── Informações ── */}
@@ -188,7 +199,7 @@ export default function Events() {
                   {/* Data e local */}
                   <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500 mb-4">
                     <span>{event.date}</span>
-                    <span>·</span>
+                    <span aria-hidden="true">·</span>
                     <span>{event.location}</span>
                   </div>
 

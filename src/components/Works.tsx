@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { experiences, projects } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
+import type { Lang } from "@/context/LanguageContext";
 
 const ArrowUpRight = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
     <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M7 7h10v10" />
   </svg>
 );
@@ -17,10 +19,11 @@ function CompanyLogo({ logo, name, logoBg }: { logo: string; name: string; logoB
 
   if (logo && !failed) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <Image
         src={logo}
         alt={name}
+        width={48}
+        height={48}
         onError={() => setFailed(true)}
         className={`w-12 h-12 rounded-xl object-cover flex-shrink-0 ${bg}`}
       />
@@ -33,7 +36,7 @@ function CompanyLogo({ logo, name, logoBg }: { logo: string; name: string; logoB
   );
 }
 
-function periodLabel(start: string, end: string | null, lang: string) {
+function periodLabel(start: string, end: string | null, lang: Lang) {
   const present = lang === "pt" ? "Presente" : lang === "es" ? "Presente" : "Present";
   return `${start} – ${end ?? present}`;
 }
@@ -42,13 +45,13 @@ export default function Works() {
   const { lang, t } = useLang();
 
   return (
-    <section id="works" className="py-28 px-6 bg-white dark:bg-neutral-900">
+    <section id="works" aria-labelledby="works-heading" className="py-28 px-6 bg-white dark:bg-neutral-900">
       <div className="max-w-6xl mx-auto">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
           {t({ pt: "Experiência", en: "Experience", es: "Experiencia" })}
         </span>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
+        <h2 id="works-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
           {t({ pt: "Onde já trabalhei", en: "Where I've worked", es: "Dónde he trabajado" })}
         </h2>
 
@@ -77,8 +80,13 @@ export default function Works() {
                           </p>
                         </div>
                         {exp.link && (
-                          <a href={exp.link} target="_blank" rel="noopener noreferrer"
-                            className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors flex-shrink-0">
+                          <a
+                            href={exp.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Ver ${exp.company}`}
+                            className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors flex-shrink-0"
+                          >
                             <ArrowUpRight />
                           </a>
                         )}
@@ -97,8 +105,13 @@ export default function Works() {
                       <div className="flex items-center justify-between flex-1 gap-2 flex-wrap">
                         <h3 className="font-semibold text-neutral-900 dark:text-white">{exp.company}</h3>
                         {exp.link && (
-                          <a href={exp.link} target="_blank" rel="noopener noreferrer"
-                            className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">
+                          <a
+                            href={exp.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Ver ${exp.company}`}
+                            className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
+                          >
                             <ArrowUpRight />
                           </a>
                         )}
@@ -142,7 +155,7 @@ export default function Works() {
                   <div className="flex justify-between items-start mb-4">
                     <span className="text-xs text-neutral-400">{proj.period}</span>
                     {proj.link && (
-                      <span className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
+                      <span aria-hidden="true" className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
                         <ArrowUpRight />
                       </span>
                     )}
