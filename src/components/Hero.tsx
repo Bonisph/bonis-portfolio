@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
-import RoleCycler from "@/components/RoleCycler";
 
 const TwitterIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
@@ -126,16 +125,9 @@ export default function Hero() {
             <span className="text-neutral-500">&ldquo;Bonis&rdquo;</span>
           </h1>
 
-          <p
-            className="text-xl md:text-2xl text-neutral-400 mb-10 font-light"
-            style={heroStyle(2)}
-          >
-            <RoleCycler />
-          </p>
-
           <div
             className="flex flex-col sm:flex-row items-start gap-3 mb-10"
-            style={heroStyle(3)}
+            style={heroStyle(2)}
           >
             <a
               href={siteConfig.socials.calendly}
@@ -159,7 +151,7 @@ export default function Hero() {
 
           <div
             className="flex flex-wrap items-center gap-3"
-            style={heroStyle(4)}
+            style={heroStyle(3)}
           >
             <a
               href={siteConfig.socials.twitter}
