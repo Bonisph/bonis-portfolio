@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
+import ParticleField from "@/components/ParticleField";
 
 const TwitterIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
@@ -56,58 +57,23 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="relative min-h-screen overflow-hidden bg-neutral-950"
     >
-      {/* Dot grid */}
+      {/* Particle network animation */}
+      <ParticleField />
+
+      {/* Subtle colour tint behind particles */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-        }}
-      />
-
-      {/* Orb 1 — blue, top-left */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          width: "800px", height: "800px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(59,130,246,0.32) 0%, rgba(59,130,246,0.08) 50%, transparent 70%)",
-          filter: "blur(72px)",
-          top: "-220px", left: "-220px",
-          animation: "blob1 14s ease-in-out infinite",
-        }}
-      />
-
-      {/* Orb 2 — indigo, behind photo */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          width: "700px", height: "700px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(99,102,241,0.35) 0%, rgba(99,102,241,0.08) 50%, transparent 70%)",
-          filter: "blur(72px)",
-          top: "5%", right: "-160px",
-          animation: "blob2 18s ease-in-out infinite",
-        }}
-      />
-
-      {/* Orb 3 — cyan, bottom-center */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          width: "500px", height: "500px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 70%)",
-          filter: "blur(60px)",
-          bottom: "0%", left: "35%",
-          animation: "blob3 22s ease-in-out infinite",
+          background:
+            "radial-gradient(ellipse 70% 80% at 15% 50%, rgba(59,130,246,0.12) 0%, transparent 70%), " +
+            "radial-gradient(ellipse 55% 70% at 85% 45%, rgba(99,102,241,0.14) 0%, transparent 70%)",
         }}
       />
 
       {/* Edge vignette */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 85% 85% at 50% 50%, transparent 35%, rgba(10,10,10,0.7) 100%)" }}
+        style={{ background: "radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, rgba(10,10,10,0.75) 100%)" }}
       />
 
       {/* Two-column layout */}
