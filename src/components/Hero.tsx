@@ -155,7 +155,7 @@ export default function Hero() {
               {/* Outer decorative ring */}
               <div style={{
                 position: "absolute", inset: "-8px",
-                borderRadius: "26px",
+                borderRadius: "48px",
                 border: "1px solid rgba(99,102,241,0.25)",
                 pointerEvents: "none",
               }} />
@@ -164,7 +164,7 @@ export default function Hero() {
               <div style={{
                 width: "360px",
                 height: "100%",
-                borderRadius: "18px",
+                borderRadius: "40px",
                 overflow: "hidden",
                 border: "2px solid rgba(99,102,241,0.55)",
                 position: "relative",
