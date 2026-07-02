@@ -174,20 +174,6 @@ export default function Hero() {
                   className="object-cover object-top"
                 />
 
-                {/* Bottom fade */}
-                <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0,
-                  height: "90px",
-                  background: "linear-gradient(to top, rgba(15,15,24,0.97) 0%, rgba(15,15,24,0.6) 60%, transparent 100%)",
-                }} />
-
-                {/* Name tag */}
-                <div style={{ position: "absolute", bottom: "16px", left: "18px", right: "18px" }}>
-                  <p style={{ color: "#fff", fontSize: "14px", fontWeight: 700, margin: 0, lineHeight: 1.2 }}>Pedro Bonis</p>
-                  <p style={{ color: "rgba(165,180,252,0.85)", fontSize: "12px", margin: "3px 0 0", lineHeight: 1 }}>
-                    Web3 & Growth
-                  </p>
-                </div>
               </div>
             </div>
           </div>
