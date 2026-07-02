@@ -318,9 +318,7 @@ export const education: {
       en: "I studied Business Administration at the Federal University of Technology – Paraná (UTFPR). My thesis explored the role of blockchains, stablecoins, and Real World Assets in expanding access to financial assets in Latin America.",
       es: "Estudié Administración de Empresas en la Universidad Tecnológica Federal de Paraná (UTFPR). Mi trabajo de fin de carrera abordó el papel de las blockchains, stablecoins y Real World Assets en la ampliación del acceso a activos financieros en América Latina.",
     },
-    stats: [
-      { value: "4", label: { pt: "anos de graduação", en: "years of study", es: "años de carrera" } },
-    ],
+    stats: [],
   },
 ];
 
