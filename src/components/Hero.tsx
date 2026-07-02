@@ -176,7 +176,8 @@ export default function Hero() {
                   fill
                   priority
                   sizes="360px"
-                  className="object-cover object-top"
+                  className="object-cover"
+                  style={{ transform: "scale(1.35)", transformOrigin: "center 18%" }}
                 />
               </div>
             </div>
