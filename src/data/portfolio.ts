@@ -290,6 +290,41 @@ export const events: {
   },
 ];
 
+// ─── FORMAÇÃO ─────────────────────────────────────────────────────────────────
+export const education: {
+  id: number;
+  institution: string;
+  logo: string;
+  logoBg?: "dark" | "light";
+  link?: string;
+  degree: { pt: string; en: string; es?: string };
+  field: { pt: string; en: string; es?: string };
+  start: string;
+  end: string | null;
+  description?: { pt: string; en: string; es?: string };
+  stats?: { value: string; label: { pt: string; en: string; es?: string } }[];
+}[] = [
+  {
+    id: 1,
+    institution: "UTFPR",
+    logo: "https://www.google.com/s2/favicons?domain=utfpr.edu.br&sz=256",
+    link: "https://utfpr.edu.br",
+    degree: { pt: "Bacharel em Administração de Empresas", en: "Bachelor's in Business Administration", es: "Licenciatura en Administración de Empresas" },
+    field:  { pt: "Administração", en: "Business Administration", es: "Administración" },
+    start: "2022",
+    end:   "2026",
+    description: {
+      pt: "Ao longo da graduação desenvolvi competências em gestão, estratégia e empreendedorismo, com projetos voltados ao mercado digital e Web3. TCC defendido e aprovado com nota máxima em julho de 2026 — um trabalho que une administração e tecnologia blockchain, áreas que moldam minha forma de pensar e atuar.",
+      en: "Throughout the degree I developed skills in management, strategy, and entrepreneurship, with projects focused on digital markets and Web3. Thesis defended and approved with the highest grade in July 2026 — a work bridging business administration and blockchain technology, the two areas that shape how I think and operate.",
+      es: "Durante la carrera desarrollé competencias en gestión, estrategia y emprendimiento, con proyectos orientados al mercado digital y Web3. TCC defendido y aprobado con nota máxima en julio de 2026, un trabajo que une administración y tecnología blockchain.",
+    },
+    stats: [
+      { value: "4",     label: { pt: "anos de graduação", en: "years of study", es: "años de carrera" } },
+      { value: "10/10", label: { pt: "nota do TCC",       en: "thesis grade",   es: "nota del TCC"   } },
+    ],
+  },
+];
+
 // ─── LADO PESSOAL ─────────────────────────────────────────────────────────────
 export const personal: {
   id: number;
@@ -298,23 +333,6 @@ export const personal: {
   image?: string;
   stats?: { value: string; label: { pt: string; en: string; es?: string }; currencyBRL?: number }[];
 }[] = [
-  {
-    id: 2,
-    title: {
-      pt: "Formação Acadêmica",
-      en: "Academic Background",
-      es: "Formación Académica",
-    },
-    description: {
-      pt: `Bacharel em Administração de Empresas pela UTFPR (2022–2026). Ao longo da graduação desenvolvi competências em gestão, estratégia e empreendedorismo, com projetos voltados ao mercado digital e Web3. TCC defendido e aprovado com nota máxima em julho de 2026 — um trabalho que une administração e tecnologia blockchain, áreas que moldam minha forma de pensar e atuar.`,
-      en: `Bachelor's in Business Administration from UTFPR (2022–2026). Throughout the degree I developed skills in management, strategy, and entrepreneurship, with projects focused on digital markets and Web3. Thesis defended and approved with the highest grade in July 2026 — a work bridging business administration and blockchain technology, the two areas that shape how I think and operate.`,
-      es: `Licenciado en Administración de Empresas por la UTFPR (2022–2026). Durante la carrera desarrollé competencias en gestión, estrategia y emprendimiento, con proyectos orientados al mercado digital y Web3. TCC defendido y aprobado con nota máxima en julio de 2026, un trabajo que une administración y tecnología blockchain.`,
-    },
-    stats: [
-      { value: "4",     label: { pt: "anos de graduação", en: "years of study",  es: "años de carrera" } },
-      { value: "10/10", label: { pt: "nota do TCC",       en: "thesis grade",    es: "nota del TCC"    } },
-    ],
-  },
   {
     id: 1,
     title: {
