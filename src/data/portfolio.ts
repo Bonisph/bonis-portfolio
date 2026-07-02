@@ -314,13 +314,12 @@ export const education: {
     start: "2022",
     end:   "2026",
     description: {
-      pt: "Ao longo da graduação desenvolvi competências em gestão, estratégia e empreendedorismo, com projetos voltados ao mercado digital e Web3. TCC defendido e aprovado com nota máxima em julho de 2026 — um trabalho que une administração e tecnologia blockchain, áreas que moldam minha forma de pensar e atuar.",
-      en: "Throughout the degree I developed skills in management, strategy, and entrepreneurship, with projects focused on digital markets and Web3. Thesis defended and approved with the highest grade in July 2026 — a work bridging business administration and blockchain technology, the two areas that shape how I think and operate.",
-      es: "Durante la carrera desarrollé competencias en gestión, estrategia y emprendimiento, con proyectos orientados al mercado digital y Web3. TCC defendido y aprobado con nota máxima en julio de 2026, un trabajo que une administración y tecnología blockchain.",
+      pt: "Ao longo da graduação desenvolvi competências em gestão, estratégia e empreendedorismo, com projetos voltados ao mercado digital e Web3. TCC defendido e aprovado em julho de 2026 — um trabalho que une administração e tecnologia blockchain, áreas que moldam minha forma de pensar e atuar.",
+      en: "Throughout the degree I developed skills in management, strategy, and entrepreneurship, with projects focused on digital markets and Web3. Thesis defended and approved in July 2026 — a work bridging business administration and blockchain technology, the two areas that shape how I think and operate.",
+      es: "Durante la carrera desarrollé competencias en gestión, estrategia y emprendimiento, con proyectos orientados al mercado digital y Web3. TCC defendido y aprobado en julio de 2026, un trabajo que une administración y tecnología blockchain.",
     },
     stats: [
-      { value: "4",     label: { pt: "anos de graduação", en: "years of study", es: "años de carrera" } },
-      { value: "10/10", label: { pt: "nota do TCC",       en: "thesis grade",   es: "nota del TCC"   } },
+      { value: "4", label: { pt: "anos de graduação", en: "years of study", es: "años de carrera" } },
     ],
   },
 ];
