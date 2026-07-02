@@ -343,7 +343,6 @@ export const personal: {
       en: `In 2020, during the pandemic, I was a teenager when I discovered the sneaker world and saw a real market inside it. A passion for dressing well and collecting things with story and value became my first business venture. I started buying, reselling, and deeply studying sneaker culture and the streetwear market. Those experiences taught me a lot about niche, demand, customer relationships, and the art of finding opportunity where others just see style.`,
       es: `En 2020, durante la pandemia, siendo adolescente, descubrí el mundo de las zapatillas y vi un mercado real dentro de él. La pasión por vestirme bien y coleccionar cosas con historia y valor se convirtió en mi primer negocio. Comencé a comprar, revender y estudiar a fondo la cultura sneaker y el mercado de streetwear. Esas experiencias me enseñaron mucho sobre nichos, demanda, relación con el cliente y el arte de encontrar oportunidades donde otros solo ven estilo.`,
     },
-    image: "https://i.ibb.co/F45kkLQb/Jordan-1-High-Chicago-Lost-And-Found.jpg",
     stats: [
       { value: "590+",    label: { pt: "tênis vendidos",    en: "sneakers sold",   es: "zapatillas vendidas" } },
       { value: "R$600k+", label: { pt: "faturamento total", en: "total revenue",   es: "facturación total"   }, currencyBRL: 600000 },
