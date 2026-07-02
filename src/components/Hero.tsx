@@ -135,9 +135,6 @@ export default function Hero() {
             <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
               aria-label="GitHub"><GitHubIcon /></a>
-            <span className="ml-3 text-xs text-neutral-700 tracking-widest uppercase hidden md:block">
-              {t({ pt: "role para explorar", en: "scroll to explore", es: "desplázate" })}
-            </span>
           </div>
         </div>
 
@@ -161,8 +158,8 @@ export default function Hero() {
 
               {/* Photo card */}
               <div style={{
-                width: "320px",
-                height: "440px",
+                width: "380px",
+                height: "520px",
                 borderRadius: "18px",
                 overflow: "hidden",
                 border: "2px solid rgba(99,102,241,0.55)",

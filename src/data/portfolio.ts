@@ -93,33 +93,6 @@ export const experiences: {
     ],
   },
   {
-    id: 4,
-    company: "UTFPR",
-    logo: "https://www.google.com/s2/favicons?domain=utfpr.edu.br&sz=256",
-    logoBg: "light",
-    link: "https://utfpr.edu.br",
-    roles: [
-      {
-        title: {
-          pt:  "Bacharelado em Administração de Empresas",
-          en:  "Bachelor's in Business Administration",
-          es:  "Licenciatura en Administración de Empresas",
-        },
-        start: "Fev 2022",
-        end:   "Jun 2026",
-        description: {
-          pt: "Graduação em Administração de Empresas pela Universidade Tecnológica Federal do Paraná. Ao longo do curso desenvolvi competências em gestão, estratégia e empreendedorismo, com projetos voltados ao mercado digital e Web3. TCC defendido e aprovado com nota máxima em julho de 2026.",
-          en: "Bachelor's degree in Business Administration from the Federal University of Technology – Paraná (UTFPR). Developed skills in management, strategy, and entrepreneurship, with projects focused on digital markets and Web3. Thesis defended and approved with the highest grade in July 2026.",
-          es: "Licenciatura en Administración de Empresas en la Universidad Tecnológica Federal de Paraná (UTFPR). Desarrollé competencias en gestión, estrategia y emprendimiento, con proyectos orientados al mercado digital y Web3. TCC defendido y aprobado con nota máxima en julio de 2026.",
-        },
-        stats: [
-          { value: "4",     label: { pt: "anos de graduação", en: "years of study",  es: "años de carrera" } },
-          { value: "10/10", label: { pt: "nota do TCC",       en: "thesis grade",    es: "nota del TCC"    } },
-        ],
-      },
-    ],
-  },
-  {
     id: 3,
     company: "Modular Crypto",
     logo: "https://media.beehiiv.com/cdn-cgi/image/format=auto,onerror=redirect/uploads/asset/file/f66aa22c-da3d-45d9-a9ab-981749782825/1.jpg",
@@ -325,6 +298,23 @@ export const personal: {
   image?: string;
   stats?: { value: string; label: { pt: string; en: string; es?: string }; currencyBRL?: number }[];
 }[] = [
+  {
+    id: 2,
+    title: {
+      pt: "Formação Acadêmica",
+      en: "Academic Background",
+      es: "Formación Académica",
+    },
+    description: {
+      pt: `Bacharel em Administração de Empresas pela UTFPR (2022–2026). Ao longo da graduação desenvolvi competências em gestão, estratégia e empreendedorismo, com projetos voltados ao mercado digital e Web3. TCC defendido e aprovado com nota máxima em julho de 2026 — um trabalho que une administração e tecnologia blockchain, áreas que moldam minha forma de pensar e atuar.`,
+      en: `Bachelor's in Business Administration from UTFPR (2022–2026). Throughout the degree I developed skills in management, strategy, and entrepreneurship, with projects focused on digital markets and Web3. Thesis defended and approved with the highest grade in July 2026 — a work bridging business administration and blockchain technology, the two areas that shape how I think and operate.`,
+      es: `Licenciado en Administración de Empresas por la UTFPR (2022–2026). Durante la carrera desarrollé competencias en gestión, estrategia y emprendimiento, con proyectos orientados al mercado digital y Web3. TCC defendido y aprobado con nota máxima en julio de 2026, un trabajo que une administración y tecnología blockchain.`,
+    },
+    stats: [
+      { value: "4",     label: { pt: "anos de graduação", en: "years of study",  es: "años de carrera" } },
+      { value: "10/10", label: { pt: "nota do TCC",       en: "thesis grade",    es: "nota del TCC"    } },
+    ],
+  },
   {
     id: 1,
     title: {
