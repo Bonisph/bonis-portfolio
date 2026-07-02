@@ -307,16 +307,16 @@ export const education: {
   {
     id: 1,
     institution: "UTFPR",
-    logo: "https://www.google.com/s2/favicons?domain=utfpr.edu.br&sz=256",
+    logo: "",
     link: "https://utfpr.edu.br",
     degree: { pt: "Bacharel em Administração de Empresas", en: "Bachelor's in Business Administration", es: "Licenciatura en Administración de Empresas" },
     field:  { pt: "Administração", en: "Business Administration", es: "Administración" },
     start: "2022",
     end:   "2026",
     description: {
-      pt: "Ao longo da graduação desenvolvi competências em gestão, estratégia e empreendedorismo, com projetos voltados ao mercado digital e Web3. TCC defendido e aprovado em julho de 2026 — um trabalho que une administração e tecnologia blockchain, áreas que moldam minha forma de pensar e atuar.",
-      en: "Throughout the degree I developed skills in management, strategy, and entrepreneurship, with projects focused on digital markets and Web3. Thesis defended and approved in July 2026 — a work bridging business administration and blockchain technology, the two areas that shape how I think and operate.",
-      es: "Durante la carrera desarrollé competencias en gestión, estrategia y emprendimiento, con proyectos orientados al mercado digital y Web3. TCC defendido y aprobado en julio de 2026, un trabajo que une administración y tecnología blockchain.",
+      pt: "Cursei Administração de Empresas na Universidade Tecnológica Federal do Paraná (UTFPR). Meu trabalho de conclusão de curso abordou o papel das blockchains, stablecoins e Real World Assets na ampliação do acesso a ativos financeiros na América Latina.",
+      en: "I studied Business Administration at the Federal University of Technology – Paraná (UTFPR). My thesis explored the role of blockchains, stablecoins, and Real World Assets in expanding access to financial assets in Latin America.",
+      es: "Estudié Administración de Empresas en la Universidad Tecnológica Federal de Paraná (UTFPR). Mi trabajo de fin de carrera abordó el papel de las blockchains, stablecoins y Real World Assets en la ampliación del acceso a activos financieros en América Latina.",
     },
     stats: [
       { value: "4", label: { pt: "anos de graduação", en: "years of study", es: "años de carrera" } },

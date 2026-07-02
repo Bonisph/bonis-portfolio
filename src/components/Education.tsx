@@ -57,7 +57,7 @@ export default function Education() {
           </span>
 
           <h2 id="formacao-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-            {t({ pt: "Onde me formei", en: "Where I studied", es: "Dónde estudié" })}
+            {t({ pt: "Formação Acadêmica", en: "Academic Background", es: "Formación Académica" })}
           </h2>
         </Reveal>
 
