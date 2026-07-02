@@ -17,7 +17,7 @@ function PersonalCard({ item, index, t }: {
   const showImage = item.image && !imgFailed;
 
   return (
-    <div className="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full">
+    <div className="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full">
       <div className="flex flex-col md:flex-row h-full">
         <div className="flex-1 p-7 flex flex-col justify-center min-w-0">
           <span className="text-xs font-semibold text-neutral-300 dark:text-neutral-600 mb-3 block">
@@ -49,7 +49,7 @@ function PersonalCard({ item, index, t }: {
         </div>
 
         {showImage && (
-          <div className="md:w-72 md:flex-shrink-0 h-64 md:h-auto overflow-hidden">
+          <div className="md:w-72 md:flex-shrink-0 h-64 md:h-auto overflow-hidden rounded-b-2xl md:rounded-b-none md:rounded-r-2xl">
             <Image
               src={item.image!}
               alt={t(item.title)}
