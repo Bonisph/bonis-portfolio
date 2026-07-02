@@ -33,7 +33,7 @@ function PersonalCard({ item, index, t }: {
           {item.stats && item.stats.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/60">
               {item.stats.map((stat, si) => (
-                <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2">
+                <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20 hover:bg-white dark:hover:bg-neutral-700">
                   <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums">
                     {stat.currencyBRL
                       ? <CurrencyStat brl={stat.currencyBRL} ptValue={stat.value} />
