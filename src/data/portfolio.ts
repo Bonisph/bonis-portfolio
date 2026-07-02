@@ -18,11 +18,12 @@ export const siteConfig = {
   photo: "https://i.ibb.co/xqYsQs8M/Foto-do-portfolio.png",
 
   socials: {
-    twitter:  "https://x.com/bonis_crypto",
-    linkedin: "https://www.linkedin.com/in/pedro-henrique-bonilha-ferreira-68271625a/",
-    github:   "https://github.com/Bonisph",
-    telegram: "https://t.me/bonis_crypto",
-    calendly: "https://calendly.com/pedro-f-binance/30min",
+    twitter:   "https://x.com/bonis_crypto",
+    linkedin:  "https://www.linkedin.com/in/pedro-henrique-bonilha-ferreira-68271625a/",
+    github:    "https://github.com/Bonisph",
+    instagram: "https://www.instagram.com/bonis_crypto/",
+    telegram:  "https://t.me/bonis_crypto",
+    calendly:  "https://calendly.com/pedro-f-binance/30min",
   },
 };
 
