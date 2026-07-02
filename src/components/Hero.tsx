@@ -158,8 +158,8 @@ export default function Hero() {
 
               {/* Photo card */}
               <div style={{
-                width: "400px",
-                height: "560px",
+                width: "480px",
+                height: "580px",
                 borderRadius: "40px",
                 overflow: "hidden",
                 border: "2px solid rgba(99,102,241,0.55)",
