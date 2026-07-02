@@ -15,7 +15,7 @@ export const siteConfig = {
     es: ``,
   },
 
-  photo: "https://i.ibb.co/xqYsQs8M/Foto-do-portfolio.png",
+  photo: "",
 
   socials: {
     twitter:   "https://x.com/bonis_crypto",
