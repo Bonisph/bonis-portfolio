@@ -141,15 +141,11 @@ export default function Hero() {
         {/* Right — portrait card */}
         {siteConfig.photo && (
           <div
-            className="hidden md:flex self-stretch flex-shrink-0"
-            style={{
-              animation: `heroUp 0.7s cubic-bezier(0.4,0,0.2,1) 120ms both`,
-              paddingTop: "72px",
-              paddingBottom: "32px",
-            }}
+            className="hidden md:block flex-shrink-0"
+            style={{ animation: `heroUp 0.7s cubic-bezier(0.4,0,0.2,1) 120ms both` }}
           >
             <div
-              className="relative h-full"
+              className="relative"
               style={{ filter: "drop-shadow(0 0 72px rgba(99,102,241,0.5))" }}
             >
               {/* Outer decorative ring */}
@@ -162,8 +158,8 @@ export default function Hero() {
 
               {/* Photo card */}
               <div style={{
-                width: "480px",
-                height: "100%",
+                width: "clamp(340px, 36vw, 560px)",
+                aspectRatio: "4/5",
                 borderRadius: "44px",
                 overflow: "hidden",
                 border: "2px solid rgba(99,102,241,0.55)",
@@ -175,7 +171,7 @@ export default function Hero() {
                   alt="Pedro Bonis"
                   fill
                   priority
-                  sizes="360px"
+                  sizes="(max-width: 1280px) 36vw, 560px"
                   className="object-cover"
                   style={{ transform: "scale(1.35)", transformOrigin: "center 18%" }}
                 />
