@@ -168,7 +168,7 @@ export default function Hero() {
               {/* Photo card */}
               <div style={{
                 width: "clamp(340px, 36vw, 560px)",
-                aspectRatio: "4/5",
+                height: "clamp(425px, 45vw, 700px)",
                 borderRadius: "44px",
                 overflow: "hidden",
                 border: "2px solid rgba(99,102,241,0.55)",
