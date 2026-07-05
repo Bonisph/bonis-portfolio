@@ -57,6 +57,7 @@ export default function Content() {
                     <div className="relative md:w-20 md:h-14 w-full h-36 flex-shrink-0 rounded-lg overflow-hidden bg-neutral-100">
                       <Image
                         fill
+                        sizes="80px"
                         src={item.thumbnail}
                         alt={t(item.title)}
                         className="object-cover"

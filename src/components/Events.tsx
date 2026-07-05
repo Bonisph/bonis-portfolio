@@ -73,6 +73,7 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
           <Image
             key={`${eventId}-img-${idx}`}
             fill
+            sizes="(max-width: 768px) 100vw, 600px"
             src={current.url}
             alt=""
             className="object-cover"
