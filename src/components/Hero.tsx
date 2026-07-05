@@ -1,9 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
-import ParticleField from "@/components/ParticleField";
+import LiquidMetalScene from "@/components/LiquidMetalScene";
 
 const TwitterIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
@@ -25,7 +26,7 @@ const GitHubIcon = () => (
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
   </svg>
 );
 
@@ -37,59 +38,118 @@ const CalendarIcon = () => (
 
 const TelegramIcon = () => (
   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
   </svg>
 );
 
-const STAGGER = [50, 160, 280, 380] as const;
+function useTypewriter(text: string, speed = 88, startDelay = 0) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const iv = setInterval(() => {
+        setCount(c => {
+          if (c >= text.length) { clearInterval(iv); return c; }
+          return c + 1;
+        });
+      }, speed);
+      return () => clearInterval(iv);
+    }, startDelay);
+    return () => clearTimeout(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return { partial: text.slice(0, count), done: count >= text.length };
+}
 
+const STAGGER = [50, 160, 280, 380] as const;
 function heroStyle(i: number): React.CSSProperties {
   return { animation: `heroUp 0.65s cubic-bezier(0.4,0,0.2,1) ${STAGGER[i]}ms both` };
 }
 
-const BONIS_GRADIENT: React.CSSProperties = {
-  background: "linear-gradient(135deg, #60a5fa 0%, #818cf8 55%, #a78bfa 100%)",
+const BONIS_METAL: React.CSSProperties = {
+  background:
+    "linear-gradient(135deg, #4a5568 0%, #8898b0 20%, #c8d2e0 42%, #6a7890 64%, #9aaabe 82%, #c8d2e0 100%)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
   backgroundClip: "text",
 };
 
+const SOCIAL_LINKS = [
+  { key: "twitter",   Icon: TwitterIcon,   label: "Twitter" },
+  { key: "linkedin",  Icon: LinkedInIcon,  label: "LinkedIn" },
+  { key: "github",    Icon: GitHubIcon,    label: "GitHub" },
+  { key: "instagram", Icon: InstagramIcon, label: "Instagram" },
+] as const;
+
 export default function Hero() {
   const { t } = useLang();
+  const pedro = useTypewriter("Pedro", 88, 320);
+  const bonis = useTypewriter("“Bonis”", 88, 1100);
 
   return (
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative min-h-screen overflow-hidden bg-neutral-950"
+      className="relative min-h-screen overflow-hidden"
     >
-      {/* Particle network animation */}
-      <ParticleField />
+      {/* Sky gradient */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, #3a8ecf 0%, #5bb5e2 20%, #8dd4f5 46%, #c0e5ff 58%, #b8e0ff 62%)",
+        }}
+      />
 
-      {/* Subtle colour tint behind particles */}
+      {/* Rolling hills */}
+      <svg
+        className="absolute inset-x-0 bottom-0"
+        style={{ top: "38%", height: "68%" }}
+        viewBox="0 0 1440 600"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M 0 260 C 100 160, 280 90, 480 130 C 680 170, 880 230, 1100 190 C 1240 165, 1360 148, 1440 138 L 1440 600 L 0 600 Z"
+          fill="#7cc840"
+        />
+        <path
+          d="M 0 340 C 140 210, 340 130, 560 178 C 760 222, 960 285, 1160 248 C 1300 222, 1390 208, 1440 200 L 1440 600 L 0 600 Z"
+          fill="#5aaa2a"
+        />
+        <path
+          d="M 0 490 C 300 460, 700 470, 1440 455 L 1440 600 L 0 600 Z"
+          fill="#458820"
+        />
+      </svg>
+
+      {/* Subtle white veil on text side — improves readability */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 80% at 15% 50%, rgba(59,130,246,0.12) 0%, transparent 70%), " +
-            "radial-gradient(ellipse 55% 70% at 85% 45%, rgba(99,102,241,0.14) 0%, transparent 70%)",
+            "linear-gradient(90deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.12) 44%, transparent 68%)",
         }}
       />
 
-      {/* Edge vignette */}
+      {/* Fade to dark at bottom → matches dark sections below */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, rgba(10,10,10,0.75) 100%)" }}
+        className="absolute inset-x-0 bottom-0 pointer-events-none"
+        style={{
+          height: "28%",
+          background: "linear-gradient(180deg, transparent 0%, rgba(8,8,14,0.97) 100%)",
+        }}
       />
 
-      {/* Two-column layout */}
-      <div className="relative z-10 flex items-center min-h-screen max-w-6xl mx-auto px-8 md:px-12 lg:px-20 pt-24 pb-16 md:pt-0 md:pb-0 gap-6 lg:gap-12">
+      {/* Liquid metal blobs + chrome tech objects */}
+      <LiquidMetalScene />
 
-        {/* Left — text */}
+      {/* Content */}
+      <div className="relative z-10 flex items-center min-h-screen max-w-6xl mx-auto px-8 md:px-12 lg:px-20 pt-24 pb-16 md:pt-0 md:pb-0 gap-6 lg:gap-12">
         <div className="flex-1 flex flex-col justify-center min-w-0">
 
           <span
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 mb-8 block"
+            className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 mb-8 block"
             style={heroStyle(0)}
           >
             {t({ pt: "Portfólio Pessoal", en: "Personal Portfolio", es: "Portafolio Personal" })}
@@ -100,8 +160,18 @@ export default function Hero() {
             className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.0] tracking-tight mb-8"
             style={heroStyle(1)}
           >
-            <span className="text-white">Pedro</span><br />
-            <span style={BONIS_GRADIENT}>&ldquo;Bonis&rdquo;</span>
+            <span className="block text-slate-900">
+              {pedro.partial}
+              {!pedro.done && (
+                <span style={{ animation: "blink 0.7s step-end infinite", color: "#334155" }}>|</span>
+              )}
+            </span>
+            <span style={BONIS_METAL}>
+              {bonis.partial}
+              {pedro.done && !bonis.done && (
+                <span style={{ animation: "blink 0.7s step-end infinite", WebkitTextFillColor: "#6a7890", color: "#6a7890" }}>|</span>
+              )}
+            </span>
           </h1>
 
           <div
@@ -112,7 +182,7 @@ export default function Hero() {
               href={siteConfig.socials.calendly}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30"
+              className="flex items-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-700 text-white text-sm font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-slate-900/30"
             >
               <CalendarIcon />
               {t({ pt: "Marque uma reunião", en: "Schedule a meeting", es: "Agenda una reunión" })}
@@ -121,7 +191,7 @@ export default function Hero() {
               href={siteConfig.socials.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 border border-neutral-700 text-neutral-300 text-sm font-semibold rounded-full hover:border-blue-400 hover:text-white transition-all duration-300 hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-6 py-3 border border-slate-400 text-slate-700 text-sm font-semibold rounded-full hover:border-slate-900 hover:text-slate-900 hover:bg-white/40 transition-all duration-300 hover:-translate-y-0.5"
             >
               <TelegramIcon />
               {t({ pt: "Me mande uma mensagem", en: "Send me a message", es: "Envíame un mensaje" })}
@@ -132,49 +202,29 @@ export default function Hero() {
             className="flex flex-wrap items-center gap-3"
             style={heroStyle(3)}
           >
-            <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
-              aria-label="Twitter"><TwitterIcon /></a>
-            <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
-              aria-label="LinkedIn"><LinkedInIcon /></a>
-            <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
-              aria-label="GitHub"><GitHubIcon /></a>
-            <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center w-11 h-11 rounded-full border border-neutral-800 text-neutral-500 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:-translate-y-0.5"
-              aria-label="Instagram"><InstagramIcon /></a>
+            {SOCIAL_LINKS.map(({ key, Icon, label }) => (
+              <a
+                key={key}
+                href={siteConfig.socials[key as keyof typeof siteConfig.socials]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-11 h-11 rounded-full border border-slate-300 bg-white/30 text-slate-500 hover:text-slate-900 hover:border-slate-900 hover:bg-white/60 transition-all duration-300 hover:-translate-y-0.5"
+                aria-label={label}
+              >
+                <Icon />
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Right — portrait card */}
         {siteConfig.photo && (
           <div
             className="hidden md:block flex-shrink-0"
-            style={{ animation: `heroUp 0.7s cubic-bezier(0.4,0,0.2,1) 120ms both` }}
+            style={{ animation: "heroUp 0.7s cubic-bezier(0.4,0,0.2,1) 120ms both" }}
           >
-            <div
-              className="relative"
-              style={{ filter: "drop-shadow(0 0 72px rgba(99,102,241,0.5))" }}
-            >
-              {/* Outer decorative ring */}
-              <div style={{
-                position: "absolute", inset: "-8px",
-                borderRadius: "52px",
-                border: "1px solid rgba(99,102,241,0.25)",
-                pointerEvents: "none",
-              }} />
-
-              {/* Photo card */}
-              <div style={{
-                width: "clamp(340px, 36vw, 560px)",
-                height: "clamp(425px, 45vw, 700px)",
-                borderRadius: "44px",
-                overflow: "hidden",
-                border: "2px solid rgba(99,102,241,0.55)",
-                position: "relative",
-                background: "#0f0f18",
-              }}>
+            <div className="relative" style={{ filter: "drop-shadow(0 0 72px rgba(99,102,241,0.5))" }}>
+              <div style={{ position: "absolute", inset: "-8px", borderRadius: "52px", border: "1px solid rgba(99,102,241,0.25)", pointerEvents: "none" }} />
+              <div style={{ width: "clamp(340px, 36vw, 560px)", height: "clamp(425px, 45vw, 700px)", borderRadius: "44px", overflow: "hidden", border: "2px solid rgba(99,102,241,0.55)", position: "relative", background: "#0f0f18" }}>
                 <Image
                   src={siteConfig.photo}
                   alt="Pedro Bonis"
