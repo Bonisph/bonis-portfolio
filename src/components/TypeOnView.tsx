@@ -56,7 +56,7 @@ export default function TypeOnView({
   style,
 }: {
   text: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   className?: string;
   id?: string;
   speed?: number;
