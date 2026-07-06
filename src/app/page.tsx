@@ -7,11 +7,13 @@ import Content from "@/components/Content";
 import Events from "@/components/Events";
 import Personal from "@/components/Personal";
 import Footer from "@/components/Footer";
+import MusicPlayer from "@/components/MusicPlayer";
 
 export default function Home() {
   return (
     <>
       <Navbar />
+      <MusicPlayer />
       <main>
         <Hero />
         <About />
