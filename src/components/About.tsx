@@ -46,7 +46,7 @@ export default function About() {
             </div>
           ) : (
             <p style={{ fontSize: 12, fontWeight: 500, textTransform: "uppercase", color: "var(--faint)", margin: 0 }}>
-              [ seção vazia — aguardando sua bio ]
+              {t({ pt: "[ seção vazia — aguardando sua bio ]", en: "[ empty section — bio coming soon ]", es: "[ sección vacía — bio próximamente ]" })}
             </p>
           )}
         </Reveal>

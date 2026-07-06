@@ -195,7 +195,7 @@ export default function Hero() {
           pointerEvents: "none",
         }}
       >
-        role ↓
+        {t({ pt: "role ↓", en: "role ↓", es: "rol ↓" })}
       </div>
     </section>
   );

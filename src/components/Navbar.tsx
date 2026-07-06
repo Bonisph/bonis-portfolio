@@ -8,7 +8,7 @@ import { useTheme } from "@/context/ThemeContext";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { lang, setLang } = useLang();
+  const { lang, setLang, t } = useLang();
   const { theme, toggleTheme } = useTheme();
   const rafRef = useRef<number | null>(null);
 
@@ -139,7 +139,7 @@ export default function Navbar() {
             onClick={() => handleNav("#contato")}
             className="contato-pill"
           >
-            Contato
+            {t({ pt: "Contato", en: "Contact", es: "Contacto" })}
           </button>
         </nav>
 
@@ -218,7 +218,7 @@ export default function Navbar() {
             ))}
           </div>
           <button onClick={() => handleNav("#contato")} className="contato-pill" style={{ alignSelf: "flex-start" }}>
-            Contato
+            {t({ pt: "Contato", en: "Contact", es: "Contacto" })}
           </button>
         </div>
       )}
