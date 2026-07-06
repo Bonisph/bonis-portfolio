@@ -64,21 +64,45 @@ export default function TypeOnView({
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
-  const { displayed, start } = useTypewriter(text, { speed, autoStart: false });
-  const caretOn = displayed.length > 0 && displayed.length < text.length;
+  const [displayed, setDisplayed] = useState("");
+  const hasAnimatedRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const runTypewriter = (newText: string) => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplayed(newText);
+      return;
+    }
+
+    let i = 0;
+    const tick = () => {
+      i++;
+      setDisplayed(newText.slice(0, i));
+      if (i < newText.length) {
+        timerRef.current = setTimeout(tick, speed + Math.random() * (speed * 0.6));
+      }
+    };
+    tick();
+  };
+
+  // Start animation when element first enters view
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setVisible(true);
+      setDisplayed(text);
+      hasAnimatedRef.current = true;
       return;
     }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          start();
+          hasAnimatedRef.current = true;
+          runTypewriter(text);
           observer.disconnect();
         }
       },
@@ -86,8 +110,22 @@ export default function TypeOnView({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [start]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  // When text changes after first animation, update instantly (language switch)
+  useEffect(() => {
+    if (hasAnimatedRef.current) {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      setDisplayed(text);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
+
+  // Cleanup on unmount
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
+
+  const caretOn = displayed.length > 0 && displayed.length < text.length;
   const content: ReactNode = visible ? displayed : " ";
 
   return createElement(
