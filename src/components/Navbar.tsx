@@ -144,7 +144,7 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile controls */}
-        <div className="md:hidden" style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div className="mobile-nav-controls" style={{ alignItems: "center", gap: 12 }}>
           <button
             onClick={toggleTheme}
             aria-label="Alternar tema"

@@ -223,6 +223,15 @@ html { scroll-behavior: smooth; }
 }
 
 /* ── Responsive ──────────────────────────────────────────────────── */
+.mobile-nav-controls {
+  display: flex;
+}
+@media (min-width: 768px) {
+  .mobile-nav-controls {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   .events-grid {
     grid-template-columns: repeat(2, 1fr) !important;
