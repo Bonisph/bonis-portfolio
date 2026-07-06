@@ -91,8 +91,11 @@ function MusicPlayerInner() {
   }, []);
 
   const handleEnded = useCallback(() => {
-    const next = randomUnplayed();
-    if (next === -1) { setPlaying(false); return; }
+    let next = randomUnplayed();
+    if (next === -1) {
+      playedRef.current.clear();
+      next = randomUnplayed();
+    }
     playedRef.current.add(next);
     setTrackIdx(next);
     loadTrack(next);
@@ -131,8 +134,11 @@ function MusicPlayerInner() {
   };
 
   const skipTrack = () => {
-    const next = randomUnplayed(trackIdx);
-    if (next === -1) return;
+    let next = randomUnplayed(trackIdx);
+    if (next === -1) {
+      playedRef.current.clear();
+      next = randomUnplayed(trackIdx);
+    }
     playedRef.current.add(next);
     setTrackIdx(next);
     loadTrack(next);
