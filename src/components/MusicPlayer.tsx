@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
 const TRACKS: { title: string; src: string }[] = [
-  { title: "On Sight Loop", src: "/music/track-01.mp3" },
-  // add more: { title: "...", src: "/music/track-02.mp3" },
+  { title: "𝄞", src: "/music/track-01.mp3" },
+  // add more: { title: "𝄞", src: "/music/track-02.mp3" },
 ];
 
 export default function MusicPlayer() {
@@ -18,19 +18,27 @@ export default function MusicPlayer() {
   useEffect(() => {
     const audio = new Audio(TRACKS[0].src);
     audio.loop = TRACKS.length === 1;
-    audio.muted = true;
+    audio.muted = false;
     audio.preload = "auto";
     audioRef.current = audio;
 
     audio.addEventListener("ended", handleEnded);
 
-    // Autoplay muted
-    audio.play().then(() => {
-      setPlaying(true);
-      setVisible(true);
-    }).catch(() => {
-      setVisible(true);
-    });
+    // Try unmuted first; if browser blocks, fall back to muted autoplay
+    audio.play()
+      .then(() => {
+        setMuted(false);
+        setPlaying(true);
+        setVisible(true);
+      })
+      .catch(() => {
+        audio.muted = true;
+        setMuted(true);
+        audio.play()
+          .then(() => { setPlaying(true); })
+          .catch(() => {});
+        setVisible(true);
+      });
 
     return () => {
       audio.removeEventListener("ended", handleEnded);
