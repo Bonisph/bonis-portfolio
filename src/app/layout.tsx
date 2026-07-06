@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
@@ -7,6 +7,12 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -36,8 +42,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${spaceGrotesk.variable} h-full scroll-smooth`}>
-      <body className="min-h-full flex flex-col bg-white text-neutral-900 antialiased">
+    <html lang="pt-BR" className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} h-full scroll-smooth`}>
+      <body className="min-h-full flex flex-col antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>

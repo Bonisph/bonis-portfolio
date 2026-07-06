@@ -4,87 +4,104 @@ import Image from "next/image";
 import { content } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
-
-const ArrowUpRight = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M7 7h10v10" />
-  </svg>
-);
-
-const platformColor: Record<string, string> = {
-  LinkedIn:  "bg-blue-50 text-blue-600",
-  Twitter:   "bg-neutral-100 text-neutral-700",
-  YouTube:   "bg-red-50 text-red-600",
-  Instagram: "bg-pink-50 text-pink-600",
-  Medium:    "bg-green-50 text-green-700",
-  Substack:  "bg-orange-50 text-orange-600",
-  Podcast:   "bg-red-50 text-red-600",
-  Mídia:     "bg-neutral-100 text-neutral-700",
-  Press:     "bg-neutral-100 text-neutral-700",
-};
+import TypeOnView from "@/components/TypeOnView";
 
 export default function Content() {
   const { t } = useLang();
 
   return (
-    <section id="conteudo" aria-labelledby="content-heading" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
-      <div className="max-w-6xl mx-auto">
+    <section id="conteudo" style={{ borderBottom: "2px solid var(--ink)", background: "var(--bg-alt)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "100px 32px" }}>
         <Reveal>
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-            {t({ pt: "Conteúdo & Mídia", en: "Content & Media", es: "Contenido & Medios" })}
-          </span>
+          <div style={{
+            fontSize: 12, fontWeight: 700, letterSpacing: "0.2em",
+            textTransform: "uppercase", marginBottom: 28, color: "var(--muted)",
+          }}>
+            (05) {t({ pt: "Conteúdo & Mídia", en: "Content & Media", es: "Contenido & Medios" })}
+          </div>
+        </Reveal>
 
-          <h2 id="content-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-            {t({ pt: "Conteúdos", en: "Content", es: "Contenido" })}
-          </h2>
+        <Reveal delay={80}>
+          <TypeOnView
+            as="h2"
+            id="content-heading"
+            className="display-heading"
+            text={t({ pt: "Conteúdos", en: "Content", es: "Contenido" })}
+            style={{
+              fontSize: "clamp(34px, 4.5vw, 64px)",
+              letterSpacing: "-0.02em",
+              margin: "0 0 48px",
+              color: "var(--ink)",
+            }}
+          />
         </Reveal>
 
         {content.length === 0 ? (
-          <p className="text-neutral-300 italic text-sm">
+          <p style={{ fontSize: 12, fontWeight: 500, textTransform: "uppercase", color: "var(--faint)", fontStyle: "italic" }}>
             {t({ pt: "Nenhum conteúdo adicionado ainda.", en: "No content added yet.", es: "Ningún contenido añadido aún." })}
           </p>
         ) : (
-          <div className="space-y-4">
+          <div style={{ display: "flex", flexDirection: "column", gap: 0, borderTop: "2px solid var(--ink)" }}>
             {content.map((item, i) => (
               <Reveal key={item.id} delay={i * 60}>
                 <a
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col md:flex-row md:items-center gap-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  style={{
+                    display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap",
+                    padding: "20px 0",
+                    borderBottom: "2px solid var(--ink)",
+                    textDecoration: "none",
+                    transition: "background .2s",
+                    background: "transparent",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "var(--bg)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
                 >
                   {item.thumbnail && (
-                    <div className="relative md:w-20 md:h-14 w-full h-36 flex-shrink-0 rounded-lg overflow-hidden bg-neutral-100">
+                    <div style={{
+                      position: "relative", width: 80, height: 56, flexShrink: 0,
+                      overflow: "hidden", border: "2px solid var(--ink)",
+                    }}>
                       <Image
                         fill
                         sizes="80px"
                         src={item.thumbnail}
                         alt={t(item.title)}
-                        className="object-cover"
+                        style={{ objectFit: "cover" }}
                       />
                     </div>
                   )}
 
-                  <div className="md:w-32 flex-shrink-0">
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${platformColor[item.platform] ?? "bg-neutral-100 text-neutral-600"}`}>
-                      {item.platform}
-                    </span>
+                  <div style={{ width: 110, flexShrink: 0 }}>
+                    <span className="event-chip">{item.platform}</span>
                   </div>
 
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-1 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors">
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <h3 style={{
+                      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      fontWeight: 700, fontSize: 15, textTransform: "uppercase",
+                      letterSpacing: "-0.01em", color: "var(--ink)", margin: "0 0 4px",
+                      overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+                    }}>
                       {t(item.title)}
                     </h3>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed line-clamp-2">
+                    <p style={{
+                      fontSize: 12, fontWeight: 500, lineHeight: 1.6,
+                      textTransform: "uppercase", color: "var(--muted)",
+                      margin: 0, overflow: "hidden", display: "-webkit-box",
+                      WebkitLineClamp: 2, WebkitBoxOrient: "vertical",
+                    } as React.CSSProperties}>
                       {t(item.excerpt)}
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-3 flex-shrink-0">
-                    <span className="text-xs text-neutral-400">{item.date}</span>
-                    <span aria-hidden="true" className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
-                      <ArrowUpRight />
+                  <div style={{ display: "flex", alignItems: "center", gap: 14, flexShrink: 0 }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", color: "var(--muted)" }}>
+                      {item.date}
                     </span>
+                    <span style={{ fontSize: 18, color: "var(--ink)", lineHeight: 1 }} aria-hidden="true">↗</span>
                   </div>
                 </a>
               </Reveal>

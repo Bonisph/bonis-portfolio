@@ -3,12 +3,213 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-sans: var(--font-space);
+  --font-sans: var(--font-mono);
 }
 
+/* ── Design tokens (light mode defaults) ─────────────────────────── */
+:root {
+  --bg:      #ffffff;
+  --ink:     #0a0a0a;
+  --bg-alt:  #f4f4f2;
+  --body:    #1a1a1a;
+  --muted:   #404040;
+  --faint:   #8a8a8a;
+  --nav-bg:  rgba(255,255,255,0.92);
+  --glass:   rgba(255,255,255,0.65);
+  --glass2:  rgba(255,255,255,0.85);
+  --scrim:   rgba(0,20,40,0.14);
+  --hero-b:  1;
+}
+
+/* ── Base ────────────────────────────────────────────────────────── */
+*, ::before, ::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-mono), 'IBM Plex Mono', monospace;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.35s, color 0.35s;
+}
+
+html { scroll-behavior: smooth; }
+
+::selection { background: var(--ink); color: var(--bg); }
+
+/* ── Utility classes (CSS-variable-aware hover effects) ──────────── */
+.stat-chip {
+  border: 2px solid var(--ink);
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  cursor: default;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--ink);
+  background: transparent;
+}
+.stat-chip:hover {
+  background: var(--ink);
+  color: var(--bg);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.event-chip {
+  border: 2px solid var(--ink);
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  cursor: default;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--ink);
+  background: transparent;
+}
+.event-chip:hover {
+  background: var(--ink);
+  color: var(--bg);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.social-icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  background: var(--glass);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+.social-icon:hover {
+  background: var(--ink);
+  color: var(--bg);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.cta-primary {
+  padding: 14px 26px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.cta-primary:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.cta-secondary {
+  padding: 14px 26px;
+  background: var(--glass2);
+  color: var(--ink);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.cta-secondary:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  background: var(--ink);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
+.nav-link {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+.nav-link:hover { text-decoration: underline; }
+
+.contato-pill {
+  color: var(--bg);
+  background: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 14px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+}
+.contato-pill:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.display-heading {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes heroUp {
@@ -16,28 +217,24 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes blob1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25%  { transform: translate(50px, -70px) scale(1.1); }
-  50%  { transform: translate(-30px, 50px) scale(0.9); }
-  75%  { transform: translate(60px, 20px) scale(1.05); }
-}
-@keyframes blob2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(-60px, 70px) scale(1.08); }
-  66%  { transform: translate(50px, -50px) scale(0.93); }
-}
-@keyframes blob3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  40%  { transform: translate(70px, 40px) scale(1.12); }
-  80%  { transform: translate(-30px, -60px) scale(0.95); }
+@keyframes blink {
+  0%, 50%  { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
-body {
-  font-family: var(--font-space);
-  -webkit-font-smoothing: antialiased;
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@media (max-width: 600px) {
+  .events-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .personal-grid {
+    grid-template-columns: 1fr !important;
+  }
 }

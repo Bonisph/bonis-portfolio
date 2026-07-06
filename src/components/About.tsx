@@ -1,56 +1,55 @@
 "use client";
 
-import { siteConfig, aboutStats } from "@/data/portfolio";
+import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
+import TypeOnView from "@/components/TypeOnView";
 
 export default function About() {
   const { t } = useLang();
   const bio = t(siteConfig.bio);
-  const filledStats = aboutStats.filter((s) => s.value);
 
   return (
-    <section id="sobre" aria-labelledby="about-heading" className="py-28 px-6 bg-neutral-50 dark:bg-neutral-950">
-      <div className="max-w-6xl mx-auto">
+    <section id="sobre" style={{ borderBottom: "2px solid var(--ink)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "100px 32px" }}>
         <Reveal>
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-            {t({ pt: "Sobre", en: "About", es: "Sobre mí" })}
-          </span>
+          <div style={{
+            fontSize: 12, fontWeight: 700, letterSpacing: "0.2em",
+            textTransform: "uppercase", marginBottom: 28, color: "var(--muted)",
+          }}>
+            (01) {t({ pt: "Sobre", en: "About", es: "Sobre mí" })}
+          </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-          <Reveal delay={80}>
-            <div>
-              <h2 id="about-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-6">
-                {t({ pt: "Quem é Pedro Bonis?", en: "Who is Pedro Bonis?", es: "¿Quién es Pedro Bonis?" })}
-              </h2>
-              {bio ? (
-                <div className="space-y-4 text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                  {bio.split("\n").filter(Boolean).map((paragraph, i) => (
-                    <p key={i}>{paragraph.trim()}</p>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-neutral-300 italic text-sm">
-                  {t({ pt: "Bio ainda não adicionada.", en: "Bio not added yet.", es: "Bio aún no añadida." })}
-                </p>
-              )}
-            </div>
-          </Reveal>
+        <Reveal delay={80}>
+          <TypeOnView
+            as="h2"
+            id="about-heading"
+            className="display-heading"
+            text={t({ pt: "Quem é Pedro Bonis?", en: "Who is Pedro Bonis?", es: "¿Quién es Pedro Bonis?" })}
+            style={{
+              fontSize: "clamp(34px, 4.5vw, 64px)",
+              lineHeight: 0.98,
+              letterSpacing: "-0.02em",
+              margin: "0 0 24px",
+              color: "var(--ink)",
+            }}
+          />
+        </Reveal>
 
-          {filledStats.length > 0 && (
-            <Reveal delay={160}>
-              <div className="grid grid-cols-2 gap-4">
-                {filledStats.map((stat) => (
-                  <div key={stat.value} className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl p-6">
-                    <p className="text-2xl font-bold text-neutral-900 dark:text-white mb-1">{stat.value}</p>
-                    <p className="text-sm text-neutral-400">{t(stat.label)}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
+        <Reveal delay={160}>
+          {bio ? (
+            <div style={{ fontSize: 13, fontWeight: 500, textTransform: "uppercase", lineHeight: 1.7, color: "var(--body)", maxWidth: 820 }}>
+              {bio.split("\n").filter(Boolean).map((p, i) => (
+                <p key={i} style={{ margin: "0 0 16px" }}>{p.trim()}</p>
+              ))}
+            </div>
+          ) : (
+            <p style={{ fontSize: 12, fontWeight: 500, textTransform: "uppercase", color: "var(--faint)", margin: 0 }}>
+              [ seção vazia — aguardando sua bio ]
+            </p>
           )}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

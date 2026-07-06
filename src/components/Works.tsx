@@ -2,207 +2,176 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { experiences, projects } from "@/data/portfolio";
+import { experiences } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import type { Lang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
-import CountUp from "@/components/CountUp";
-
-const ArrowUpRight = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M7 7h10v10" />
-  </svg>
-);
-
-function CompanyLogo({ logo, name, logoBg }: { logo: string; name: string; logoBg?: "dark" | "light" }) {
-  const [failed, setFailed] = useState(false);
-  const isDark = logoBg === "dark";
-  const bg = isDark ? "bg-neutral-900 dark:bg-neutral-700" : "bg-neutral-100 dark:bg-neutral-800";
-
-  if (logo && !failed) {
-    return (
-      <Image
-        src={logo}
-        alt={name}
-        width={48}
-        height={48}
-        onError={() => setFailed(true)}
-        className={`w-12 h-12 rounded-xl object-cover flex-shrink-0 ${bg}`}
-      />
-    );
-  }
-  return (
-    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${bg}`}>
-      <span className={`text-lg font-bold ${isDark ? "text-white" : "text-neutral-600 dark:text-neutral-300"}`}>{name[0]}</span>
-    </div>
-  );
-}
+import TypeOnView from "@/components/TypeOnView";
 
 function periodLabel(start: string, end: string | null, lang: Lang) {
   const present = lang === "pt" ? "Presente" : lang === "es" ? "Presente" : "Present";
   return `${start} – ${end ?? present}`;
 }
 
+function CompanyLogo({ logo, name }: { logo: string; name: string }) {
+  const [failed, setFailed] = useState(false);
+  if (logo && !failed) {
+    return (
+      <Image
+        src={logo}
+        alt={name}
+        width={56}
+        height={56}
+        onError={() => setFailed(true)}
+        style={{ width: 56, height: 56, border: "2px solid var(--ink)", objectFit: "cover", flexShrink: 0, display: "block" }}
+      />
+    );
+  }
+  return (
+    <div style={{
+      width: 56, height: 56, border: "2px solid var(--ink)", flexShrink: 0,
+      display: "flex", alignItems: "center", justifyContent: "center",
+      background: "var(--bg-alt)",
+    }}>
+      <span style={{ fontSize: 18, fontWeight: 800, fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>{name[0]}</span>
+    </div>
+  );
+}
+
 export default function Works() {
   const { lang, t } = useLang();
 
-  return (
-    <section id="works" aria-labelledby="works-heading" className="py-28 px-6 bg-white dark:bg-neutral-900">
-      <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-8">
-            {t({ pt: "Experiência", en: "Experience", es: "Experiencia" })}
-          </span>
+  if (experiences.length === 0) return null;
 
-          <h2 id="works-heading" className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white leading-snug mb-14">
-            {t({ pt: "Onde já trabalhei", en: "Where I've worked", es: "Dónde he trabajado" })}
-          </h2>
+  return (
+    <section id="works" style={{ borderBottom: "2px solid var(--ink)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "100px 32px" }}>
+        <Reveal>
+          <div style={{
+            fontSize: 12, fontWeight: 700, letterSpacing: "0.2em",
+            textTransform: "uppercase", marginBottom: 28, color: "var(--muted)",
+          }}>
+            (02) {t({ pt: "Experiência", en: "Experience", es: "Experiencia" })}
+          </div>
         </Reveal>
 
-        {/* ── EXPERIÊNCIAS ─────────────────────────────────────── */}
-        {experiences.length > 0 && (
-          <div className="space-y-3 mb-16">
-            {experiences.map((exp, expIdx) => (
-              <Reveal key={exp.id} delay={expIdx * 80}>
-                <div className="border border-neutral-200 dark:border-neutral-700 rounded-2xl p-6 hover:border-neutral-300 dark:hover:border-neutral-600 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
-                  {exp.roles.length === 1 ? (
-                    <div className="flex gap-4">
-                      <CompanyLogo logo={exp.logo} name={exp.company} logoBg={exp.logoBg} />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-2 flex-wrap">
-                          <div>
-                            <h3 className="font-semibold text-neutral-900 dark:text-white leading-tight">
-                              {t(exp.roles[0].title)}
-                            </h3>
-                            <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-                              {exp.company}
-                            </p>
-                            <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">
-                              {periodLabel(exp.roles[0].start, exp.roles[0].end, lang)}
-                            </p>
-                          </div>
-                          {exp.link && (
-                            <a
-                              href={exp.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label={`Ver ${exp.company}`}
-                              className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors flex-shrink-0"
-                            >
-                              <ArrowUpRight />
-                            </a>
-                          )}
-                        </div>
-                        {t(exp.roles[0].description) && (
-                          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-3">
-                            {t(exp.roles[0].description)}
-                          </p>
-                        )}
-                        {exp.roles[0].stats && exp.roles[0].stats.length > 0 && (
-                          <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/60">
-                            {exp.roles[0].stats.map((stat, si) => (
-                              <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20 hover:bg-white dark:hover:bg-neutral-700">
-                                <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums"><CountUp value={stat.value} /></p>
-                                <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 leading-none whitespace-nowrap">{t(stat.label)}</p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="flex items-center gap-4 mb-5">
-                        <CompanyLogo logo={exp.logo} name={exp.company} logoBg={exp.logoBg} />
-                        <div className="flex items-center justify-between flex-1 gap-2 flex-wrap">
-                          <h3 className="font-semibold text-neutral-900 dark:text-white">{exp.company}</h3>
-                          {exp.link && (
-                            <a
-                              href={exp.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label={`Ver ${exp.company}`}
-                              className="text-neutral-300 dark:text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
-                            >
-                              <ArrowUpRight />
-                            </a>
-                          )}
-                        </div>
-                      </div>
+        <Reveal delay={80}>
+          <TypeOnView
+            as="h2"
+            id="works-heading"
+            className="display-heading"
+            text={t({ pt: "Onde já trabalhei", en: "Where I've worked", es: "Dónde he trabajado" })}
+            style={{
+              fontSize: "clamp(34px, 4.5vw, 64px)",
+              letterSpacing: "-0.02em",
+              margin: "0 0 48px",
+              color: "var(--ink)",
+            }}
+          />
+        </Reveal>
 
-                      <div className="ml-16 border-l-2 border-neutral-100 dark:border-neutral-700 pl-5 space-y-6">
-                        {exp.roles.map((role, i) => (
-                          <div key={i}>
-                            <p className="font-medium text-neutral-800 dark:text-neutral-100 leading-tight">
-                              {t(role.title)}
-                            </p>
-                            <p className="text-sm text-neutral-400 dark:text-neutral-500 mt-0.5">
-                              {periodLabel(role.start, role.end, lang)}
-                            </p>
-                            {t(role.description) && (
-                              <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-2">
-                                {t(role.description)}
-                              </p>
-                            )}
-                            {role.stats && role.stats.length > 0 && (
-                              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700/60">
-                                {role.stats.map((stat, si) => (
-                                  <div key={si} className="bg-neutral-50 dark:bg-neutral-800 rounded-lg px-3 py-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20 hover:bg-white dark:hover:bg-neutral-700">
-                                    <p className="text-sm font-bold text-neutral-900 dark:text-white leading-none tabular-nums"><CountUp value={stat.value} /></p>
-                                    <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 leading-none whitespace-nowrap">{t(stat.label)}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
+        <div style={{ display: "flex", flexDirection: "column", borderTop: "2px solid var(--ink)" }}>
+          {experiences.map((exp, expIdx) => (
+            <Reveal key={exp.id} delay={expIdx * 80}>
+              {exp.roles.length === 1 ? (
+                /* Single role */
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: "56px 1fr auto",
+                  gap: 20,
+                  alignItems: "start",
+                  padding: "28px 0",
+                  borderBottom: "2px solid var(--ink)",
+                }}>
+                  <CompanyLogo logo={exp.logo} name={exp.company} />
+
+                  <div>
+                    <h3 style={{
+                      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      fontWeight: 800, textTransform: "uppercase",
+                      fontSize: 22, margin: 0, letterSpacing: "-0.01em", color: "var(--ink)",
+                    }}>
+                      {t(exp.roles[0].title)}
+                    </h3>
+                    <div style={{ fontSize: 13, fontWeight: 600, textTransform: "uppercase", marginTop: 4, color: "var(--body)" }}>
+                      {exp.company}
+                    </div>
+                    {t(exp.roles[0].description) && (
+                      <p style={{
+                        fontSize: 13, fontWeight: 500, lineHeight: 1.7, textTransform: "uppercase",
+                        color: "var(--body)", margin: "14px 0 0", maxWidth: 720,
+                      }}>
+                        {t(exp.roles[0].description)}
+                      </p>
+                    )}
+                    {exp.roles[0].stats && exp.roles[0].stats.length > 0 && (
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 16 }}>
+                        {exp.roles[0].stats.map((stat, si) => (
+                          <span key={si} className="stat-chip">{stat.value} {t(stat.label)}</span>
                         ))}
                       </div>
-                    </div>
-                  )}
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        )}
+                    )}
+                  </div>
 
-        {/* ── PROJETOS (se houver) ─────────────────────────────── */}
-        {projects.length > 0 && (
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-6">
-              {t({ pt: "Projetos", en: "Projects", es: "Proyectos" })}
-            </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {projects.map((proj, i) => (
-                <Reveal key={proj.id} delay={i * 80}>
-                  <a href={proj.link || "#"} target="_blank" rel="noopener noreferrer"
-                    className="group block border border-neutral-200 rounded-2xl p-6 hover:border-neutral-400 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full">
-                    <div className="flex justify-between items-start mb-4">
-                      <span className="text-xs text-neutral-400">{proj.period}</span>
-                      {proj.link && (
-                        <span aria-hidden="true" className="text-neutral-300 group-hover:text-neutral-700 transition-colors">
-                          <ArrowUpRight />
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="font-semibold text-neutral-900 mb-2">{t(proj.title)}</h3>
-                    <p className="text-sm text-neutral-500 leading-relaxed mb-4">{t(proj.description)}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {proj.tags.map((tag) => (
-                        <span key={tag} className="text-xs px-2.5 py-1 bg-neutral-100 text-neutral-500 rounded-full">{tag}</span>
+                  <div style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", color: "var(--muted)", whiteSpace: "nowrap" }}>
+                    {periodLabel(exp.roles[0].start, exp.roles[0].end, lang)}
+                  </div>
+                </div>
+              ) : (
+                /* Multi-role */
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: "56px 1fr",
+                  gap: 20,
+                  alignItems: "start",
+                  padding: "28px 0",
+                  borderBottom: "2px solid var(--ink)",
+                }}>
+                  <CompanyLogo logo={exp.logo} name={exp.company} />
+
+                  <div>
+                    <h3 style={{
+                      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      fontWeight: 800, textTransform: "uppercase",
+                      fontSize: 22, margin: "0 0 20px", letterSpacing: "-0.01em", color: "var(--ink)",
+                    }}>
+                      {exp.company}
+                    </h3>
+                    <div style={{ borderLeft: "2px solid var(--ink)", paddingLeft: 24, display: "flex", flexDirection: "column", gap: 28 }}>
+                      {exp.roles.map((role, i) => (
+                        <div key={i}>
+                          <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                            <div style={{ fontSize: 14, fontWeight: 700, textTransform: "uppercase", color: "var(--ink)" }}>
+                              {t(role.title)}
+                            </div>
+                            <div style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", color: "var(--muted)" }}>
+                              {periodLabel(role.start, role.end, lang)}
+                            </div>
+                          </div>
+                          {t(role.description) && (
+                            <p style={{
+                              fontSize: 13, fontWeight: 500, lineHeight: 1.7, textTransform: "uppercase",
+                              color: "var(--body)", margin: "10px 0 0", maxWidth: 720,
+                            }}>
+                              {t(role.description)}
+                            </p>
+                          )}
+                          {role.stats && role.stats.length > 0 && (
+                            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 }}>
+                              {role.stats.map((stat, si) => (
+                                <span key={si} className="stat-chip">{stat.value} {t(stat.label)}</span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       ))}
                     </div>
-                  </a>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {experiences.length === 0 && projects.length === 0 && (
-          <p className="text-neutral-300 italic text-sm">
-            {t({ pt: "Nenhuma experiência adicionada ainda.", en: "No experience added yet.", es: "Ninguna experiencia añadida aún." })}
-          </p>
-        )}
+                  </div>
+                </div>
+              )}
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
