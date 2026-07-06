@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# music files (hosted on Vercel Blob)
+/public/music/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

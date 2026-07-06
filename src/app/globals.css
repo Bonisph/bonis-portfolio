@@ -201,6 +201,18 @@ html { scroll-behavior: smooth; }
   letter-spacing: -0.02em;
 }
 
+/* ── Music ticker ────────────────────────────────────────────────── */
+.music-ticker {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: music-ticker 14s linear infinite;
+}
+
+@keyframes music-ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* ── Keyframes ───────────────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; }
