@@ -287,7 +287,7 @@ export const events: {
       { type: "image", url: "https://i.ibb.co/pvNgBmpx/BINANCE-9-Y-GENERAL-29.jpg" },
     ],
     types: [
-      { pt: "Community Outreach", en: "Community Outreach", es: "Community Outreach" },
+      { pt: "Mobilização de Comunidade", en: "Community Outreach", es: "Movilización de Comunidad" },
     ],
   },
   {
