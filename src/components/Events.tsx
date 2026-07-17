@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { events } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
@@ -19,6 +19,15 @@ type MediaItem = { type: "image" | "video"; url: string };
 
 function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eventId: number; eventTitle: string }) {
   const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    media.forEach((item) => {
+      if (item.type === "image") {
+        const img = new window.Image();
+        img.src = item.url;
+      }
+    });
+  }, [media]);
 
   if (!media || media.length === 0) {
     return (
