@@ -270,6 +270,27 @@ export const events: {
     ],
   },
   {
+    id: 7,
+    title: { pt: "Aniversário de 9 Anos da Binance", en: "Binance 9th Anniversary", es: "9.º Aniversario de Binance" },
+    description: {
+      pt: "Responsável por 30% dos convites do evento de 9 anos da Binance, que reuniu cerca de 1.000 pessoas. Mobilizei minha rede de comunidade e KOLs para garantir a presença de um público qualificado e representativo do ecossistema.",
+      en: "Responsible for 30% of the invites at Binance's 9th anniversary event, which gathered around 1,000 attendees. Mobilized my community and KOL network to ensure a qualified and representative audience from the ecosystem.",
+      es: "Responsable del 30% de las invitaciones en el evento del 9.º aniversario de Binance, que reunió a cerca de 1.000 personas. Movilicé mi red de comunidad y KOLs para garantizar una audiencia calificada y representativa del ecosistema.",
+    },
+    date: "Jul 2026",
+    location: "São Paulo, SP",
+    media: [
+      { type: "image", url: "https://i.ibb.co/4gdGD8z0/HNYPTui-XMAAt-Q-7.jpg" },
+      { type: "image", url: "https://i.ibb.co/4gNmQ49c/BINANCE-9-Y-GENERAL-18.jpg" },
+      { type: "image", url: "https://i.ibb.co/sJdrdSQt/BINANCE-9-Y-GENERAL-24.jpg" },
+      { type: "image", url: "https://i.ibb.co/TQ0cK8F/BINANCE-9-Y-GENERAL-27.jpg" },
+      { type: "image", url: "https://i.ibb.co/pvNgBmpx/BINANCE-9-Y-GENERAL-29.jpg" },
+    ],
+    types: [
+      { pt: "Community Outreach", en: "Community Outreach", es: "Community Outreach" },
+    ],
+  },
+  {
     id: 6,
     title: { pt: "Modular Carnival 2025", en: "Modular Carnival 2025", es: "Modular Carnival 2025" },
     description: {
