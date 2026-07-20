@@ -61,6 +61,8 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
                 sizes="(max-width: 768px) 100vw, 400px"
                 src={item.url}
                 alt=""
+                loading="eager"
+                unoptimized
                 style={{ objectFit: "cover" }}
               />
             </div>

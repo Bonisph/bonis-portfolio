@@ -184,8 +184,8 @@ export const events: {
     date: "Nov 2025",
     location: "São Paulo, SP",
     media: [
-      { type: "image", url: "https://i.ibb.co/C3QyxbwF/ELZ-0922.jpg" },
-      { type: "image", url: "https://i.ibb.co/Qvcjq10z/ELZ-0647.jpg" },
+      { type: "image", url: "https://i.ibb.co/CK8Tkpt6/ELZ-0922.jpg" },
+      { type: "image", url: "https://i.ibb.co/yc5jQzw0/ELZ-0647.jpg" },
       { type: "video", url: "https://www.youtube.com/watch?v=vI6-GmvSAIQ" },
     ],
     types: [
@@ -223,9 +223,9 @@ export const events: {
     location: "São Paulo, SP",
     media: [
       { type: "image", url: "https://i.ibb.co/pj5Q8sw4/ELZ-2002.jpg" },
-      { type: "image", url: "https://i.ibb.co/xtGPPngF/ELZ-2168.jpg" },
-      { type: "image", url: "https://i.ibb.co/fdDvYm6d/ELZ-2086.jpg" },
-      { type: "image", url: "https://i.ibb.co/x8MLYxsV/ELZ-2038.jpg" },
+      { type: "image", url: "https://i.ibb.co/WWXMKK6W/ELZ-2168-1.jpg" },
+      { type: "image", url: "https://i.ibb.co/FkN7WNpY/ELZ-2086.jpg" },
+      { type: "image", url: "https://i.ibb.co/Ff8PZXS/ELZ-2038.jpg" },
       { type: "video", url: "https://youtu.be/s6mJZ_RHUes" },
     ],
     types: [
@@ -302,7 +302,6 @@ export const events: {
     location: "Belo Horizonte, MG",
     media: [
       { type: "image", url: "https://i.ibb.co/8gSscY2L/20250227-170204.jpg" },
-      { type: "image", url: "https://i.ibb.co/VGHSC56/G8-ZSSq-JXIAAZL2h.jpg" },
       { type: "video", url: "https://youtu.be/0SHSsuaroCA" },
     ],
     types: [
