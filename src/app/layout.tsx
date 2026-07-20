@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
 
 const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-mono",
@@ -42,7 +36,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} h-full scroll-smooth`}>
+    <html lang="pt-BR" className={`${ibmPlexMono.variable} h-full scroll-smooth`}>
+      <head>
+        <link rel="preload" as="image" href="/hero-bliss-wallpaper.png" />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         <Providers>{children}</Providers>
       </body>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { events } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
@@ -19,15 +19,6 @@ type MediaItem = { type: "image" | "video"; url: string };
 
 function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eventId: number; eventTitle: string }) {
   const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    media.forEach((item) => {
-      if (item.type === "image") {
-        const img = new window.Image();
-        img.src = item.url;
-      }
-    });
-  }, [media]);
 
   if (!media || media.length === 0) {
     return (
@@ -49,26 +40,44 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
 
   return (
     <div style={{ position: "absolute", inset: 0 }}>
-      {ytId ? (
+      {/* All images rendered in the DOM — CSS opacity controls visibility.
+          This lets Next.js Image load every slide through /_next/image on mount,
+          so navigation is instant after the first render. */}
+      {media.map((item, i) => {
+        if (item.type !== "image") return null;
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute", inset: 0,
+              opacity: i === idx && !ytId ? 1 : 0,
+              transition: "opacity 0.2s",
+              zIndex: 1,
+            }}
+          >
+            <div style={{ position: "relative", width: "100%", height: "100%" }}>
+              <Image
+                fill
+                sizes="(max-width: 768px) 100vw, 400px"
+                src={item.url}
+                alt=""
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          </div>
+        );
+      })}
+
+      {/* YouTube video rendered only when it's the active slide */}
+      {ytId && (
         <iframe
           key={`${eventId}-yt-${ytId}`}
           src={`https://www.youtube.com/embed/${ytId}?rel=0`}
           title={`Aftermovie: ${eventTitle}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, zIndex: 2 }}
         />
-      ) : (
-        <div style={{ position: "relative", width: "100%", height: "100%" }}>
-          <Image
-            key={`${eventId}-img-${idx}`}
-            fill
-            sizes="(max-width: 768px) 100vw, 400px"
-            src={current.url}
-            alt=""
-            style={{ objectFit: "cover" }}
-          />
-        </div>
       )}
 
       {total > 1 && (
@@ -82,7 +91,7 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
               color: "#fefefe", fontSize: 30, fontWeight: 700, cursor: "pointer",
               display: "flex", alignItems: "center", justifyContent: "center",
               lineHeight: 1, textShadow: "0 1px 6px rgba(0,0,0,0.7)",
-              transition: "all .2s", zIndex: 2,
+              transition: "all .2s", zIndex: 3,
             }}
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-50%) translateX(-3px) scale(1.15)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(-50%)"; }}
@@ -98,7 +107,7 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
               color: "#fefefe", fontSize: 30, fontWeight: 700, cursor: "pointer",
               display: "flex", alignItems: "center", justifyContent: "center",
               lineHeight: 1, textShadow: "0 1px 6px rgba(0,0,0,0.7)",
-              transition: "all .2s", zIndex: 2,
+              transition: "all .2s", zIndex: 3,
             }}
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-50%) translateX(3px) scale(1.15)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(-50%)"; }}
@@ -106,7 +115,7 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
             ›
           </button>
           <span style={{
-            position: "absolute", right: 8, bottom: 8, zIndex: 2,
+            position: "absolute", right: 8, bottom: 8, zIndex: 3,
             background: "var(--nav-bg)", border: "2px solid var(--ink)",
             fontSize: 10, fontWeight: 700, padding: "2px 8px",
             color: "var(--ink)",
