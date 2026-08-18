@@ -19,6 +19,15 @@
   --glass2:  rgba(255,255,255,0.85);
   --scrim:   rgba(0,20,40,0.14);
   --hero-b:  1;
+
+  /* Accent. Reserved for the primary CTA and event-card hover only —
+     spending it anywhere else costs it its focal weight.
+     Light amber is darkened to clear 4.5:1 against white. */
+  --accent:     #b45309;
+  --accent-ink: #ffffff;
+
+  /* Display stack: headings, wordmark, CTAs. Body stays IBM Plex Mono. */
+  --display: var(--font-display), 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 /* ── Base ────────────────────────────────────────────────────────── */
@@ -96,17 +105,18 @@ html { scroll-behavior: smooth; }
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* The one accented control on the page — this is the single primary CTA. */
 .cta-primary {
   padding: 14px 26px;
-  background: var(--ink);
-  color: var(--bg);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--display);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
-  border: 2px solid var(--ink);
+  border: 2px solid var(--accent);
   transition: all 0.2s;
   display: inline-flex;
   align-items: center;
@@ -114,15 +124,15 @@ html { scroll-behavior: smooth; }
   cursor: pointer;
 }
 .cta-primary:hover {
-  background: var(--bg);
-  color: var(--ink);
+  background: transparent;
+  color: var(--accent);
 }
 
 .cta-secondary {
   padding: 14px 26px;
   background: var(--glass2);
   color: var(--ink);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: var(--display);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.05em;
@@ -195,11 +205,70 @@ html { scroll-behavior: smooth; }
 }
 
 .display-heading {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 800;
+  font-family: var(--display);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.02em;
 }
+
+/* ── Event card ──────────────────────────────────────────────────── */
+.event-card {
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s,
+              box-shadow 0.25s;
+}
+.event-card:hover {
+  transform: translate(-3px, -3px);
+  border-color: var(--accent);
+  box-shadow: 6px 6px 0 var(--accent);
+}
+
+.event-card__media {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+
+.event-card__body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+/* Featured card — the first event runs full-bleed across two columns and
+   turns horizontal, which gives the grid an entry point and breaks the flat
+   3-up rhythm. Below 600px the grid is single-column, so it reverts to the
+   ordinary stacked card. */
+@media (min-width: 601px) {
+  .event-cell--featured {
+    grid-column: span 2;
+  }
+  .event-card--featured {
+    flex-direction: row;
+  }
+  .event-card--featured .event-card__media {
+    width: 46%;
+    height: auto;
+    min-height: 260px;
+    border-bottom: 0;
+    border-right: 2px solid var(--ink);
+  }
+  .event-card--featured .event-card__body {
+    padding: 26px;
+    gap: 12px;
+    justify-content: center;
+  }
+}
+
 
 /* ── Music ticker ────────────────────────────────────────────────── */
 .music-ticker {
@@ -232,6 +301,41 @@ html { scroll-behavior: smooth; }
 @keyframes blink {
   0%, 50%  { opacity: 1; }
   51%, 100% { opacity: 0; }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────── */
+/* Reveal, TypeOnView and the Hero parallax opt out in JS. This covers
+   everything driven purely by CSS. Durations collapse instead of being
+   removed so animations still settle on their final keyframe — fadeUp
+   lands at opacity 1 rather than leaving content invisible. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* The ticker has no meaningful end state — it just loops. Stop it at the
+     start so the track stays readable instead of snapping to its midpoint. */
+  .music-ticker {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Hover feedback stays, but as colour only — no lift, no shadow. */
+  .stat-chip:hover,
+  .event-chip:hover,
+  .social-icon:hover,
+  .theme-toggle:hover,
+  .event-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
 }
 
 /* ── Responsive ──────────────────────────────────────────────────── */

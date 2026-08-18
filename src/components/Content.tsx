@@ -80,7 +80,7 @@ export default function Content() {
 
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <h3 style={{
-                      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      fontFamily: "var(--display)",
                       fontWeight: 700, fontSize: 15, textTransform: "uppercase",
                       letterSpacing: "-0.01em", color: "var(--ink)", margin: "0 0 4px",
                       overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",

@@ -33,7 +33,7 @@ function CompanyLogo({ logo, name }: { logo: string; name: string }) {
       display: "flex", alignItems: "center", justifyContent: "center",
       background: "var(--bg-alt)",
     }}>
-      <span style={{ fontSize: 18, fontWeight: 800, fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>{name[0]}</span>
+      <span style={{ fontSize: 18, fontWeight: 700, fontFamily: "var(--display)" }}>{name[0]}</span>
     </div>
   );
 }
@@ -87,8 +87,8 @@ export default function Works() {
 
                   <div>
                     <h3 style={{
-                      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-                      fontWeight: 800, textTransform: "uppercase",
+                      fontFamily: "var(--display)",
+                      fontWeight: 700, textTransform: "uppercase",
                       fontSize: 22, margin: 0, letterSpacing: "-0.01em", color: "var(--ink)",
                     }}>
                       {t(exp.roles[0].title)}
@@ -131,8 +131,8 @@ export default function Works() {
 
                   <div>
                     <h3 style={{
-                      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-                      fontWeight: 800, textTransform: "uppercase",
+                      fontFamily: "var(--display)",
+                      fontWeight: 700, textTransform: "uppercase",
                       fontSize: 22, margin: "0 0 20px", letterSpacing: "-0.01em", color: "var(--ink)",
                     }}>
                       {exp.company}

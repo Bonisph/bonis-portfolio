@@ -57,8 +57,8 @@ export default function Navbar() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           style={{
-            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-            fontWeight: 800,
+            fontFamily: "var(--display)",
+            fontWeight: 700,
             fontSize: 17,
             letterSpacing: "-0.02em",
             color: "var(--ink)",

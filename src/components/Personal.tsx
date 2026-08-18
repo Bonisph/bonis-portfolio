@@ -127,8 +127,8 @@ function PersonalStatCard({ value, label }: { value: string; label: string }) {
       }}
     >
       <div style={{
-        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-        fontWeight: 800, fontSize: 30, color: "var(--ink)",
+        fontFamily: "var(--display)",
+        fontWeight: 700, fontSize: 30, color: "var(--ink)",
       }}>
         {value}
       </div>

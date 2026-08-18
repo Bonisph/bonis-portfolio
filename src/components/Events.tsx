@@ -15,10 +15,30 @@ function getYouTubeId(url: string): string | null {
   return YT_ID_RE.test(match[1]) ? match[1] : null;
 }
 
-type MediaItem = { type: "image" | "video"; url: string };
+type Translated = { pt: string; en: string; es?: string };
+type MediaItem = { type: "image" | "video"; url: string; alt?: Translated };
+
+/* Arrows stay visually small, but the hit area is padded out to the 44px
+   minimum so they are not two pinpoint targets on a phone. */
+const CAROUSEL_BTN_SIZE = 44;
+
+/* Visually hidden, still read aloud. Used for the live slide announcement,
+   which has no visual counterpart — the "2/3" badge is its visual form. */
+const SR_ONLY: React.CSSProperties = {
+  position: "absolute",
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: -1,
+  overflow: "hidden",
+  clip: "rect(0, 0, 0, 0)",
+  whiteSpace: "nowrap",
+  border: 0,
+};
 
 function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eventId: number; eventTitle: string }) {
   const [idx, setIdx] = useState(0);
+  const { t } = useLang();
 
   if (!media || media.length === 0) {
     return (
@@ -38,31 +58,57 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
   const prev = (e: React.MouseEvent) => { e.stopPropagation(); setIdx((i) => (i - 1 + total) % total); };
   const next = (e: React.MouseEvent) => { e.stopPropagation(); setIdx((i) => (i + 1) % total); };
 
+  /* Falls back to position when the item carries no authored description.
+     It states only what is verifiable — it deliberately does not pretend to
+     describe the photo. */
+  const positionLabel = (i: number) =>
+    t({
+      pt: `${eventTitle} — imagem ${i + 1} de ${total}`,
+      en: `${eventTitle} — image ${i + 1} of ${total}`,
+      es: `${eventTitle} — imagen ${i + 1} de ${total}`,
+    });
+
+  const altFor = (item: MediaItem, i: number) =>
+    item.alt ? t(item.alt) : positionLabel(i);
+
   return (
-    <div style={{ position: "absolute", inset: 0 }}>
+    <div
+      style={{ position: "absolute", inset: 0 }}
+      role={total > 1 ? "group" : undefined}
+      aria-label={total > 1 ? eventTitle : undefined}
+    >
       {/* All images rendered in the DOM — CSS opacity controls visibility.
           This lets Next.js Image load every slide through /_next/image on mount,
           so navigation is instant after the first render. */}
       {media.map((item, i) => {
         if (item.type !== "image") return null;
+        const isActive = i === idx && !ytId;
         return (
           <div
             key={i}
+            /* Every slide stays mounted so navigation is instant, but only the
+               visible one is exposed — otherwise a screen reader reads all
+               slides of every card back to back. Safe here: no focusable
+               content lives inside a slide. */
+            aria-hidden={!isActive}
             style={{
               position: "absolute", inset: 0,
-              opacity: i === idx && !ytId ? 1 : 0,
+              opacity: isActive ? 1 : 0,
               transition: "opacity 0.2s",
               zIndex: 1,
             }}
           >
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
+              {/* Images are local now, so Next serves WebP/AVIF sized to the
+                  card instead of the full-resolution original. Lazy throughout:
+                  this section sits well below the fold, so nothing here is the
+                  LCP and none of it needs to load before the card is reached. */}
               <Image
                 fill
-                sizes="(max-width: 768px) 100vw, 400px"
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px"
                 src={item.url}
-                alt=""
-                loading="eager"
-                unoptimized
+                alt={altFor(item, i)}
+                loading="lazy"
                 style={{ objectFit: "cover" }}
               />
             </div>
@@ -86,10 +132,10 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
         <>
           <button
             onClick={prev}
-            aria-label="Anterior"
+            aria-label={t({ pt: "Imagem anterior", en: "Previous image", es: "Imagen anterior" })}
             style={{
-              position: "absolute", left: 6, top: "50%", transform: "translateY(-50%)",
-              width: 34, height: 40, border: 0, background: "transparent",
+              position: "absolute", left: 2, top: "50%", transform: "translateY(-50%)",
+              width: CAROUSEL_BTN_SIZE, height: CAROUSEL_BTN_SIZE, border: 0, background: "transparent",
               color: "#fefefe", fontSize: 30, fontWeight: 700, cursor: "pointer",
               display: "flex", alignItems: "center", justifyContent: "center",
               lineHeight: 1, textShadow: "0 1px 6px rgba(0,0,0,0.7)",
@@ -102,10 +148,10 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
           </button>
           <button
             onClick={next}
-            aria-label="Próximo"
+            aria-label={t({ pt: "Próxima imagem", en: "Next image", es: "Imagen siguiente" })}
             style={{
-              position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)",
-              width: 34, height: 40, border: 0, background: "transparent",
+              position: "absolute", right: 2, top: "50%", transform: "translateY(-50%)",
+              width: CAROUSEL_BTN_SIZE, height: CAROUSEL_BTN_SIZE, border: 0, background: "transparent",
               color: "#fefefe", fontSize: 30, fontWeight: 700, cursor: "pointer",
               display: "flex", alignItems: "center", justifyContent: "center",
               lineHeight: 1, textShadow: "0 1px 6px rgba(0,0,0,0.7)",
@@ -116,17 +162,73 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
           >
             ›
           </button>
-          <span style={{
-            position: "absolute", right: 8, bottom: 8, zIndex: 3,
-            background: "var(--nav-bg)", border: "2px solid var(--ink)",
-            fontSize: 10, fontWeight: 700, padding: "2px 8px",
-            color: "var(--ink)",
-          }}>
+          {/* "2/3" reads as noise out of context, so the badge is visual only
+              and the live region carries the full phrase instead. */}
+          <span
+            aria-hidden="true"
+            style={{
+              position: "absolute", right: 8, bottom: 8, zIndex: 3,
+              background: "var(--nav-bg)", border: "2px solid var(--ink)",
+              fontSize: 10, fontWeight: 700, padding: "2px 8px",
+              color: "var(--ink)",
+            }}
+          >
             {idx + 1}/{total}
+          </span>
+
+          {/* Announces the change without moving focus, so the arrows produce a
+              perceivable result instead of silently swapping hidden images. */}
+          <span aria-live="polite" aria-atomic="true" style={SR_ONLY}>
+            {altFor(media[idx], idx)}
           </span>
         </>
       )}
     </div>
+  );
+}
+
+type EventEntry = (typeof events)[number];
+
+function EventCard({ event, featured }: { event: EventEntry; featured: boolean }) {
+  const { t } = useLang();
+
+  return (
+    <article className={`event-card${featured ? " event-card--featured" : ""}`}>
+      <div className="event-card__media">
+        <MediaCarousel media={event.media} eventId={event.id} eventTitle={t(event.title)} />
+      </div>
+
+      <div className="event-card__body">
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+          {event.types.map((type, ti) => (
+            <span key={ti} className="event-chip">{t(type)}</span>
+          ))}
+        </div>
+
+        <TypeOnView
+          as="h3"
+          className="display-heading"
+          text={t(event.title)}
+          style={{
+            fontSize: featured ? 24 : 17,
+            margin: 0,
+            letterSpacing: "-0.01em",
+            color: "var(--ink)",
+          }}
+        />
+
+        <p style={{
+          fontSize: featured ? 13 : 12, fontWeight: 500, lineHeight: 1.65, textTransform: "uppercase",
+          color: "var(--muted)", margin: 0, flex: featured ? "none" : 1,
+        }}>
+          {t(event.description)}
+        </p>
+
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", color: "var(--muted)" }}>
+          {event.location} · {event.date}
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -167,47 +269,12 @@ export default function Events() {
         ) : (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="events-grid">
             {events.map((event, i) => (
-              <Reveal key={event.id} delay={i * 70}>
-                <div style={{
-                  background: "var(--bg)",
-                  border: "2px solid var(--ink)",
-                  display: "flex",
-                  flexDirection: "column",
-                }}>
-                  <div style={{ position: "relative", height: 200, overflow: "hidden", borderBottom: "2px solid var(--ink)" }}>
-                    <MediaCarousel
-                      media={event.media}
-                      eventId={event.id}
-                      eventTitle={t(event.title)}
-                    />
-                  </div>
-
-                  <div style={{ padding: 18, display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                      {event.types.map((type, ti) => (
-                        <span key={ti} className="event-chip">{t(type)}</span>
-                      ))}
-                    </div>
-
-                    <TypeOnView
-                      as="h3"
-                      className="display-heading"
-                      text={t(event.title)}
-                      style={{ fontSize: 17, margin: 0, letterSpacing: "-0.01em", color: "var(--ink)" }}
-                    />
-
-                    <p style={{
-                      fontSize: 12, fontWeight: 500, lineHeight: 1.65, textTransform: "uppercase",
-                      color: "var(--muted)", margin: 0, flex: 1,
-                    }}>
-                      {t(event.description)}
-                    </p>
-
-                    <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", color: "var(--muted)" }}>
-                      {event.location} · {event.date}
-                    </div>
-                  </div>
-                </div>
+              <Reveal
+                key={event.id}
+                delay={i * 70}
+                className={i === 0 ? "event-cell--featured" : undefined}
+              >
+                <EventCard event={event} featured={i === 0} />
               </Reveal>
             ))}
           </div>

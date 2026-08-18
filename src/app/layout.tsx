@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
@@ -7,6 +7,15 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+/* Display face for headings, wordmark and CTAs. Space Grotesk tops out at 700,
+   so display type uses 700 rather than the 800 Helvetica was carrying. */
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +36,7 @@ export const metadata: Metadata = {
     description: "Portfólio pessoal de Pedro Bonis — works, conteúdo e eventos na interseção entre Tecnologia e Negócios.",
     images: ["https://i.ibb.co/xqYsQs8M/Foto-do-portfolio.png"],
   },
-  robots: { index: false, follow: false },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -36,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${ibmPlexMono.variable} h-full scroll-smooth`}>
+    <html lang="pt-BR" className={`${ibmPlexMono.variable} ${spaceGrotesk.variable} h-full scroll-smooth`}>
       <head>
         <link rel="preload" as="image" href="/hero-bliss-wallpaper.png" />
       </head>

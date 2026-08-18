@@ -56,6 +56,11 @@ export default function Hero() {
   if (first.done && !second.displayed) second.start();
 
   useEffect(() => {
+    // Parallax is the one effect that can actually make someone ill, so it is
+    // skipped outright rather than shortened. Skipping leaves the copy at its
+    // natural position and the cue at its resting opacity — the correct static state.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const copy = copyRef.current;
     const cue = cueRef.current;
     let ticking = false;
@@ -120,8 +125,8 @@ export default function Hero() {
         <h1
           id="hero-heading"
           style={{
-            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-            fontWeight: 800,
+            fontFamily: "var(--display)",
+            fontWeight: 700,
             textTransform: "uppercase",
             fontSize: "clamp(52px, 8.5vw, 128px)",
             lineHeight: 0.92,

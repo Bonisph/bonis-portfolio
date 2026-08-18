@@ -13,8 +13,8 @@ export default function Footer() {
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "100px 32px 48px" }}>
         <Reveal>
           <h2 style={{
-            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-            fontWeight: 800,
+            fontFamily: "var(--display)",
+            fontWeight: 700,
             textTransform: "uppercase",
             fontSize: "clamp(40px, 6vw, 92px)",
             lineHeight: 0.94,
@@ -42,7 +42,7 @@ export default function Footer() {
                 padding: "14px 26px",
                 background: "var(--bg)",
                 color: "var(--ink)",
-                fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                fontFamily: "var(--display)",
                 fontWeight: 700, fontSize: 13, letterSpacing: "0.05em",
                 textTransform: "uppercase", textDecoration: "none",
                 border: "2px solid var(--bg)", transition: "all .2s", display: "inline-block",
@@ -60,7 +60,7 @@ export default function Footer() {
                 padding: "14px 26px",
                 background: "transparent",
                 color: "var(--bg)",
-                fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                fontFamily: "var(--display)",
                 fontWeight: 700, fontSize: 13, letterSpacing: "0.05em",
                 textTransform: "uppercase", textDecoration: "none",
                 border: "2px solid var(--bg)", transition: "all .2s", display: "inline-block",

@@ -27,6 +27,8 @@ const CSS_VARS: Record<Theme, Record<string, string>> = {
     "--glass2":  "rgba(255,255,255,0.85)",
     "--scrim":   "rgba(0,20,40,0.14)",
     "--hero-b":  "1",
+    "--accent":     "#b45309",
+    "--accent-ink": "#ffffff",
   },
   dark: {
     "--bg":      "#0f0f0f",
@@ -40,6 +42,9 @@ const CSS_VARS: Record<Theme, Record<string, string>> = {
     "--glass2":  "rgba(15,15,15,0.85)",
     "--scrim":   "rgba(0,10,20,0.45)",
     "--hero-b":  "0.5",
+    /* Dark surfaces let the amber run at full saturation (8.9:1 on --bg). */
+    "--accent":     "#f59e0b",
+    "--accent-ink": "#0f0f0f",
   },
 };
 

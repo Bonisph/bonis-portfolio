@@ -160,17 +160,28 @@ export const content: {
 
 // ─── EVENTOS ──────────────────────────────────────────────────────────────────
 // type: "Host" | "Palestra"/"Talk" | "Painel"/"Panel" | "Organização"/"Organizer"
-// media: array de { type: "image" | "video", url: string }
+// media: array de { type: "image" | "video", url: string, alt? }
 //   - image: URL do ImgBB
 //   - video: URL do YouTube (ex: https://youtube.com/watch?v=ID)
 //   Deixe o array vazio ([]) enquanto não tiver mídia.
+//
+//   alt (opcional): descrição da foto para leitores de tela. Descreva o que se
+//   vê — quem está na imagem, o que está acontecendo — e não o nome do evento,
+//   que já é lido no título do card. Ex: "Pedro no palco durante o painel de
+//   RWA, ao lado de quatro palestrantes sentados."
+//   Sem esse campo, o carrossel usa "<título do evento> — imagem N de M", que
+//   funciona mas não descreve nada. Pode preencher aos poucos.
 export const events: {
   id: number;
   title: { pt: string; en: string; es?: string };
   description: { pt: string; en: string; es?: string };
   date: string;
   location: string;
-  media: { type: "image" | "video"; url: string }[];
+  media: {
+    type: "image" | "video";
+    url: string;
+    alt?: { pt: string; en: string; es?: string };
+  }[];
   types: { pt: string; en: string; es?: string }[];
 }[] = [
   {
@@ -184,8 +195,24 @@ export const events: {
     date: "Nov 2025",
     location: "São Paulo, SP",
     media: [
-      { type: "image", url: "https://i.ibb.co/CK8Tkpt6/ELZ-0922.jpg" },
-      { type: "image", url: "https://i.ibb.co/yc5jQzw0/ELZ-0647.jpg" },
+      {
+        type: "image",
+        url: "/events/arbilink-2025-1.jpg",
+        alt: {
+          pt: "Três palestrantes sentados em banquetas num palco ao ar livre; o da esquerda fala ao microfone e gesticula. Atrás deles, um telão com o título \"Programa de Embaixadores da Arbitrum\" e os perfis dos três participantes.",
+          en: "Three speakers sitting on stools on an outdoor stage; the one on the left is talking into a microphone and gesturing. Behind them, a screen titled \"Programa de Embaixadores da Arbitrum\" showing the three participants' profiles.",
+          es: "Tres ponentes sentados en taburetes en un escenario al aire libre; el de la izquierda habla al micrófono y gesticula. Detrás, una pantalla titulada \"Programa de Embaixadores da Arbitrum\" con los perfiles de los tres participantes.",
+        },
+      },
+      {
+        type: "image",
+        url: "/events/arbilink-2025-2.jpg",
+        alt: {
+          pt: "Gravação de podcast: quatro pessoas conversam ao redor de uma mesa coberta por uma toalha azul com o logo \"Arbitrum Everywhere\", numa sala de parede de tijolos. Ao fundo, um monitor com o painel da GMX e um banner \"Arbitrum Anywhere. GMX Everywhere.\". Em primeiro plano, uma câmera em tripé grava a conversa.",
+          en: "Podcast recording: four people talking around a table draped with a navy \"Arbitrum Everywhere\" cloth in a brick-walled room. Behind them, a monitor showing the GMX dashboard and an \"Arbitrum Anywhere. GMX Everywhere.\" banner. A tripod-mounted camera records in the foreground.",
+          es: "Grabación de pódcast: cuatro personas conversan alrededor de una mesa cubierta con un mantel azul con el logo \"Arbitrum Everywhere\", en una sala de pared de ladrillo. Al fondo, un monitor con el panel de GMX y un banner \"Arbitrum Anywhere. GMX Everywhere.\". En primer plano, una cámara en trípode graba la charla.",
+        },
+      },
       { type: "video", url: "https://www.youtube.com/watch?v=vI6-GmvSAIQ" },
     ],
     types: [
@@ -205,7 +232,15 @@ export const events: {
     date: "2025",
     location: "São Paulo, SP",
     media: [
-      { type: "image", url: "https://i.ibb.co/cKC2swDL/IMG-4235.jpg" },
+      {
+        type: "image",
+        url: "/events/eth-latam-2025-1.jpg",
+        alt: {
+          pt: "Quatro participantes sentados em banquetas brancas sobre um palco circular azul; o da esquerda, de boné, fala ao microfone. No telão acima, o título \"Panel: RWA in Brazil\" com as fotos e os nomes dos palestrantes.",
+          en: "Four panelists sitting on white stools on a round blue stage; the one on the left, wearing a cap, is speaking into a microphone. On the screen above, the title \"Panel: RWA in Brazil\" with the speakers' photos and names.",
+          es: "Cuatro participantes sentados en taburetes blancos sobre un escenario circular azul; el de la izquierda, con gorra, habla al micrófono. En la pantalla superior, el título \"Panel: RWA in Brazil\" con las fotos y los nombres de los ponentes.",
+        },
+      },
     ],
     types: [
       { pt: "Palestrante", en: "Speaker", es: "Ponente" },
@@ -222,10 +257,42 @@ export const events: {
     date: "2025",
     location: "São Paulo, SP",
     media: [
-      { type: "image", url: "https://i.ibb.co/pj5Q8sw4/ELZ-2002.jpg" },
-      { type: "image", url: "https://i.ibb.co/WWXMKK6W/ELZ-2168-1.jpg" },
-      { type: "image", url: "https://i.ibb.co/FkN7WNpY/ELZ-2086.jpg" },
-      { type: "image", url: "https://i.ibb.co/Ff8PZXS/ELZ-2038.jpg" },
+      {
+        type: "image",
+        url: "/events/modular-sp-2025-1.jpg",
+        alt: {
+          pt: "Pedro, de suéter preto, posa ao lado do banner vertical do Modular House São Paulo, com a frase \"O maior hub de mídia e educação sobre Web3 do Brasil!\". Ao fundo, o auditório com cadeiras laranja e brancas.",
+          en: "Pedro, in a black sweater, standing beside the Modular House São Paulo banner, which reads \"O maior hub de mídia e educação sobre Web3 do Brasil!\". Behind him, the venue with orange and white chairs.",
+          es: "Pedro, con suéter negro, posa junto al banner vertical del Modular House São Paulo, con la frase \"O maior hub de mídia e educação sobre Web3 do Brasil!\". Al fondo, el auditorio con sillas naranjas y blancas.",
+        },
+      },
+      {
+        type: "image",
+        url: "/events/modular-sp-2025-2.jpg",
+        alt: {
+          pt: "Pedro fala ao microfone, em pé, diante da plateia. Atrás dele, um banner do Arbitrum DAO com a palavra \"everywhere\" e QR codes para o perfil @arbitrum_pt.",
+          en: "Pedro speaking into a microphone, standing in front of the audience. Behind him, an Arbitrum DAO banner reading \"everywhere\" with QR codes linking to the @arbitrum_pt profile.",
+          es: "Pedro habla al micrófono, de pie, frente al público. Detrás, un banner de Arbitrum DAO con la palabra \"everywhere\" y códigos QR del perfil @arbitrum_pt.",
+        },
+      },
+      {
+        type: "image",
+        url: "/events/modular-sp-2025-3.jpg",
+        alt: {
+          pt: "Vista ampla da sala durante uma apresentação: uma pessoa fala ao microfone ao lado de uma TV com o slide do Modular House São Paulo. À esquerda, a plateia sentada em cadeiras laranja e brancas; ao fundo, o letreiro \"DISTRITO\" na parede.",
+          en: "Wide view of the room during a talk: a person speaks into a microphone beside a TV showing the Modular House São Paulo slide. On the left, the seated audience; on the back wall, the word \"DISTRITO\".",
+          es: "Vista amplia de la sala durante una presentación: una persona habla al micrófono junto a un televisor con la diapositiva del Modular House São Paulo. A la izquierda, el público sentado; al fondo, el letrero \"DISTRITO\" en la pared.",
+        },
+      },
+      {
+        type: "image",
+        url: "/events/modular-sp-2025-4.jpg",
+        alt: {
+          pt: "Cinco participantes posam lado a lado, sorrindo, ao lado de um letreiro de neon com o logo da Modular numa parede rosa.",
+          en: "Five attendees posing side by side, smiling, next to a neon Modular logo on a pink wall.",
+          es: "Cinco participantes posan uno al lado del otro, sonriendo, junto a un letrero de neón con el logo de Modular en una pared rosa.",
+        },
+      },
       { type: "video", url: "https://youtu.be/s6mJZ_RHUes" },
     ],
     types: [
@@ -245,7 +312,15 @@ export const events: {
     date: "2025",
     location: "Rio de Janeiro, RJ",
     media: [
-      { type: "image", url: "https://i.ibb.co/cKnJmcKL/Baskerp-115.jpg" },
+      {
+        type: "image",
+        url: "/events/modular-rj-2025-1.jpg",
+        alt: {
+          pt: "Seis integrantes da equipe sentados lado a lado num banco de madeira, sorrindo, diante do painel do Modular House Rio de Janeiro com a silhueta do Cristo Redentor. À direita, tubos de neon amarelos e azuis.",
+          en: "Six team members sitting side by side on a wooden bench, smiling, in front of the Modular House Rio de Janeiro backdrop featuring the Christ the Redeemer silhouette. Yellow and blue neon tubes on the right.",
+          es: "Seis integrantes del equipo sentados en un banco de madera, sonriendo, frente al panel del Modular House Rio de Janeiro con la silueta del Cristo Redentor. A la derecha, tubos de neón amarillos y azules.",
+        },
+      },
       { type: "video", url: "https://youtu.be/6jrnFo-8XDI" },
     ],
     types: [
@@ -263,7 +338,15 @@ export const events: {
     date: "2025",
     location: "Rio de Janeiro, RJ",
     media: [
-      { type: "image", url: "https://i.ibb.co/gM9Sw5n3/Gy-Zo-Ly-UWEAAs0-EW.jpg" },
+      {
+        type: "image",
+        url: "/events/arbilunch-rj-2025-1.jpg",
+        alt: {
+          pt: "Apresentação durante um almoço: uma pessoa fala ao microfone diante de um telão com a frase \"Agora é oficial: Arbitrum fala português\". Nas mesas ao redor, os convidados assistem e vários gravam com o celular.",
+          en: "A talk during a lunch event: a person speaks into a microphone in front of a screen reading \"Agora é oficial: Arbitrum fala português\". At the tables around, guests watch and several film with their phones.",
+          es: "Presentación durante un almuerzo: una persona habla al micrófono frente a una pantalla con la frase \"Agora é oficial: Arbitrum fala português\". En las mesas, los invitados miran y varios graban con el móvil.",
+        },
+      },
     ],
     types: [
       { pt: "Organizador", en: "Organizer", es: "Organizador" },
@@ -280,11 +363,51 @@ export const events: {
     date: "Jul 2026",
     location: "São Paulo, SP",
     media: [
-      { type: "image", url: "https://i.ibb.co/4gdGD8z0/HNYPTui-XMAAt-Q-7.jpg" },
-      { type: "image", url: "https://i.ibb.co/4gNmQ49c/BINANCE-9-Y-GENERAL-18.jpg" },
-      { type: "image", url: "https://i.ibb.co/sJdrdSQt/BINANCE-9-Y-GENERAL-24.jpg" },
-      { type: "image", url: "https://i.ibb.co/TQ0cK8F/BINANCE-9-Y-GENERAL-27.jpg" },
-      { type: "image", url: "https://i.ibb.co/pvNgBmpx/BINANCE-9-Y-GENERAL-29.jpg" },
+      {
+        type: "image",
+        url: "/events/binance-9y-1.jpg",
+        alt: {
+          pt: "Vista do alto do salão lotado durante a festa: centenas de convidados, muitos com chapéus amarelos, sob bandeirinhas verdes e amarelas. À direita, o bar; à esquerda, o palco com a banda tocando.",
+          en: "Elevated view of the packed venue during the party: hundreds of guests, many wearing yellow hats, under green and yellow bunting. The bar on the right, the stage with the band on the left.",
+          es: "Vista desde lo alto del salón lleno durante la fiesta: cientos de invitados, muchos con sombreros amarillos, bajo banderines verdes y amarillos. A la derecha, la barra; a la izquierda, el escenario con la banda.",
+        },
+      },
+      {
+        type: "image",
+        url: "/events/binance-9y-2.jpg",
+        alt: {
+          pt: "Grupo de sete convidados posando no palco diante do letreiro dos 9 anos da Binance, sob luzes verdes e amarelas.",
+          en: "A group of seven guests posing on stage in front of the Binance 9th anniversary sign, under green and yellow lighting.",
+          es: "Grupo de siete invitados posando en el escenario frente al letrero de los 9 años de Binance, bajo luces verdes y amarillas.",
+        },
+      },
+      {
+        type: "image",
+        url: "/events/binance-9y-3.jpg",
+        alt: {
+          pt: "Dois convidados de camiseta preta com o logo da Binance posam para a foto segurando brindes. Ao fundo, o painel de logos da Binance e a vegetação do salão.",
+          en: "Two guests in black Binance t-shirts posing for a photo, holding gift bags. Behind them, the Binance logo backdrop and the venue's greenery.",
+          es: "Dos invitados con camiseta negra del logo de Binance posan para la foto sosteniendo obsequios. Al fondo, el panel de logos de Binance y la vegetación del salón.",
+        },
+      },
+      {
+        type: "image",
+        url: "/events/binance-9y-4.jpg",
+        alt: {
+          pt: "Dois convidados de camiseta da Binance, vistos de costas, observam o letreiro \"Built by You\" iluminado no salão do evento.",
+          en: "Two guests in Binance t-shirts, seen from behind, looking at the lit \"Built by You\" sign in the venue.",
+          es: "Dos invitados con camiseta de Binance, vistos de espaldas, observan el letrero iluminado \"Built by You\" en el salón del evento.",
+        },
+      },
+      {
+        type: "image",
+        url: "/events/binance-9y-5.jpg",
+        alt: {
+          pt: "Quatro convidados posam juntos vestindo camisetas e moletons da Binance, um deles com chapéu amarelo. Ao fundo, uma parede vazada iluminada de laranja.",
+          en: "Four guests posing together in Binance t-shirts and hoodies, one wearing a yellow bucket hat. Behind them, a latticed wall lit in orange.",
+          es: "Cuatro invitados posan juntos con camisetas y sudaderas de Binance, uno de ellos con sombrero amarillo. Al fondo, una pared calada iluminada de naranja.",
+        },
+      },
     ],
     types: [
       { pt: "Mobilização de Comunidade", en: "Community Outreach", es: "Movilización de Comunidad" },
@@ -301,7 +424,15 @@ export const events: {
     date: "2025",
     location: "Belo Horizonte, MG",
     media: [
-      { type: "image", url: "https://i.ibb.co/8gSscY2L/20250227-170204.jpg" },
+      {
+        type: "image",
+        url: "/events/modular-carnival-2025-1.jpg",
+        alt: {
+          pt: "Painel num palco de teatro: três participantes sentados em poltronas, o da direita falando ao microfone. No telão atrás, o título \"Solana — Além das memecoins\" e os perfis dos participantes. Em primeiro plano, a plateia de costas.",
+          en: "A panel on a theatre stage: three participants seated in armchairs, the one on the right speaking into a microphone. On the screen behind, the title \"Solana — Além das memecoins\" and the panelists' profiles. The audience seen from behind in the foreground.",
+          es: "Panel en un escenario de teatro: tres participantes sentados en sillones, el de la derecha hablando al micrófono. En la pantalla del fondo, el título \"Solana — Além das memecoins\" y los perfiles de los participantes. En primer plano, el público de espaldas.",
+        },
+      },
       { type: "video", url: "https://youtu.be/0SHSsuaroCA" },
     ],
     types: [
