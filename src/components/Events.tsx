@@ -196,11 +196,11 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
 
 type EventEntry = (typeof events)[number];
 
-function EventCard({ event, featured }: { event: EventEntry; featured: boolean }) {
+function EventCard({ event }: { event: EventEntry }) {
   const { t } = useLang();
 
   return (
-    <article className={`event-card${featured ? " event-card--featured" : ""}`}>
+    <article className="event-card">
       <div className="event-card__media">
         <MediaCarousel media={event.media} eventId={event.id} eventTitle={t(event.title)} />
       </div>
@@ -217,7 +217,7 @@ function EventCard({ event, featured }: { event: EventEntry; featured: boolean }
         <h3
           className="display-heading"
           style={{
-            fontSize: featured ? 24 : 17,
+            fontSize: 17,
             margin: 0,
             letterSpacing: "-0.01em",
             color: "var(--ink)",
@@ -229,10 +229,10 @@ function EventCard({ event, featured }: { event: EventEntry; featured: boolean }
         <p
           className="prose"
           style={{
-            fontSize: featured ? 14 : 13,
+            fontSize: 13,
             color: "var(--muted)",
             margin: 0,
-            flex: featured ? "none" : 1,
+            flex: 1,
           }}
         >
           {t(event.description)}
@@ -262,14 +262,13 @@ export default function Events() {
             {t({ pt: "Nenhum evento adicionado ainda.", en: "No events added yet.", es: "Ningún evento añadido aún." })}
           </p>
         ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="events-grid">
+          /* Two columns, not three: at three the description ran 44 characters
+             a line, just under the comfortable floor, and the media pane was
+             smaller than the text beside it. */
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }} className="events-grid">
             {events.map((event, i) => (
-              <Reveal
-                key={event.id}
-                delay={i * 70}
-                className={i === 0 ? "event-cell--featured" : undefined}
-              >
-                <EventCard event={event} featured={i === 0} />
+              <Reveal key={event.id} delay={i * 70}>
+                <EventCard event={event} />
               </Reveal>
             ))}
           </div>

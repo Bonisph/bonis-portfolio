@@ -402,15 +402,21 @@ html { scroll-behavior: smooth; }
               border-color 0.25s,
               box-shadow 0.25s;
 }
+/* No transform on hover. These cards contain cross-origin YouTube frames, and
+   a transform animating on an iframe's ancestor breaks its hit testing — the
+   compositor moves the frame while the clickable region lags, so the play
+   button stops responding. The offset shadow alone reads as the same lift. */
 .event-card:hover {
-  transform: translate(-3px, -3px);
   border-color: var(--accent);
   box-shadow: 6px 6px 0 var(--accent);
 }
 
+/* 16:9 instead of a fixed 200px. The aftermovies are 16:9, so they now land
+   exactly; the 3:2 stills lose a sliver top and bottom rather than a quarter
+   of their width, which is what the old ratio was taking. */
 .event-card__media {
   position: relative;
-  height: 200px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-bottom: 2px solid var(--ink);
   flex-shrink: 0;
@@ -424,30 +430,6 @@ html { scroll-behavior: smooth; }
   flex: 1;
 }
 
-/* Featured card — the first event runs full-bleed across two columns and
-   turns horizontal, which gives the grid an entry point and breaks the flat
-   3-up rhythm. Below 600px the grid is single-column, so it reverts to the
-   ordinary stacked card. */
-@media (min-width: 601px) {
-  .event-cell--featured {
-    grid-column: span 2;
-  }
-  .event-card--featured {
-    flex-direction: row;
-  }
-  .event-card--featured .event-card__media {
-    width: 46%;
-    height: auto;
-    min-height: 260px;
-    border-bottom: 0;
-    border-right: 2px solid var(--ink);
-  }
-  .event-card--featured .event-card__body {
-    padding: 26px;
-    gap: 12px;
-    justify-content: center;
-  }
-}
 
 
 /* ── Music ticker ────────────────────────────────────────────────── */
@@ -528,12 +510,8 @@ html { scroll-behavior: smooth; }
   }
 }
 
-@media (max-width: 900px) {
-  .events-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
+/* The 900px step is gone: the grid is already two columns at every width above
+   600px, so it had nothing left to do. */
 @media (max-width: 600px) {
   .events-grid {
     grid-template-columns: 1fr !important;
