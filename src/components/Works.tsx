@@ -6,7 +6,7 @@ import { experiences } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import type { Lang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
-import TypeOnView from "@/components/TypeOnView";
+import SectionHead from "@/components/SectionHead";
 
 function periodLabel(start: string, end: string | null, lang: Lang) {
   const present = lang === "pt" ? "Presente" : lang === "es" ? "Presente" : "Present";
@@ -46,30 +46,11 @@ export default function Works() {
   return (
     <section id="works" style={{ borderBottom: "2px solid var(--ink)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "100px 32px" }}>
-        <Reveal>
-          <div style={{
-            fontSize: 12, fontWeight: 700, letterSpacing: "0.2em",
-            textTransform: "uppercase", marginBottom: 28, color: "var(--muted)",
-          }}>
-            (02) {t({ pt: "Experiência", en: "Experience", es: "Experiencia" })}
-          </div>
-        </Reveal>
-
-        <Reveal delay={80}>
-          <TypeOnView
-            as="h2"
-            id="works-heading"
-            className="display-heading"
-            text={t({ pt: "Onde já trabalhei", en: "Where I've worked", es: "Dónde he trabajado" })}
-            style={{
-              fontSize: "clamp(34px, 4.5vw, 64px)",
-              letterSpacing: "-0.02em",
-              margin: "0 0 48px",
-              color: "var(--ink)",
-            }}
-          />
-        </Reveal>
-
+        <SectionHead
+          id="works-heading"
+          title={t({ pt: "Experiência", en: "Experience", es: "Experiencia" })}
+          subtitle={t({ pt: "Onde já trabalhei", en: "Where I've worked", es: "Dónde he trabajado" })}
+        />
         <div style={{ display: "flex", flexDirection: "column", borderTop: "2px solid var(--ink)" }}>
           {experiences.map((exp, expIdx) => (
             <Reveal key={exp.id} delay={expIdx * 80}>
@@ -97,10 +78,7 @@ export default function Works() {
                       {exp.company}
                     </div>
                     {t(exp.roles[0].description) && (
-                      <p style={{
-                        fontSize: 13, fontWeight: 500, lineHeight: 1.7, textTransform: "uppercase",
-                        color: "var(--body)", margin: "14px 0 0", maxWidth: 720,
-                      }}>
+                      <p className="prose" style={{ margin: "14px 0 0" }}>
                         {t(exp.roles[0].description)}
                       </p>
                     )}
@@ -149,10 +127,7 @@ export default function Works() {
                             </div>
                           </div>
                           {t(role.description) && (
-                            <p style={{
-                              fontSize: 13, fontWeight: 500, lineHeight: 1.7, textTransform: "uppercase",
-                              color: "var(--body)", margin: "10px 0 0", maxWidth: 720,
-                            }}>
+                            <p className="prose" style={{ margin: "10px 0 0" }}>
                               {t(role.description)}
                             </p>
                           )}

@@ -26,8 +26,15 @@
   --accent:     #b45309;
   --accent-ink: #ffffff;
 
-  /* Display stack: headings, wordmark, CTAs. Body stays IBM Plex Mono. */
+  /* Three type roles. Serif is the editorial voice, display is utility
+     (chips, buttons, numbers), mono carries the running text. */
+  --serif:   var(--font-serif), Georgia, 'Times New Roman', serif;
   --display: var(--font-display), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Border weights. Everything used to be 2px, which flattened hierarchy —
+     a chip read as loudly as a card. Strong is for structure, hair for detail. */
+  --bd-strong: 2px;
+  --bd-hair:   1px;
 }
 
 /* ── Base ────────────────────────────────────────────────────────── */
@@ -47,7 +54,7 @@ html { scroll-behavior: smooth; }
 
 /* ── Utility classes (CSS-variable-aware hover effects) ──────────── */
 .stat-chip {
-  border: 2px solid var(--ink);
+  border: var(--bd-hair) solid var(--ink);
   padding: 5px 10px;
   font-size: 11px;
   font-weight: 700;
@@ -66,7 +73,7 @@ html { scroll-behavior: smooth; }
 }
 
 .event-chip {
-  border: 2px solid var(--ink);
+  border: var(--bd-hair) solid var(--ink);
   padding: 3px 8px;
   font-size: 10px;
   font-weight: 700;
@@ -91,7 +98,7 @@ html { scroll-behavior: smooth; }
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2px solid var(--ink);
+  border: var(--bd-hair) solid var(--ink);
   color: var(--ink);
   background: var(--glass);
   text-decoration: none;
@@ -157,7 +164,7 @@ html { scroll-behavior: smooth; }
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2px solid var(--ink);
+  border: var(--bd-hair) solid var(--ink);
   background: transparent;
   color: var(--ink);
   font-size: 15px;
@@ -204,11 +211,184 @@ html { scroll-behavior: smooth; }
   color: var(--ink);
 }
 
+/* Utility display face — chips, buttons, card titles, numbers. */
 .display-heading {
   font-family: var(--display);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.02em;
+}
+
+/* ── Section head: number, title, subtitle ───────────────────────── */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 56px;
+}
+
+/* Sections that open straight onto a photograph need more air, otherwise the
+   subtitle reads as a caption sitting on the image. */
+.section-head--airy {
+  margin-bottom: 88px;
+}
+
+.section-sub {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+
+/* ── Editorial voice ─────────────────────────────────────────────── */
+/* Section titles in the serif, sentence case. Uppercase serif at display
+   size reads as a monument; these are headings, not inscriptions. */
+.editorial-heading {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(38px, 5.2vw, 76px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* Running text. Previously every paragraph was uppercased at 12–13px, which
+   is measurably harder to read and fatiguing at paragraph length. Uppercase
+   now belongs to labels, chips and buttons only. */
+.prose {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--body);
+  max-width: 68ch;
+}
+
+/* ── Hero: editorial plate ───────────────────────────────────────── */
+/* The hero commits to a dark ground in both themes — a photograph under a
+   scrim, like a magazine cover. So its type takes fixed light values rather
+   than the themed tokens, which would invert into illegibility. */
+.hero {
+  --hero-ink:      #f6f2ea;
+  --hero-ink-soft: #cfc7ba;
+  --hero-accent:   #f59e0b;
+  position: relative;
+  min-height: 640px;
+  height: 100vh;
+  overflow: hidden;
+  background: #0d0c0b;
+}
+
+.hero__photo {
+  position: absolute;
+  inset: 0;
+}
+
+/* Dark where the words sit, clearing toward the right so the subject of the
+   photograph stays visible instead of being flattened by an even wash. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(10, 9, 8, 0.94) 0%,
+    rgba(10, 9, 8, 0.78) 42%,
+    rgba(10, 9, 8, 0.30) 78%,
+    rgba(10, 9, 8, 0.12) 100%
+  );
+  pointer-events: none;
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 3;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 60px 32px 96px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .hero__copy {
+    padding: 60px 20px 72px;
+    gap: 16px;
+  }
+}
+
+.hero__eyebrow {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hero-accent);
+  margin: 0;
+}
+
+.hero__name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(56px, 9vw, 132px);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: var(--hero-ink);
+  max-width: 18ch;
+}
+
+.hero__role {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--hero-ink-soft);
+  margin: 0;
+  max-width: 46ch;
+}
+
+/* Hero controls sit on the photo, so they carry the fixed light palette
+   instead of the themed one. */
+.hero .social-icon {
+  border-color: var(--hero-ink);
+  color: var(--hero-ink);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+}
+.hero .social-icon:hover {
+  background: var(--hero-ink);
+  color: #0d0c0b;
+}
+
+.hero .cta-secondary {
+  background: transparent;
+  border-color: var(--hero-ink);
+  color: var(--hero-ink);
+}
+.hero .cta-secondary:hover {
+  background: var(--hero-ink);
+  color: #0d0c0b;
+}
+
+.hero__cue {
+  position: absolute;
+  z-index: 3;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hero-ink-soft);
+  opacity: 0.75;
+  transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 /* ── Event card ──────────────────────────────────────────────────── */

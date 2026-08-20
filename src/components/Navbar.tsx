@@ -15,7 +15,6 @@ export default function Navbar() {
   useEffect(() => { setMounted(true); }, []);
 
   const navLinks = [
-    { label: lang === "pt" ? "Sobre"       : lang === "es" ? "Sobre mí"    : "About",     href: "#sobre" },
     { label: lang === "pt" ? "Experiência" : lang === "es" ? "Experiencia" : "Works",     href: "#works" },
     { label: lang === "pt" ? "Formação"    : lang === "es" ? "Formación"   : "Education", href: "#formacao" },
     { label: lang === "pt" ? "Eventos"     : lang === "es" ? "Eventos"     : "Events",    href: "#eventos" },

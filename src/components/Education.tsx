@@ -6,7 +6,7 @@ import { education } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import type { Lang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
-import TypeOnView from "@/components/TypeOnView";
+import SectionHead from "@/components/SectionHead";
 
 function periodLabel(start: string, end: string | null, lang: Lang) {
   const present = lang === "pt" ? "Presente" : lang === "es" ? "Presente" : "Present";
@@ -46,30 +46,10 @@ export default function Education() {
   return (
     <section id="formacao" style={{ borderBottom: "2px solid var(--ink)", background: "var(--bg-alt)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "100px 32px" }}>
-        <Reveal>
-          <div style={{
-            fontSize: 12, fontWeight: 700, letterSpacing: "0.2em",
-            textTransform: "uppercase", marginBottom: 28, color: "var(--muted)",
-          }}>
-            (03) {t({ pt: "Formação", en: "Education", es: "Formación" })}
-          </div>
-        </Reveal>
-
-        <Reveal delay={80}>
-          <TypeOnView
-            as="h2"
-            id="formacao-heading"
-            className="display-heading"
-            text={t({ pt: "Base acadêmica", en: "Academic background", es: "Base académica" })}
-            style={{
-              fontSize: "clamp(34px, 4.5vw, 64px)",
-              letterSpacing: "-0.02em",
-              margin: "0 0 48px",
-              color: "var(--ink)",
-            }}
-          />
-        </Reveal>
-
+        <SectionHead
+          id="formacao-heading"
+          title={t({ pt: "Formação", en: "Education", es: "Formación" })}
+        />
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {education.map((edu, idx) => (
             <Reveal key={edu.id} delay={idx * 80}>
@@ -96,10 +76,7 @@ export default function Education() {
                     {edu.institution}
                   </div>
                   {edu.description && t(edu.description) && (
-                    <p style={{
-                      fontSize: 13, fontWeight: 500, lineHeight: 1.7, textTransform: "uppercase",
-                      color: "var(--body)", margin: "14px 0 0", maxWidth: 820,
-                    }}>
+                    <p className="prose" style={{ margin: "14px 0 0" }}>
                       {t(edu.description)}
                     </p>
                   )}

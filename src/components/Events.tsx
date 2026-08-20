@@ -5,7 +5,7 @@ import Image from "next/image";
 import { events } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
-import TypeOnView from "@/components/TypeOnView";
+import SectionHead from "@/components/SectionHead";
 
 const YT_ID_RE = /^[a-zA-Z0-9_-]{11}$/;
 
@@ -71,17 +71,24 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
   const altFor = (item: MediaItem, i: number) =>
     item.alt ? t(item.alt) : positionLabel(i);
 
+  /* Only the active slide and its two neighbours get an <img>. Mounting all of
+     them fired fifteen optimiser requests at once and several never came back —
+     the queue starved. Three per card keeps navigation instant (the next slide
+     is already fetched) without the pile-up. Revisiting a slide re-mounts it,
+     but the browser serves it from cache. */
+  const inWindow = (i: number) =>
+    i === idx || i === (idx + 1) % total || i === (idx - 1 + total) % total;
+
   return (
     <div
       style={{ position: "absolute", inset: 0 }}
       role={total > 1 ? "group" : undefined}
       aria-label={total > 1 ? eventTitle : undefined}
     >
-      {/* All images rendered in the DOM — CSS opacity controls visibility.
-          This lets Next.js Image load every slide through /_next/image on mount,
-          so navigation is instant after the first render. */}
+      {/* Slides are stacked and cross-faded with opacity, but only the ones in
+          the loading window are mounted. */}
       {media.map((item, i) => {
-        if (item.type !== "image") return null;
+        if (item.type !== "image" || !inWindow(i)) return null;
         const isActive = i === idx && !ytId;
         return (
           <div
@@ -99,16 +106,16 @@ function MediaCarousel({ media, eventId, eventTitle }: { media: MediaItem[]; eve
             }}
           >
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
-              {/* Images are local now, so Next serves WebP/AVIF sized to the
-                  card instead of the full-resolution original. Lazy throughout:
-                  this section sits well below the fold, so nothing here is the
-                  LCP and none of it needs to load before the card is reached. */}
+              {/* Images are local, so Next serves WebP/AVIF sized to the card
+                  instead of the full-resolution original. The active slide loads
+                  eagerly — it is what the visitor is looking at; the neighbours
+                  wait for the viewport. */}
               <Image
                 fill
                 sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px"
                 src={item.url}
                 alt={altFor(item, i)}
-                loading="lazy"
+                loading={isActive ? "eager" : "lazy"}
                 style={{ objectFit: "cover" }}
               />
             </div>
@@ -205,22 +212,29 @@ function EventCard({ event, featured }: { event: EventEntry; featured: boolean }
           ))}
         </div>
 
-        <TypeOnView
-          as="h3"
+        {/* Card titles stay in the utility face — the serif is reserved for the
+            hero and section titles, so it keeps its weight. */}
+        <h3
           className="display-heading"
-          text={t(event.title)}
           style={{
             fontSize: featured ? 24 : 17,
             margin: 0,
             letterSpacing: "-0.01em",
             color: "var(--ink)",
           }}
-        />
+        >
+          {t(event.title)}
+        </h3>
 
-        <p style={{
-          fontSize: featured ? 13 : 12, fontWeight: 500, lineHeight: 1.65, textTransform: "uppercase",
-          color: "var(--muted)", margin: 0, flex: featured ? "none" : 1,
-        }}>
+        <p
+          className="prose"
+          style={{
+            fontSize: featured ? 14 : 13,
+            color: "var(--muted)",
+            margin: 0,
+            flex: featured ? "none" : 1,
+          }}
+        >
           {t(event.description)}
         </p>
 
@@ -238,30 +252,11 @@ export default function Events() {
   return (
     <section id="eventos" style={{ borderBottom: "2px solid var(--ink)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "100px 32px" }}>
-        <Reveal>
-          <div style={{
-            fontSize: 12, fontWeight: 700, letterSpacing: "0.2em",
-            textTransform: "uppercase", marginBottom: 28, color: "var(--muted)",
-          }}>
-            (04) {t({ pt: "Eventos", en: "Events", es: "Eventos" })}
-          </div>
-        </Reveal>
-
-        <Reveal delay={80}>
-          <TypeOnView
-            as="h2"
-            id="events-heading"
-            className="display-heading"
-            text={t({ pt: "Onde já estive", en: "Events I've attended", es: "Eventos en los que participé" })}
-            style={{
-              fontSize: "clamp(34px, 4.5vw, 64px)",
-              letterSpacing: "-0.02em",
-              margin: "0 0 48px",
-              color: "var(--ink)",
-            }}
-          />
-        </Reveal>
-
+        <SectionHead
+          id="events-heading"
+          title={t({ pt: "Eventos", en: "Events", es: "Eventos" })}
+          subtitle={t({ pt: "Que ajudei a construir.", en: "That I helped build.", es: "Que ayudé a construir." })}
+        />
         {events.length === 0 ? (
           <p style={{ fontSize: 12, fontWeight: 500, textTransform: "uppercase", color: "var(--faint)", fontStyle: "italic" }}>
             {t({ pt: "Nenhum evento adicionado ainda.", en: "No events added yet.", es: "Ningún evento añadido aún." })}

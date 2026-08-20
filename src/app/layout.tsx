@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import { IBM_Plex_Mono, Space_Grotesk, Newsreader } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
@@ -9,8 +9,20 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600", "700"],
 });
 
-/* Display face for headings, wordmark and CTAs. Space Grotesk tops out at 700,
-   so display type uses 700 rather than the 800 Helvetica was carrying. */
+/* Three roles, three faces:
+   - Newsreader carries the editorial voice — hero name and section titles.
+     Firmer stroke than Instrument Serif, which read thin over the hero photo.
+   - Space Grotesk drops to utility duty: chips, buttons, card titles, numbers.
+   - IBM Plex Mono keeps the running text.
+   Space Grotesk tops out at 700, so display type uses 700 rather than 800. */
+const newsreader = Newsreader({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
@@ -45,10 +57,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${ibmPlexMono.variable} ${spaceGrotesk.variable} h-full scroll-smooth`}>
-      <head>
-        <link rel="preload" as="image" href="/hero-bliss-wallpaper.png" />
-      </head>
+    <html
+      lang="pt-BR"
+      className={`${ibmPlexMono.variable} ${spaceGrotesk.variable} ${newsreader.variable} h-full scroll-smooth`}
+    >
+      {/* No manual preload: the hero photo now renders through next/image with
+          priority, which emits its own preload at the right resolution. */}
       <body className="min-h-full flex flex-col antialiased">
         <Providers>{children}</Providers>
       </body>

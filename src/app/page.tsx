@@ -1,9 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
 import Works from "@/components/Works";
 import Education from "@/components/Education";
-import Content from "@/components/Content";
 import Events from "@/components/Events";
 import Personal from "@/components/Personal";
 import Footer from "@/components/Footer";
@@ -15,12 +13,16 @@ export default function Home() {
       <Navbar />
       <MusicPlayer />
       <main>
+        {/* Sobre e Conteúdos ficam fora até haver o que mostrar. Os componentes
+            e os dados seguem no repositório — é só devolver <About /> e
+            <Content /> aqui, e o link no Navbar. */}
         <Hero />
-        <About />
         <Works />
         <Education />
+        {/* Conteúdos fica fora por enquanto — o componente e os dados seguem no
+            repositório, é só voltar com <Content /> quando houver o que mostrar
+            (vídeos, threads, artigos, TCC). */}
         <Events />
-        <Content />
         <Personal />
       </main>
       <Footer />

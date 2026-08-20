@@ -1,9 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { siteConfig } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import { useTypewriter } from "@/components/TypeOnView";
+
+/* Swap this to change the hero. Any file in public/events works — the stage
+   shots read strongest because Pedro is clearly the one speaking. */
+const HERO_PHOTO = "/events/modular-sp-2025-2.jpg";
 
 const TwitterIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -83,70 +88,52 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      id="hero"
-      aria-labelledby="hero-heading"
-      style={{ position: "relative", height: "100vh", minHeight: 640, overflow: "hidden" }}
-    >
-      {/* Bliss wallpaper background */}
-      <div style={{
-        position: "absolute",
-        inset: -12,
-        backgroundImage: "url('/hero-bliss-wallpaper.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center 65%",
-        filter: "blur(3px) saturate(1.08) brightness(var(--hero-b))",
-      }} />
+    <section id="hero" aria-labelledby="hero-heading" className="hero">
+      {/* A photograph of Pedro speaking, in place of the Windows XP wallpaper.
+          The wallpaper was borrowed identity — recognisable, but it spoke about
+          Microsoft. This states the positioning before a single word is read.
+          Through next/image with priority so it is a properly sized WebP and
+          the LCP element Next knows to preload. */}
+      <div className="hero__photo">
+        <Image
+          src={HERO_PHOTO}
+          alt={t({
+            pt: "Pedro fala ao microfone durante o Modular House São Paulo, diante da plateia.",
+            en: "Pedro speaking into a microphone at Modular House São Paulo, facing the audience.",
+            es: "Pedro habla al micrófono durante el Modular House São Paulo, frente al público.",
+          })}
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "60% 38%" }}
+        />
+      </div>
 
-      {/* Radial scrim */}
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        background: "radial-gradient(ellipse 100% 100% at 50% 40%, transparent 55%, var(--scrim) 100%)",
-        pointerEvents: "none",
-      }} />
+      <div className="hero__scrim" />
 
-      {/* Content */}
-      <div
-        ref={copyRef}
-        style={{
-          position: "relative",
-          zIndex: 3,
-          maxWidth: 1280,
-          margin: "0 auto",
-          padding: "60px 32px 0",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          willChange: "transform, opacity",
-        }}
-      >
-        <h1
-          id="hero-heading"
-          style={{
-            fontFamily: "var(--display)",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            fontSize: "clamp(52px, 8.5vw, 128px)",
-            lineHeight: 0.92,
-            letterSpacing: "-0.03em",
-            margin: "0 0 36px",
-            color: "var(--ink)",
-            minHeight: "1.9em",
-          }}
-        >
-          <span style={{ display: "block", minHeight: "0.92em" }}>
+      {/* Content — anchored to the bottom edge, magazine-cover fashion, rather
+          than centred over the middle of the photograph. */}
+      <div ref={copyRef} className="hero__copy" style={{ willChange: "transform, opacity" }}>
+        <h1 id="hero-heading" className="hero__name" style={{ minHeight: "1.88em" }}>
+          <span style={{ display: "block", minHeight: "0.94em" }}>
             {first.displayed}
             <Caret show={!first.done} />
           </span>
-          <span style={{ display: "block", minHeight: "0.92em" }}>
+          <span style={{ display: "block", minHeight: "0.94em" }}>
             {second.displayed}
             <Caret show={first.done && !second.done} />
           </span>
         </h1>
 
-        <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 30, animation: "fadeUp .6s .28s both", pointerEvents: "auto" }}>
+        <p className="hero__role" style={{ animation: "fadeUp .6s .2s both" }}>
+          {t({
+            pt: "Business Developer & Growth Web3",
+            en: "Business Developer & Growth Web3",
+            es: "Business Developer & Growth Web3",
+          })}
+        </p>
+
+        <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 10, animation: "fadeUp .6s .28s both", pointerEvents: "auto" }}>
           <a
             href={siteConfig.socials.calendly}
             target="_blank"
@@ -182,24 +169,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll cue */}
-      <div
-        ref={cueRef}
-        style={{
-          position: "absolute",
-          zIndex: 3,
-          bottom: 24,
-          left: "50%",
-          transform: "translateX(-50%)",
-          fontSize: 11,
-          fontWeight: 700,
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: "var(--ink)",
-          opacity: 0.75,
-          transition: "opacity .3s",
-          pointerEvents: "none",
-        }}
-      >
+      <div ref={cueRef} className="hero__cue">
         {t({ pt: "role ↓", en: "role ↓", es: "rol ↓" })}
       </div>
     </section>

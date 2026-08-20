@@ -5,7 +5,7 @@ import Image from "next/image";
 import { personal } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
-import TypeOnView from "@/components/TypeOnView";
+import SectionHead from "@/components/SectionHead";
 
 export default function Personal() {
   const { t } = useLang();
@@ -13,15 +13,12 @@ export default function Personal() {
   return (
     <section id="pessoal" style={{ borderBottom: "2px solid var(--ink)", background: "var(--bg-alt)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "100px 32px" }}>
-        <Reveal>
-          <div style={{
-            fontSize: 12, fontWeight: 700, letterSpacing: "0.2em",
-            textTransform: "uppercase", marginBottom: 28, color: "var(--muted)",
-          }}>
-            (06) {t({ pt: "Pessoal", en: "Personal", es: "Personal" })}
-          </div>
-        </Reveal>
-
+        <SectionHead
+          id="pessoal-heading"
+          title={t({ pt: "Além do trabalho", en: "Beyond work", es: "Más allá del trabajo" })}
+          subtitle={t({ pt: "O que me forma como pessoa.", en: "What shapes me as a person.", es: "Lo que me forma como persona." })}
+          airy
+        />
         {personal.length === 0 ? (
           <p style={{ fontSize: 12, fontWeight: 500, textTransform: "uppercase", color: "var(--faint)", fontStyle: "italic" }}>
             {t({ pt: "Nenhum item adicionado ainda.", en: "No items added yet.", es: "Ningún ítem añadido aún." })}
@@ -76,22 +73,14 @@ function PersonalItem({
       )}
 
       <Reveal delay={80}>
-        <TypeOnView
-          as="h2"
-          className="display-heading"
-          text={t(item.title)}
-          style={{
-            fontSize: "clamp(28px, 3.5vw, 48px)",
-            letterSpacing: "-0.02em",
-            margin: "0 0 22px",
-            color: "var(--ink)",
-          }}
-        />
+        <h2
+          className="editorial-heading"
+          style={{ fontSize: "clamp(30px, 3.8vw, 52px)", margin: "0 0 22px" }}
+        >
+          {t(item.title)}
+        </h2>
 
-        <p style={{
-          fontSize: 13, fontWeight: 500, lineHeight: 1.75,
-          textTransform: "uppercase", color: "var(--body)", margin: "0 0 30px",
-        }}>
+        <p className="prose" style={{ margin: "0 0 30px" }}>
           {t(item.description)}
         </p>
 

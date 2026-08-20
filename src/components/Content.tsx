@@ -4,7 +4,6 @@ import Image from "next/image";
 import { content } from "@/data/portfolio";
 import { useLang } from "@/context/LanguageContext";
 import Reveal from "@/components/Reveal";
-import TypeOnView from "@/components/TypeOnView";
 
 export default function Content() {
   const { t } = useLang();
@@ -20,22 +19,6 @@ export default function Content() {
             (05) {t({ pt: "Conteúdo & Mídia", en: "Content & Media", es: "Contenido & Medios" })}
           </div>
         </Reveal>
-
-        <Reveal delay={80}>
-          <TypeOnView
-            as="h2"
-            id="content-heading"
-            className="display-heading"
-            text={t({ pt: "Conteúdos", en: "Content", es: "Contenido" })}
-            style={{
-              fontSize: "clamp(34px, 4.5vw, 64px)",
-              letterSpacing: "-0.02em",
-              margin: "0 0 48px",
-              color: "var(--ink)",
-            }}
-          />
-        </Reveal>
-
         {content.length === 0 ? (
           <p style={{ fontSize: 12, fontWeight: 500, textTransform: "uppercase", color: "var(--faint)", fontStyle: "italic" }}>
             {t({ pt: "Nenhum conteúdo adicionado ainda.", en: "No content added yet.", es: "Ningún contenido añadido aún." })}
@@ -87,12 +70,14 @@ export default function Content() {
                     }}>
                       {t(item.title)}
                     </h3>
-                    <p style={{
-                      fontSize: 12, fontWeight: 500, lineHeight: 1.6,
-                      textTransform: "uppercase", color: "var(--muted)",
-                      margin: 0, overflow: "hidden", display: "-webkit-box",
-                      WebkitLineClamp: 2, WebkitBoxOrient: "vertical",
-                    } as React.CSSProperties}>
+                    <p
+                      className="prose"
+                      style={{
+                        fontSize: 13, color: "var(--muted)", margin: 0,
+                        overflow: "hidden", display: "-webkit-box",
+                        WebkitLineClamp: 2, WebkitBoxOrient: "vertical",
+                      } as React.CSSProperties}
+                    >
                       {t(item.excerpt)}
                     </p>
                   </div>
