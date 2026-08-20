@@ -402,11 +402,12 @@ html { scroll-behavior: smooth; }
               border-color 0.25s,
               box-shadow 0.25s;
 }
-/* No transform on hover. These cards contain cross-origin YouTube frames, and
-   a transform animating on an iframe's ancestor breaks its hit testing — the
-   compositor moves the frame while the clickable region lags, so the play
-   button stops responding. The offset shadow alone reads as the same lift. */
+/* The lift transforms an ancestor of the cross-origin YouTube frames, which can
+   break their hit testing in theory. In practice playback works on the
+   published site, so it stays — worth revisiting only if the play button ever
+   stops responding on a real browser. */
 .event-card:hover {
+  transform: translate(-3px, -3px);
   border-color: var(--accent);
   box-shadow: 6px 6px 0 var(--accent);
 }
